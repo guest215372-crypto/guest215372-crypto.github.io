@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arcadium Web</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&family=Fredoka+One&display=swap" rel="stylesheet">
+    <style>
+        /* Performance optimizations */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0a0e2a 0%, #1a1f4a 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+            font-family: 'Fredoka One', cursive;
+            transition: background 0.3s ease;
+            will-change: background;
+        }
+        
+        /* Optimized Background Bubbles - Reduced count and simplified */
+        .bubbles {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+        
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+            animation: float 20s infinite linear;
+            opacity: 0.7;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); }
+            100% { transform: translateY(-100px) rotate(180deg); }
+        }
+        
+        /* Main Navigation Container */
+        .nav-container {
+            width: 100%;
+            max-width: 1000px;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            border-radius: 50px;
+            padding: 15px 30px;
+            margin-top: 30px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 
+                0 10px 20px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            z-index: 10;
+        }
+        
+        /* Optimized animation - removed heavy effects */
+        .nav-container::before {
+            display: none; /* Removed heavy gradient animation */
+        }
+        
+        /* Left Section - Logo and Main Links */
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+        
+        /* White Text Glow for all text */
+        .logo, .nav-link, .content h2, .placeholder-box, .settings-panel h3, 
+        .settings-group h4, .btn, .setting-info {
+            color: #ffffff;
+            text-shadow: 
+                0 0 5px #ffffff,
+                0 0 10px #ffffff,
+                0 0 15px #ffffff,
+                0 2px 5px rgba(0, 0, 0, 0.5);
+        }
+        
+        .logo {
+            font-family: 'Bubblegum Sans', cursive;
+            font-size: 42px;
+            font-weight: 400;
+            position: relative;
+            padding: 5px 15px;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 
+                inset 0 0 10px rgba(255, 255, 255, 0.2),
+                0 5px 10px rgba(0, 0, 0, 0.3);
+            animation: gentleGlow 4s infinite alternate;
+        }
+        
+        @keyframes gentleGlow {
+            0% { 
+                text-shadow: 
+                    0 0 5px #ffffff,
+                    0 0 10px #ffffff,
+                    0 0 15px #ffffff;
+            }
+            100% { 
+                text-shadow: 
+                    0 0 8px #ffffff,
+                    0 0 15px #ffffff,
+                    0 0 25px #ffffff;
+            }
+        }
+        
+        .nav-divider {
+            height: 40px;
+            width: 4px;
+            background: linear-gradient(to bottom, transparent, #ffffff, transparent);
+            border-radius: 2px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .nav-link {
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: 500;
+            padding: 12px 20px;
+            border-radius: 40px;
+            transition: all 0.3s ease;
+            font-family: 'Bubblegum Sans', cursive;
+            position: relative;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .nav-link:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-3px);
+            box-shadow: 
+                0 8px 15px rgba(0, 0, 0, 0.3),
+                0 0 10px rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+        
+        /* Right Section - Animated Icons */
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .icon-button {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .icon-button:hover {
+            transform: translateY(-5px) scale(1.1);
+            background: rgba(255, 255, 255, 0.2);
+            border-color: #ffffff;
+            box-shadow: 
+                0 10px 15px rgba(0, 0, 0, 0.3),
+                0 0 15px rgba(255, 255, 255, 0.4);
+        }
+        
+        /* Content Area */
+        .content {
+            max-width: 1000px;
+            width: 100%;
+            margin-top: 50px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(8px);
+            border-radius: 40px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 
+                0 10px 25px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: 400px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Removed heavy gradient animation */
+        .content::before {
+            display: none;
+        }
+        
+        .content h2 {
+            margin-bottom: 30px;
+            font-family: 'Bubblegum Sans', cursive;
+            font-size: 36px;
+            animation: gentleBounce 3s infinite;
+        }
+        
+        @keyframes gentleBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        
+        .placeholder-box {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 30px;
+            padding: 40px;
+            width: 100%;
+            border: 2px dashed rgba(255, 255, 255, 0.2);
+            font-family: 'Bubblegum Sans', cursive;
+            font-size: 22px;
+            line-height: 1.6;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .placeholder-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.1), transparent 50%);
+        }
+        
+        /* Simplified Floating Orbs - Reduced count */
+        .floating-orb {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05));
+            box-shadow: 
+                inset 0 0 10px rgba(255, 255, 255, 0.2),
+                0 0 15px rgba(255, 255, 255, 0.2);
+            animation: float-orb 15s infinite linear;
+            z-index: 1;
+            opacity: 0.5;
+            pointer-events: none;
+        }
+        
+        @keyframes float-orb {
+            0% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(15px, -15px) scale(1.05); }
+            50% { transform: translate(0, -30px) scale(1); }
+            75% { transform: translate(-15px, -15px) scale(0.95); }
+            100% { transform: translate(0, 0) scale(1); }
+        }
+        
+        /* Bubble-like Settings Panel */
+        .settings-panel {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            width: 380px;
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(15px);
+            border-radius: 30px;
+            border: 2px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.4),
+                0 0 30px rgba(255, 255, 255, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            padding: 25px;
+            overflow-y: auto;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            max-height: 80vh;
+        }
+        
+        .settings-panel.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, -50%) scale(1);
+        }
+        
+        /* Bubble shape effect */
+        .settings-panel::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.1), transparent 70%);
+            border-radius: 40px;
+            z-index: -1;
+            opacity: 0.5;
+        }
+        
+        .settings-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .settings-header h3 {
+            font-size: 28px;
+            font-family: 'Bubblegum Sans', cursive;
+        }
+        
+        .close-settings {
+            background: rgba(255, 255, 255, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .close-settings:hover {
+            background: rgba(255, 100, 100, 0.3);
+            border-color: #ff6464;
+            transform: rotate(90deg);
+        }
+        
+        .settings-group {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        
+        .settings-group h4 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            font-family: 'Bubblegum Sans', cursive;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .settings-group h4 i {
+            font-size: 20px;
+        }
+        
+        .color-picker-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .color-preview {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            border: 2px solid white;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+        
+        .color-preview:hover {
+            transform: scale(1.1);
+        }
+        
+        .color-picker {
+            flex: 1;
+            height: 40px;
+            border-radius: 10px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+        }
+        
+        .select-container {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 16px;
+            font-family: 'Fredoka One', cursive;
+            margin-bottom: 10px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        
+        .select-container:focus {
+            border-color: rgba(255, 255, 255, 0.6);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+        
+        .file-upload {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.05);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 10px;
+        }
+        
+        .file-upload:hover {
+            border-color: rgba(255, 255, 255, 0.6);
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .btn {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 14px 25px;
+            border-radius: 15px;
+            font-family: 'Bubblegum Sans', cursive;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.5);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3), 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+        
+        .btn i {
+            font-size: 20px;
+        }
+        
+        .setting-info {
+            font-size: 14px;
+            margin-top: 10px;
+            font-style: italic;
+            text-align: center;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            opacity: 0.8;
+        }
+        
+        .reset-btn {
+            background: rgba(255, 100, 100, 0.2);
+            border-color: rgba(255, 100, 100, 0.4);
+        }
+        
+        .reset-btn:hover {
+            background: rgba(255, 100, 100, 0.3);
+        }
+        
+        /* Overlay for settings */
+        .settings-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(3px);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .settings-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Responsive */
+        @media (max-width: 850px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 20px;
+                padding: 20px;
+                border-radius: 40px;
+            }
+            
+            .nav-left {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .nav-divider {
+                height: 2px;
+                width: 80%;
+                background: linear-gradient(to right, transparent, #ffffff, transparent);
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .logo {
+                font-size: 36px;
+            }
+            
+            .content h2 {
+                font-size: 28px;
+            }
+            
+            .settings-panel {
+                width: 90%;
+                max-width: 350px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .settings-panel {
+                width: 95%;
+                padding: 20px;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .placeholder-box {
+                padding: 20px;
+                font-size: 18px;
+            }
+        }
+        
+        /* Performance optimization classes */
+        .no-animation {
+            animation: none !important;
+        }
+        
+        .reduce-motion * {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+        }
+    </style>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Optimized Background Bubbles -->
+    <div class="bubbles" id="bubbles"></div>
+    
+    <!-- Settings Overlay -->
+    <div class="settings-overlay" id="settingsOverlay"></div>
+    
+    <!-- Bubble-like Settings Panel -->
+    <div class="settings-panel" id="settingsPanel">
+        <div class="settings-header">
+            <h3><i class="fas fa-cog"></i> Settings</h3>
+            <button class="close-settings" id="closeSettings">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <!-- Background Color Settings -->
+        <div class="settings-group">
+            <h4><i class="fas fa-palette"></i> Background Color</h4>
+            <div class="color-picker-container">
+                <div class="color-preview" id="colorPreview" title="Click to preview"></div>
+                <input type="color" id="bgColorPicker" class="color-picker" value="#0a0e2a">
+            </div>
+            <button class="btn" id="applyBgColor">
+                <i class="fas fa-check"></i> Apply Color
+            </button>
+        </div>
+        
+        <!-- Font Settings -->
+        <div class="settings-group">
+            <h4><i class="fas fa-font"></i> Font</h4>
+            <select id="fontSelector" class="select-container">
+                <option value="'Fredoka One', cursive">Fredoka One</option>
+                <option value="'Bubblegum Sans', cursive">Bubblegum Sans</option>
+                <option value="Arial, sans-serif">Arial</option>
+                <option value="'Courier New', monospace">Courier New</option>
+                <option value="Georgia, serif">Georgia</option>
+            </select>
+            <div class="setting-info">
+                Changes all text on page
+            </div>
+        </div>
+        
+        <!-- Background Image Settings -->
+        <div class="settings-group">
+            <h4><i class="fas fa-image"></i> Background Image</h4>
+            <input type="file" id="bgImageUpload" accept="image/*" class="file-upload">
+            <div class="setting-info">
+                Upload any image
+            </div>
+            <button class="btn" id="removeBgImage">
+                <i class="fas fa-trash"></i> Remove Image
+            </button>
+        </div>
+        
+        <!-- About:blank Opener -->
+        <div class="settings-group">
+            <h4><i class="fas fa-external-link-alt"></i> About:Blank</h4>
+            <div class="setting-info">
+                Opens page in new window
+            </div>
+            <button class="btn" id="openAboutBlank">
+                <i class="fas fa-external-link-square-alt"></i> Open
+            </button>
+        </div>
+        
+        <!-- Performance Settings -->
+        <div class="settings-group">
+            <h4><i class="fas fa-tachometer-alt"></i> Performance</h4>
+            <button class="btn" id="reduceMotion">
+                <i class="fas fa-running"></i> Reduce Animations
+            </button>
+            <div class="setting-info">
+                Makes animations simpler for better performance
+            </div>
+        </div>
+        
+        <!-- Reset Settings -->
+        <div class="settings-group">
+            <h4><i class="fas fa-redo"></i> Reset</h4>
+            <button class="btn reset-btn" id="resetSettings">
+                <i class="fas fa-undo"></i> Reset to Default
+            </button>
+        </div>
+    </div>
+    
+    <!-- Optimized Floating Orbs - Reduced to 2 -->
+    <div class="floating-orb" style="width: 80px; height: 80px; top: 15%; left: 10%;"></div>
+    <div class="floating-orb" style="width: 60px; height: 60px; bottom: 20%; right: 15%; animation-delay: -5s;"></div>
+    
+    <!-- Navigation Bar -->
+    <div class="nav-container">
+        <!-- Left Section -->
+        <div class="nav-left">
+            <div class="logo">ARCADIUM</div>
+            <div class="nav-divider"></div>
+            <div class="nav-links">
+                <a href="#" class="nav-link">Games</a>
+                <a href="#" class="nav-link">Proxies</a>
+                <a href="#" class="nav-link">Websites</a>
+                <a href="#" class="nav-link">Soundboard</a>
+                <a href="#" class="nav-link">More</a>
+            </div>
+        </div>
+        
+        <!-- Right Section with Settings Button -->
+        <div class="nav-right">
+            <div class="icon-button" id="settingsButton" title="Settings">
+                <i class="fas fa-cog"></i>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="content">
+        <h2>Welcome to Arcadium!</h2>
+        <div class="placeholder-box">
+            <p>Customize your experience using the settings button!</p>
+            <p>Optimized for smooth performance on older devices.</p>
+            <br>
+            <p>Features:</p>
+            <p>• Custom background color</p>
+            <p>• Font style selector</p>
+            <p>• Background image upload</p>
+            <p>• Performance mode for slower devices</p>
+            <p>• All white glowing text theme</p>
+        </div>
+    </div>
+    
+    <script>
+        // Performance-optimized bubble generation
+        document.addEventListener('DOMContentLoaded', function() {
+            const bubblesContainer = document.getElementById('bubbles');
+            const isSlowDevice = /Chromebook|Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            
+            // Generate fewer bubbles for slow devices
+            const bubbleCount = isSlowDevice ? 10 : 20;
+            
+            for (let i = 0; i < bubbleCount; i++) {
+                const bubble = document.createElement('div');
+                bubble.classList.add('bubble');
+                
+                // Smaller size range for performance
+                const size = Math.random() * 40 + 20;
+                bubble.style.width = `${size}px`;
+                bubble.style.height = `${size}px`;
+                
+                // Random position
+                bubble.style.left = `${Math.random() * 100}%`;
+                
+                // Start off-screen at bottom
+                bubble.style.top = `${100 + Math.random() * 20}%`;
+                
+                // Optimized animation
+                const duration = Math.random() * 20 + 20;
+                const delay = Math.random() * 10;
+                bubble.style.animationDuration = `${duration}s`;
+                bubble.style.animationDelay = `${delay}s`;
+                bubble.style.animationTimingFunction = 'linear';
+                
+                bubblesContainer.appendChild(bubble);
+            }
+            
+            // Optimized click effects
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Simple hover effect instead of complex ripple
+                    this.style.transform = 'translateY(-3px) scale(1.05)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 200);
+                    
+                    // Update content based on clicked link
+                    updateContent(this.textContent.trim());
+                });
+            });
+            
+            // Update content function
+            function updateContent(section) {
+                const contentTitle = document.querySelector('.content h2');
+                const contentBox = document.querySelector('.placeholder-box');
+                
+                const contentMap = {
+                    'HOME': {
+                        title: 'Welcome to Arcadium!',
+                        text: 'Your ultimate gaming and entertainment hub. Explore games, proxies, websites and more!'
+                    },
+                    'GAMES': {
+                        title: 'Arcadium Games',
+                        text: 'Browse our collection of fun and exciting games. From classics to modern hits!'
+                    },
+                    'PROXIES': {
+                        title: 'Proxy Services',
+                        text: 'Access blocked websites with our secure proxy services. Safe and anonymous browsing.'
+                    },
+                    'WEBSITES': {
+                        title: 'Website Collection',
+                        text: 'Curated list of useful and entertaining websites for all your needs.'
+                    },
+                    'SOUNDBOARD': {
+                        title: 'Sound Board',
+                        text: 'Play sounds and create audio mixes with our interactive soundboard.'
+                    },
+                    'MARKET': {
+                        title: 'Arcadium Market',
+                        text: 'Buy, sell, and trade with our community marketplace.'
+                    }
+                };
+                
+                if (contentMap[section]) {
+                    contentTitle.textContent = contentMap[section].title;
+                    contentBox.innerHTML = `
+                        <p>${contentMap[section].text}</p>
+                        <br>
+                        <p>Explore more options in the ${section.toLowerCase()} section.</p>
+                        <p>Use the settings button to customize your experience!</p>
+                    `;
+                }
+            }
+        });
+        
+        // Settings Panel Functionality - Optimized
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elements
+            const settingsButton = document.getElementById('settingsButton');
+            const settingsPanel = document.getElementById('settingsPanel');
+            const settingsOverlay = document.getElementById('settingsOverlay');
+            const closeSettings = document.getElementById('closeSettings');
+            const bgColorPicker = document.getElementById('bgColorPicker');
+            const colorPreview = document.getElementById('colorPreview');
+            const applyBgColor = document.getElementById('applyBgColor');
+            const fontSelector = document.getElementById('fontSelector');
+            const bgImageUpload = document.getElementById('bgImageUpload');
+            const removeBgImage = document.getElementById('removeBgImage');
+            const openAboutBlank = document.getElementById('openAboutBlank');
+            const resetSettings = document.getElementById('resetSettings');
+            const reduceMotion = document.getElementById('reduceMotion');
+            
+            // Performance mode flag
+            let performanceMode = false;
+            
+            // Load saved settings
+            loadSettings();
+            
+            // Toggle settings panel
+            settingsButton.addEventListener('click', function() {
+                settingsPanel.classList.add('active');
+                settingsOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+            
+            // Close settings panel
+            closeSettings.addEventListener('click', closeSettingsPanel);
+            settingsOverlay.addEventListener('click', closeSettingsPanel);
+            
+            // Color picker preview
+            bgColorPicker.addEventListener('input', function() {
+                colorPreview.style.backgroundColor = this.value;
+            });
+            
+            // Apply background color
+            applyBgColor.addEventListener('click', function() {
+                const color = bgColorPicker.value;
+                document.body.style.background = color;
+                document.body.style.backgroundImage = 'none';
+                saveSetting('backgroundColor', color);
+                showNotification('Background color applied!');
+            });
+            
+            // Change font
+            fontSelector.addEventListener('change', function() {
+                const fontFamily = this.value;
+                document.body.style.fontFamily = fontFamily;
+                saveSetting('fontFamily', fontFamily);
+                showNotification('Font changed!');
+            });
+            
+            // Upload background image
+            bgImageUpload.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    // Check file size for performance (max 2MB)
+                    if (file.size > 2 * 1024 * 1024) {
+                        showNotification('Image too large! Max 2MB.');
+                        return;
+                    }
+                    
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        const imageUrl = event.target.result;
+                        document.body.style.backgroundImage = `url('${imageUrl}')`;
+                        document.body.style.backgroundSize = 'cover';
+                        document.body.style.backgroundAttachment = 'fixed';
+                        saveSetting('backgroundImage', imageUrl);
+                        showNotification('Background image uploaded!');
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+            
+            // Remove background image
+            removeBgImage.addEventListener('click', function() {
+                document.body.style.backgroundImage = 'none';
+                document.body.style.background = 'linear-gradient(135deg, #0a0e2a 0%, #1a1f4a 100%)';
+                saveSetting('backgroundImage', 'none');
+                bgImageUpload.value = '';
+                showNotification('Background image removed!');
+            });
+            
+            // Open in about:blank
+            openAboutBlank.addEventListener('click', function() {
+                const newWindow = window.open('about:blank', '_blank');
+                const htmlContent = document.documentElement.outerHTML;
+                newWindow.document.write(htmlContent);
+                newWindow.document.close();
+                showNotification('Opened in new window!');
+            });
+            
+            // Toggle performance mode
+            reduceMotion.addEventListener('click', function() {
+                performanceMode = !performanceMode;
+                if (performanceMode) {
+                    document.body.classList.add('reduce-motion');
+                    this.innerHTML = '<i class="fas fa-tachometer-alt"></i> Normal Animations';
+                    showNotification('Performance mode enabled!');
+                } else {
+                    document.body.classList.remove('reduce-motion');
+                    this.innerHTML = '<i class="fas fa-running"></i> Reduce Animations';
+                    showNotification('Performance mode disabled!');
+                }
+                saveSetting('performanceMode', performanceMode);
+            });
+            
+            // Reset all settings
+            resetSettings.addEventListener('click', function() {
+                if (confirm('Reset all settings to default?')) {
+                    localStorage.clear();
+                    document.body.style.background = 'linear-gradient(135deg, #0a0e2a 0%, #1a1f4a 100%)';
+                    document.body.style.backgroundImage = 'none';
+                    document.body.style.fontFamily = "'Fredoka One', cursive";
+                    bgColorPicker.value = '#0a0e2a';
+                    colorPreview.style.backgroundColor = '#0a0e2a';
+                    fontSelector.value = "'Fredoka One', cursive";
+                    bgImageUpload.value = '';
+                    document.body.classList.remove('reduce-motion');
+                    performanceMode = false;
+                    reduceMotion.innerHTML = '<i class="fas fa-running"></i> Reduce Animations';
+                    showNotification('Settings reset!');
+                }
+            });
+            
+            // Close settings panel function
+            function closeSettingsPanel() {
+                settingsPanel.classList.remove('active');
+                settingsOverlay.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+            
+            // Save setting to localStorage
+            function saveSetting(key, value) {
+                localStorage.setItem('arcadium_' + key, value);
+            }
+            
+            // Load settings from localStorage
+            function loadSettings() {
+                // Load background color
+                const savedBgColor = localStorage.getItem('arcadium_backgroundColor');
+                if (savedBgColor) {
+                    document.body.style.background = savedBgColor;
+                    bgColorPicker.value = savedBgColor;
+                    colorPreview.style.backgroundColor = savedBgColor;
+                } else {
+                    colorPreview.style.backgroundColor = '#0a0e2a';
+                }
+                
+                // Load font
+                const savedFont = localStorage.getItem('arcadium_fontFamily');
+                if (savedFont) {
+                    document.body.style.fontFamily = savedFont;
+                    fontSelector.value = savedFont;
+                }
+                
+                // Load background image
+                const savedBgImage = localStorage.getItem('arcadium_backgroundImage');
+                if (savedBgImage && savedBgImage !== 'none') {
+                    document.body.style.backgroundImage = `url('${savedBgImage}')`;
+                    document.body.style.backgroundSize = 'cover';
+                    document.body.style.backgroundAttachment = 'fixed';
+                }
+                
+                // Load performance mode
+                const savedPerformanceMode = localStorage.getItem('arcadium_performanceMode');
+                if (savedPerformanceMode === 'true') {
+                    performanceMode = true;
+                    document.body.classList.add('reduce-motion');
+                    reduceMotion.innerHTML = '<i class="fas fa-tachometer-alt"></i> Normal Animations';
+                }
+            }
+            
+            // Show notification
+            function showNotification(message) {
+                // Remove existing notification
+                const existingNotification = document.querySelector('.notification');
+                if (existingNotification) {
+                    existingNotification.remove();
+                }
+                
+                // Create simple notification for performance
+                const notification = document.createElement('div');
+                notification.className = 'notification';
+                notification.textContent = message;
+                notification.style.cssText = `
+                    position: fixed;
+                    bottom: 30px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: rgba(255, 255, 255, 0.15);
+                    backdrop-filter: blur(10px);
+                    color: white;
+                    padding: 12px 25px;
+                    border-radius: 50px;
+                    font-family: 'Bubblegum Sans', cursive;
+                    font-size: 16px;
+                    z-index: 10000;
+                    border: 2px solid rgba(255, 255, 255, 0.3);
+                    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+                    text-shadow: 0 0 5px #ffffff;
+                    white-space: nowrap;
+                    opacity: 0;
+                    animation: notificationShow 0.3s ease forwards, notificationHide 0.3s ease 2.7s forwards;
+                `;
+                
+                document.body.appendChild(notification);
+                
+                // Remove after animation
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.remove();
+                    }
+                }, 3000);
+            }
+            
+            // Add notification keyframes
+            const notificationStyle = document.createElement('style');
+            notificationStyle.textContent = `
+                @keyframes notificationShow {
+                    from { opacity: 0; bottom: 0; }
+                    to { opacity: 1; bottom: 30px; }
+                }
+                @keyframes notificationHide {
+                    from { opacity: 1; }
+                    to { opacity: 0; }
+                }
+            `;
+            document.head.appendChild(notificationStyle);
+            
+            // Keyboard shortcuts
+            document.addEventListener('keydown', function(e) {
+                // Escape to close settings
+                if (e.key === 'Escape' && settingsPanel.classList.contains('active')) {
+                    closeSettingsPanel();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
