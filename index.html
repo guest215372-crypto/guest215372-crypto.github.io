@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Arcadium Web</title>
     <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&family=Fredoka+One&display=swap" rel="stylesheet">
+    <!-- Add 100+ Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&family=Open+Sans:wght@300;400;600;700&family=Lato:wght@300;400;700&family=Oswald:wght@300;400;500;600&family=Raleway:wght@300;400;500;600;700&family=Ubuntu:wght@300;400;500;700&family=Playfair+Display:wght@400;700&family=Merriweather:wght@300;400;700&family=Source+Sans+Pro:wght@300;400;600&family=PT+Sans:wght@400;700&family=Noto+Sans:wght@400;700&family=Nunito:wght@300;400;600;700&family=Quicksand:wght@300;400;500;600&family=Rubik:wght@300;400;500;600&family=Josefin+Sans:wght@300;400;600&family=Arvo:wght@400;700&family=Libre+Baskerville:wght@400;700&family=Roboto+Slab:wght@300;400;700&family=Cabin:wght@400;500;600;700&family=Roboto+Condensed:wght@300;400;700&family=Oxygen:wght@300;400;700&family=Fira+Sans:wght@300;400;500;600&family=Work+Sans:wght@300;400;500;600&family=Karla:wght@400;700&family=Inconsolata:wght@400;700&family=Space+Mono:wght@400;700&family=Courier+Prime:wght@400;700&family=Nanum+Gothic:wght@400;700&family=Comfortaa:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700&family=Exo+2:wght@300;400;500;600;700&family=Titillium+Web:wght@300;400;600;700&family=Archivo:wght@400;500;600;700&family=Manrope:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700&family=Chivo:wght@300;400;700&family=Overpass:wght@300;400;600;700&family=Hind:wght@300;400;500;600;700&family=Muli:wght@300;400;500;600&family=Catamaran:wght@300;400;500;600;700&family=Varela+Round&family=ABeeZee&family=Acme&family=Alfa+Slab+One&family=Amaranth&family=Anton&family=Bangers&family=Bebas+Neue&family=Black+Ops+One&family=Bree+Serif&family=Chewy&family=Concert+One&family=Courgette&family=Crimson+Text&family=Dancing+Script&family=Dosis&family=Economica&family=Fjalla+One&family=Francois+One&family=Gloria+Hallelujah&family=Great+Vibes&family=Indie+Flower&family=Lobster&family=Luckiest+Guy&family=Mitr&family=Monda&family=Monoton&family=Montserrat+Alternates&family=Orbitron&family=Pacifico&family=Passion+One&family=Patua+One&family=Permanent+Marker&family=Press+Start+2P&family=Racing+Sans+One&family=Righteous&family=Roboto+Mono&family=Sacramento&family=Shadows+Into+Light&family=Sigmar+One&family=Staatliches&family=Teko&family=Yellowtail&display=swap" rel="stylesheet">
     <style>
         /* Performance optimizations */
         * {
@@ -22,9 +24,10 @@
             align-items: center;
             padding: 20px;
             overflow-x: hidden;
-            font-family: 'Fredoka One', cursive;
+            font-family: 'Fredoka One', cursive; /* Default font */
             transition: background 0.3s ease;
             will-change: background;
+            padding-bottom: 100px; /* Space for bottom bar */
         }
         
         /* Optimized Background Bubbles - Reduced count and simplified */
@@ -70,13 +73,8 @@
             justify-content: space-between;
             align-items: center;
             position: relative;
-            overflow: hidden;
+            overflow: visible;
             z-index: 10;
-        }
-        
-        /* Optimized animation - removed heavy effects */
-        .nav-container::before {
-            display: none; /* Removed heavy gradient animation */
         }
         
         /* Left Section - Logo and Main Links */
@@ -88,7 +86,8 @@
         
         /* White Text Glow for all text */
         .logo, .nav-link, .content h2, .placeholder-box, .settings-panel h3, 
-        .settings-group h4, .btn, .setting-info {
+        .settings-group h4, .btn, .setting-info, .dropdown-link,
+        .bottom-bar-item span {
             color: #ffffff;
             text-shadow: 
                 0 0 5px #ffffff,
@@ -143,6 +142,7 @@
             display: flex;
             gap: 10px;
             align-items: center;
+            position: relative;
         }
         
         .nav-link {
@@ -158,6 +158,7 @@
             background: rgba(255, 255, 255, 0.05);
             border: 2px solid rgba(255, 255, 255, 0.2);
             box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            white-space: nowrap;
         }
         
         .nav-link:hover {
@@ -166,6 +167,76 @@
             box-shadow: 
                 0 8px 15px rgba(0, 0, 0, 0.3),
                 0 0 10px rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+        
+        /* More Dropdown Menu - Liquid Glass Panel */
+        .dropdown-container {
+            position: relative;
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 10px;
+            min-width: 220px;
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            border: 2px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 
+                0 15px 35px rgba(0, 0, 0, 0.5),
+                0 0 20px rgba(255, 255, 255, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 100;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            overflow: hidden;
+        }
+        
+        /* Bubble effect for dropdown */
+        .dropdown-menu::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.1), transparent 70%);
+            border-radius: 35px;
+            z-index: -1;
+            opacity: 0.5;
+        }
+        
+        .dropdown-menu.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .dropdown-link {
+            display: block;
+            text-decoration: none;
+            padding: 14px 18px;
+            border-radius: 20px;
+            font-family: 'Bubblegum Sans', cursive;
+            font-size: 18px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .dropdown-link:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateX(5px);
             border-color: rgba(255, 255, 255, 0.4);
         }
         
@@ -224,11 +295,7 @@
             min-height: 400px;
             position: relative;
             overflow: hidden;
-        }
-        
-        /* Removed heavy gradient animation */
-        .content::before {
-            display: none;
+            margin-bottom: 30px;
         }
         
         .content h2 {
@@ -266,6 +333,158 @@
             background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.1), transparent 50%);
         }
         
+        /* Bottom Bar - Circular Button Navigation */
+        .bottom-bar {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 800px;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(15px);
+            border-radius: 50px;
+            padding: 15px 30px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 
+                0 10px 25px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 50;
+            transition: all 0.4s ease;
+        }
+        
+        .bottom-bar:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 
+                0 15px 30px rgba(0, 0, 0, 0.5),
+                0 0 20px rgba(255, 255, 255, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+        
+        .bottom-bar-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 10px 15px;
+            border-radius: 40px;
+            position: relative;
+        }
+        
+        .bottom-bar-item:hover {
+            transform: translateY(-8px);
+        }
+        
+        .bottom-bar-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 
+                0 5px 15px rgba(0, 0, 0, 0.3),
+                inset 0 0 10px rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .bottom-bar-item:hover .bottom-bar-icon {
+            transform: scale(1.15);
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 
+                0 8px 20px rgba(0, 0, 0, 0.4),
+                0 0 15px rgba(255, 255, 255, 0.3),
+                inset 0 0 15px rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Individual icon colors */
+        .bottom-bar-item:nth-child(1) .bottom-bar-icon {
+            color: #4fc3f7; /* Chat - Light Blue */
+        }
+        
+        .bottom-bar-item:nth-child(2) .bottom-bar-icon {
+            color: #81c784; /* ChatGPT - Light Green */
+        }
+        
+        .bottom-bar-item:nth-child(3) .bottom-bar-icon {
+            color: #ff8a65; /* Report - Orange */
+        }
+        
+        .bottom-bar-item:nth-child(4) .bottom-bar-icon {
+            color: #ba68c8; /* Suggest - Purple */
+        }
+        
+        .bottom-bar-item span {
+            font-family: 'Bubblegum Sans', cursive;
+            font-size: 16px;
+            font-weight: 500;
+            opacity: 0.9;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .bottom-bar-item:hover span {
+            opacity: 1;
+            transform: translateY(2px);
+            text-shadow: 
+                0 0 8px #ffffff,
+                0 0 15px #ffffff;
+        }
+        
+        /* Pulse animation for icons */
+        .bottom-bar-icon::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            animation: pulse-ring 2s infinite;
+        }
+        
+        @keyframes pulse-ring {
+            0% {
+                transform: scale(0.8);
+                opacity: 0.8;
+            }
+            100% {
+                transform: scale(1.5);
+                opacity: 0;
+            }
+        }
+        
+        /* Delay pulse animations */
+        .bottom-bar-item:nth-child(1) .bottom-bar-icon::after {
+            animation-delay: 0s;
+        }
+        
+        .bottom-bar-item:nth-child(2) .bottom-bar-icon::after {
+            animation-delay: 0.5s;
+        }
+        
+        .bottom-bar-item:nth-child(3) .bottom-bar-icon::after {
+            animation-delay: 1s;
+        }
+        
+        .bottom-bar-item:nth-child(4) .bottom-bar-icon::after {
+            animation-delay: 1.5s;
+        }
+        
         /* Simplified Floating Orbs - Reduced count */
         .floating-orb {
             position: absolute;
@@ -294,7 +513,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%) scale(0.8);
-            width: 380px;
+            width: 420px;
             background: rgba(255, 255, 255, 0.12);
             backdrop-filter: blur(15px);
             border-radius: 30px;
@@ -383,6 +602,46 @@
         
         .settings-group h4 i {
             font-size: 20px;
+        }
+        
+        /* Font selector with scroll */
+        .font-selector-container {
+            max-height: 200px;
+            overflow-y: auto;
+            border-radius: 10px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+        }
+        
+        .font-option {
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+            font-size: 16px;
+        }
+        
+        .font-option:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateX(5px);
+        }
+        
+        .font-option.selected {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+        
+        .font-preview {
+            display: block;
+            font-size: 14px;
+            margin-top: 5px;
+            opacity: 0.8;
         }
         
         .color-picker-container {
@@ -558,6 +817,49 @@
                 width: 90%;
                 max-width: 350px;
             }
+            
+            .dropdown-menu {
+                position: static;
+                margin-top: 15px;
+                min-width: 100%;
+            }
+            
+            /* Bottom bar responsive */
+            .bottom-bar {
+                width: 95%;
+                padding: 12px 20px;
+                border-radius: 40px;
+            }
+            
+            .bottom-bar-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 24px;
+            }
+            
+            .bottom-bar-item span {
+                font-size: 14px;
+            }
+        }
+        
+        @media (max-width: 650px) {
+            .bottom-bar {
+                padding: 10px 15px;
+            }
+            
+            .bottom-bar-icon {
+                width: 55px;
+                height: 55px;
+                font-size: 22px;
+            }
+            
+            .bottom-bar-item span {
+                font-size: 12px;
+            }
+            
+            .bottom-bar-item {
+                padding: 8px 10px;
+            }
         }
         
         @media (max-width: 480px) {
@@ -573,6 +875,33 @@
             .placeholder-box {
                 padding: 20px;
                 font-size: 18px;
+            }
+            
+            .dropdown-menu {
+                min-width: 100%;
+            }
+            
+            /* Bottom bar mobile */
+            .bottom-bar {
+                flex-wrap: wrap;
+                border-radius: 30px;
+                padding: 10px;
+                width: 95%;
+            }
+            
+            .bottom-bar-item {
+                width: 45%;
+                margin-bottom: 10px;
+            }
+            
+            .bottom-bar-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+            
+            body {
+                padding-bottom: 130px; /* More space for wrapped bottom bar */
             }
         }
         
@@ -618,18 +947,17 @@
             </button>
         </div>
         
-        <!-- Font Settings -->
+        <!-- Font Settings with 100+ fonts -->
         <div class="settings-group">
-            <h4><i class="fas fa-font"></i> Font</h4>
-            <select id="fontSelector" class="select-container">
-                <option value="'Fredoka One', cursive">Fredoka One</option>
-                <option value="'Bubblegum Sans', cursive">Bubblegum Sans</option>
-                <option value="Arial, sans-serif">Arial</option>
-                <option value="'Courier New', monospace">Courier New</option>
-                <option value="Georgia, serif">Georgia</option>
-            </select>
+            <h4><i class="fas fa-font"></i> Font Selection</h4>
             <div class="setting-info">
-                Changes all text on page
+                Choose from 100+ Google Fonts. Click to preview.
+            </div>
+            <div class="font-selector-container" id="fontSelectorContainer">
+                <!-- Font options will be populated by JavaScript -->
+            </div>
+            <div class="setting-info">
+                Selected font: <span id="selectedFontName">Fredoka One</span>
             </div>
         </div>
         
@@ -691,7 +1019,15 @@
                 <a href="#" class="nav-link">Proxies</a>
                 <a href="#" class="nav-link">Websites</a>
                 <a href="#" class="nav-link">Soundboard</a>
-                <a href="#" class="nav-link">More</a>
+                <div class="dropdown-container">
+                    <a href="#" class="nav-link" id="moreButton">More <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown-menu" id="dropdownMenu">
+                        <a href="#" class="dropdown-link">Market</a>
+                        <a href="#" class="dropdown-link">News</a>
+                        <a href="#" class="dropdown-link">Partners</a>
+
+                    </div>
+                </div>
             </div>
         </div>
         
@@ -702,24 +1038,148 @@
             </div>
         </div>
     </div>
-    
-    <!-- Main Content -->
-    <div class="content">
-        <h2>Welcome to Arcadium!</h2>
-        <div class="placeholder-box">
-            <p>Customize your experience using the settings button!</p>
-            <p>Optimized for smooth performance on older devices.</p>
-            <br>
-            <p>Features:</p>
-            <p>• Custom background color</p>
-            <p>• Font style selector</p>
-            <p>• Background image upload</p>
-            <p>• Performance mode for slower devices</p>
-            <p>• All white glowing text theme</p>
+
+    <!-- Bottom Bar with Circular Buttons -->
+    <div class="bottom-bar">
+        <div class="bottom-bar-item" id="chatButton">
+            <div class="bottom-bar-icon">
+                <i class="fas fa-comment-dots"></i>
+            </div>
+            <span>Chat</span>
+        </div>
+        
+        <div class="bottom-bar-item" id="chatGPTButton">
+            <div class="bottom-bar-icon">
+                <i class="fas fa-robot"></i>
+            </div>
+            <span>ChatGPT</span>
+        </div>
+        
+        <div class="bottom-bar-item" id="reportButton">
+            <div class="bottom-bar-icon">
+                <i class="fas fa-flag"></i>
+            </div>
+            <span>Report</span>
+        </div>
+        
+        <div class="bottom-bar-item" id="suggestButton">
+            <div class="bottom-bar-icon">
+                <i class="fas fa-lightbulb"></i>
+            </div>
+            <span>Suggest</span>
         </div>
     </div>
-    
+
     <script>
+        // List of 100+ Google Fonts
+        const googleFonts = [
+            { name: "Fredoka One", family: "'Fredoka One', cursive", preview: "Smooth rounded font for titles" },
+            { name: "Bubblegum Sans", family: "'Bubblegum Sans', cursive", preview: "Fun, playful font for headers" },
+            { name: "Montserrat", family: "'Montserrat', sans-serif", preview: "Modern geometric sans-serif" },
+            { name: "Poppins", family: "'Poppins', sans-serif", preview: "Clean, geometric sans-serif font" },
+            { name: "Roboto", family: "'Roboto', sans-serif", preview: "Material Design's default font" },
+            { name: "Open Sans", family: "'Open Sans', sans-serif", preview: "Humanist sans-serif font" },
+            { name: "Lato", family: "'Lato', sans-serif", preview: "Sans-serif with warmth" },
+            { name: "Oswald", family: "'Oswald', sans-serif", preview: "Reworking of classic gothic styles" },
+            { name: "Raleway", family: "'Raleway', sans-serif", preview: "Elegant sans-serif" },
+            { name: "Ubuntu", family: "'Ubuntu', sans-serif", preview: "Modern humanist sans-serif" },
+            { name: "Playfair Display", family: "'Playfair Display', serif", preview: "Elegant serif font" },
+            { name: "Merriweather", family: "'Merriweather', serif", preview: "Serif font for reading" },
+            { name: "Source Sans Pro", family: "'Source Sans Pro', sans-serif", preview: "Adobe's first open source font" },
+            { name: "PT Sans", family: "'PT Sans', sans-serif", preview: "For use in various interfaces" },
+            { name: "Noto Sans", family: "'Noto Sans', sans-serif", preview: "Google's font for all languages" },
+            { name: "Nunito", family: "'Nunito', sans-serif", preview: "Well-balanced sans-serif" },
+            { name: "Quicksand", family: "'Quicksand', sans-serif", preview: "Display sans-serif with rounded terminals" },
+            { name: "Rubik", family: "'Rubik', sans-serif", preview: "Sans-serif with slightly rounded corners" },
+            { name: "Josefin Sans", family: "'Josefin Sans', sans-serif", preview: "Elegant, geometric sans-serif" },
+            { name: "Arvo", family: "'Arvo', serif", preview: "Slab serif typeface" },
+            { name: "Libre Baskerville", family: "'Libre Baskerville', serif", preview: "Serif optimized for body text" },
+            { name: "Roboto Slab", family: "'Roboto Slab', serif", preview: "Roboto's slab serif companion" },
+            { name: "Cabin", family: "'Cabin', sans-serif", preview: "Humanist sans-serif with personality" },
+            { name: "Roboto Condensed", family: "'Roboto Condensed', sans-serif", preview: "Condensed version of Roboto" },
+            { name: "Oxygen", family: "'Oxygen', sans-serif", preview: "Sans-serif for screens" },
+            { name: "Fira Sans", family: "'Fira Sans', sans-serif", preview: "Humanist sans-serif for Firefox OS" },
+            { name: "Work Sans", family: "'Work Sans', sans-serif", preview: "A grotesque sans-serif" },
+            { name: "Karla", family: "'Karla', sans-serif", preview: "Grotesque sans-serif" },
+            { name: "Inconsolata", family: "'Inconsolata', monospace", preview: "Monospace font for code" },
+            { name: "Space Mono", family: "'Space Mono', monospace", preview: "Original monospace font family" },
+            { name: "Courier Prime", family: "'Courier Prime', monospace", preview: "Courier replacement for screenplays" },
+            { name: "Nanum Gothic", family: "'Nanum Gothic', sans-serif", preview: "Modern sans-serif Korean font" },
+            { name: "Comfortaa", family: "'Comfortaa', cursive", preview: "Rounded geometric sans-serif" },
+            { name: "Orbitron", family: "'Orbitron', sans-serif", preview: "Geometric sans-serif with futuristic feel" },
+            { name: "Exo 2", family: "'Exo 2', sans-serif", preview: "Geometric sans-serif with futuristic feel" },
+            { name: "Titillium Web", family: "'Titillium Web', sans-serif", preview: "Contemporary sans-serif" },
+            { name: "Archivo", family: "'Archivo', sans-serif", preview: "Grotesque sans-serif" },
+            { name: "Manrope", family: "'Manrope', sans-serif", preview: "Modern variable font" },
+            { name: "Inter", family: "'Inter', sans-serif", preview: "Variable font for screens" },
+            { name: "Syne", family: "'Syne', sans-serif", preview: "Contemporary sans-serif" },
+            { name: "Chivo", family: "'Chivo', sans-serif", preview: "Modern sans-serif with character" },
+            { name: "Overpass", family: "'Overpass', sans-serif", preview: "Open source font inspired by Highway Gothic" },
+            { name: "Hind", family: "'Hind', sans-serif", preview: "Sans-serif for Indian scripts" },
+            { name: "Muli", family: "'Muli', sans-serif", preview: "Minimalist sans-serif" },
+            { name: "Catamaran", family: "'Catamaran', sans-serif", preview: "Sans-serif for Tamil and Latin" },
+            { name: "Varela Round", family: "'Varela Round', sans-serif", preview: "Sans-serif with gentle rounds" },
+            { name: "ABeeZee", family: "'ABeeZee', sans-serif", preview: "Friendly sans-serif" },
+            { name: "Acme", family: "'Acme', sans-serif", preview: "Sans-serif with clean lines" },
+            { name: "Alfa Slab One", family: "'Alfa Slab One', cursive", preview: "Heavy slab serif with a vintage feel" },
+            { name: "Amaranth", family: "'Amaranth', sans-serif", preview: "Friendly sans-serif with rounded features" },
+            { name: "Anton", family: "'Anton', sans-serif", preview: "Sans-serif with a strong personality" },
+            { name: "Bangers", family: "'Bangers', cursive", preview: "Comic book style display font" },
+            { name: "Bebas Neue", family: "'Bebas Neue', cursive", preview: "Display sans-serif with narrow width" },
+            { name: "Black Ops One", family: "'Black Ops One', cursive", preview: "Military-style display font" },
+            { name: "Bree Serif", family: "'Bree Serif', serif", preview: "Modern serif with subtle curves" },
+            { name: "Chewy", family: "'Chewy', cursive", preview: "Rounded, bold comic font" },
+            { name: "Concert One", family: "'Concert One', cursive", preview: "Rounded sans-serif for displays" },
+            { name: "Courgette", family: "'Courgette', cursive", preview: "Elegant script font" },
+            { name: "Crimson Text", family: "'Crimson Text', serif", preview: "Serif font for book production" },
+            { name: "Dancing Script", family: "'Dancing Script', cursive", preview: "Elegant cursive script" },
+            { name: "Dosis", family: "'Dosis', sans-serif", preview: "Rounded sans-serif with open forms" },
+            { name: "Economica", family: "'Economica', sans-serif", preview: "Sans-serif with geometric structure" },
+            { name: "Fjalla One", family: "'Fjalla One', sans-serif", preview: "Sans-serif with low contrast" },
+            { name: "Francois One", family: "'Francois One', sans-serif", preview: "Condensed sans-serif" },
+            { name: "Gloria Hallelujah", family: "'Gloria Hallelujah', cursive", preview: "Casual brush script" },
+            { name: "Great Vibes", family: "'Great Vibes', cursive", preview: "Elegant script font" },
+            { name: "Indie Flower", family: "'Indie Flower', cursive", preview: "Casual handwriting font" },
+            { name: "Lobster", family: "'Lobster', cursive", preview: "Script font with strong curves" },
+            { name: "Luckiest Guy", family: "'Luckiest Guy', cursive", preview: "Comic book style font" },
+            { name: "Mitr", family: "'Mitr', sans-serif", preview: "Thai and Latin sans-serif" },
+            { name: "Monda", family: "'Monda', sans-serif", preview: "Sans-serif for headlines" },
+            { name: "Monoton", family: "'Monoton', cursive", preview: "Display font with uniform strokes" },
+            { name: "Montserrat Alternates", family: "'Montserrat Alternates', sans-serif", preview: "Alternate glyphs for Montserrat" },
+            { name: "Orbitron", family: "'Orbitron', sans-serif", preview: "Futuristic sans-serif" },
+            { name: "Pacifico", family: "'Pacifico', cursive", preview: "Brush script with casual feel" },
+            { name: "Passion One", family: "'Passion One', cursive", preview: "Display font with heavy weight" },
+            { name: "Patua One", family: "'Patua One', cursive", preview: "Slab serif with rounded details" },
+            { name: "Permanent Marker", family: "'Permanent Marker', cursive", preview: "Handwritten marker font" },
+            { name: "Press Start 2P", family: "'Press Start 2P', cursive", preview: "Pixel font for video games" },
+            { name: "Racing Sans One", family: "'Racing Sans One', cursive", preview: "Sans-serif inspired by racing typography" },
+            { name: "Righteous", family: "'Righteous', cursive", preview: "Display font with art deco influences" },
+            { name: "Roboto Mono", family: "'Roboto Mono', monospace", preview: "Monospace version of Roboto" },
+            { name: "Sacramento", family: "'Sacramento', cursive", preview: "Calligraphy script font" },
+            { name: "Shadows Into Light", family: "'Shadows Into Light', cursive", preview: "Casual handwriting font" },
+            { name: "Sigmar One", family: "'Sigmar One', cursive", preview: "Display font with rounded terminals" },
+            { name: "Staatliches", family: "'Staatliches', cursive", preview: "Display sans-serif with uniform width" },
+            { name: "Teko", family: "'Teko', sans-serif", preview: "Condensed Devanagari and Latin sans-serif" },
+            { name: "Yellowtail", family: "'Yellowtail', cursive", preview: "Elegant brush script" },
+            { name: "Arial", family: "Arial, sans-serif", preview: "Standard sans-serif font" },
+            { name: "Verdana", family: "Verdana, sans-serif", preview: "Humanist sans-serif for screens" },
+            { name: "Georgia", family: "Georgia, serif", preview: "Transitional serif for screens" },
+            { name: "Times New Roman", family: "'Times New Roman', serif", preview: "Classic serif font" },
+            { name: "Courier New", family: "'Courier New', monospace", preview: "Monospace serif font" },
+            { name: "Trebuchet MS", family: "'Trebuchet MS', sans-serif", preview: "Humanist sans-serif" },
+            { name: "Impact", family: "Impact, sans-serif", preview: "Heavy sans-serif for headlines" },
+            { name: "Comic Sans MS", family: "'Comic Sans MS', cursive", preview: "Casual script font" },
+            { name: "Palatino", family: "Palatino, serif", preview: "Old-style serif typeface" },
+            { name: "Garamond", family: "Garamond, serif", preview: "Old-style serif font" },
+            { name: "Bookman", family: "Bookman, serif", preview: "Old-style serif with strong lines" },
+            { name: "Avant Garde", family: "'Avant Garde', sans-serif", preview: "Geometric sans-serif" },
+            { name: "Helvetica", family: "Helvetica, sans-serif", preview: "Neo-grotesque sans-serif" },
+            { name: "Lucida Sans", family: "'Lucida Sans', sans-serif", preview: "Humanist sans-serif" },
+            { name: "Copperplate", family: "Copperplate, serif", preview: "Serif font with engraved look" },
+            { name: "Brush Script MT", family: "'Brush Script MT', cursive", preview: "Script font resembling handwriting" },
+            { name: "Papyrus", family: "Papyrus, fantasy", preview: "Font resembling ancient writing" }
+        ];
+
         // Performance-optimized bubble generation
         document.addEventListener('DOMContentLoaded', function() {
             const bubblesContainer = document.getElementById('bubbles');
@@ -753,8 +1213,8 @@
                 bubblesContainer.appendChild(bubble);
             }
             
-            // Optimized click effects
-            const navLinks = document.querySelectorAll('.nav-link');
+            // Optimized click effects for nav links
+            const navLinks = document.querySelectorAll('.nav-link:not(#moreButton)');
             navLinks.forEach(link => {
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
@@ -796,9 +1256,9 @@
                         title: 'Sound Board',
                         text: 'Play sounds and create audio mixes with our interactive soundboard.'
                     },
-                    'MARKET': {
-                        title: 'Arcadium Market',
-                        text: 'Buy, sell, and trade with our community marketplace.'
+                    'MORE': {
+                        title: 'More Options',
+                        text: 'Explore additional features like market, community, leaderboards, and more!'
                     }
                 };
                 
@@ -824,17 +1284,104 @@
             const bgColorPicker = document.getElementById('bgColorPicker');
             const colorPreview = document.getElementById('colorPreview');
             const applyBgColor = document.getElementById('applyBgColor');
-            const fontSelector = document.getElementById('fontSelector');
+            const fontSelectorContainer = document.getElementById('fontSelectorContainer');
+            const selectedFontName = document.getElementById('selectedFontName');
             const bgImageUpload = document.getElementById('bgImageUpload');
             const removeBgImage = document.getElementById('removeBgImage');
             const openAboutBlank = document.getElementById('openAboutBlank');
             const resetSettings = document.getElementById('resetSettings');
             const reduceMotion = document.getElementById('reduceMotion');
+            const moreButton = document.getElementById('moreButton');
+            const dropdownMenu = document.getElementById('dropdownMenu');
+            
+            // Bottom bar elements
+            const chatButton = document.getElementById('chatButton');
+            const chatGPTButton = document.getElementById('chatGPTButton');
+            const reportButton = document.getElementById('reportButton');
+            const suggestButton = document.getElementById('suggestButton');
             
             // Performance mode flag
             let performanceMode = false;
             
+            // Create font options
+            function createFontOptions() {
+                fontSelectorContainer.innerHTML = '';
+                
+                googleFonts.forEach(font => {
+                    const fontOption = document.createElement('div');
+                    fontOption.className = 'font-option';
+                    fontOption.innerHTML = `
+                        <div style="font-family: ${font.family}">
+                            ${font.name}
+                            <span class="font-preview">${font.preview}</span>
+                        </div>
+                    `;
+                    
+                    // Set font family for preview
+                    fontOption.style.fontFamily = font.family;
+                    
+                    fontOption.addEventListener('click', function() {
+                        // Remove selected class from all options
+                        document.querySelectorAll('.font-option').forEach(opt => {
+                            opt.classList.remove('selected');
+                        });
+                        
+                        // Add selected class to clicked option
+                        this.classList.add('selected');
+                        
+                        // Apply font
+                        document.body.style.fontFamily = font.family;
+                        selectedFontName.textContent = font.name;
+                        saveSetting('fontFamily', font.family);
+                        saveSetting('fontName', font.name);
+                        showNotification(`Font changed to ${font.name}!`);
+                    });
+                    
+                    fontSelectorContainer.appendChild(fontOption);
+                });
+            }
+            
             // Load saved settings
+            function loadSettings() {
+                // Load background color
+                const savedBgColor = localStorage.getItem('arcadium_backgroundColor');
+                if (savedBgColor) {
+                    document.body.style.background = savedBgColor;
+                    bgColorPicker.value = savedBgColor;
+                    colorPreview.style.backgroundColor = savedBgColor;
+                } else {
+                    colorPreview.style.backgroundColor = '#0a0e2a';
+                }
+                
+                // Load font
+                const savedFont = localStorage.getItem('arcadium_fontFamily');
+                const savedFontName = localStorage.getItem('arcadium_fontName');
+                if (savedFont) {
+                    document.body.style.fontFamily = savedFont;
+                    if (savedFontName) {
+                        selectedFontName.textContent = savedFontName;
+                    }
+                }
+                
+                // Load background image
+                const savedBgImage = localStorage.getItem('arcadium_backgroundImage');
+                if (savedBgImage && savedBgImage !== 'none') {
+                    document.body.style.backgroundImage = `url('${savedBgImage}')`;
+                    document.body.style.backgroundSize = 'cover';
+                    document.body.style.backgroundAttachment = 'fixed';
+                }
+                
+                // Load performance mode
+                const savedPerformanceMode = localStorage.getItem('arcadium_performanceMode');
+                if (savedPerformanceMode === 'true') {
+                    performanceMode = true;
+                    document.body.classList.add('reduce-motion');
+                    reduceMotion.innerHTML = '<i class="fas fa-tachometer-alt"></i> Normal Animations';
+                }
+            }
+            
+            // Initialize
+            createFontOptions();
             loadSettings();
             
             // Toggle settings panel
@@ -842,6 +1389,97 @@
                 settingsPanel.classList.add('active');
                 settingsOverlay.classList.add('active');
                 document.body.style.overflow = 'hidden';
+            });
+            
+            // Toggle dropdown menu
+            moreButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                dropdownMenu.classList.toggle('active');
+            });
+            
+            // Close dropdown when clicking elsewhere
+            document.addEventListener('click', function(e) {
+                if (!dropdownMenu.contains(e.target) && !moreButton.contains(e.target)) {
+                    dropdownMenu.classList.remove('active');
+                }
+            });
+            
+            // Bottom bar button functionality
+            chatButton.addEventListener('click', function() {
+                showNotification('Chat feature opening soon!');
+                // In a real app, this would open a chat interface
+                const contentTitle = document.querySelector('.content h2');
+                const contentBox = document.querySelector('.placeholder-box');
+                contentTitle.textContent = 'Community Chat';
+                contentBox.innerHTML = `
+                    <p>Connect with other Arcadium users in real-time!</p>
+                    <br>
+                    <p>Features:</p>
+                    <p>• Group discussions</p>
+                    <p>• Private messaging</p>
+                    <p>• Game lobbies</p>
+                    <p>• Community events</p>
+                    <br>
+                    <p>Coming soon!</p>
+                `;
+            });
+            
+            chatGPTButton.addEventListener('click', function() {
+                showNotification('AI Assistant loading...');
+                // In a real app, this would open ChatGPT integration
+                const contentTitle = document.querySelector('.content h2');
+                const contentBox = document.querySelector('.placeholder-box');
+                contentTitle.textContent = 'AI Assistant';
+                contentBox.innerHTML = `
+                    <p>Get help from our AI assistant powered by ChatGPT!</p>
+                    <br>
+                    <p>Ask about:</p>
+                    <p>• Game strategies</p>
+                    <p>• Technical support</p>
+                    <p>• Website recommendations</p>
+                    <p>• General questions</p>
+                    <br>
+                    <p>Coming soon!</p>
+                `;
+            });
+            
+            reportButton.addEventListener('click', function() {
+                showNotification('Opening report form...');
+                // In a real app, this would open a report form
+                const contentTitle = document.querySelector('.content h2');
+                const contentBox = document.querySelector('.placeholder-box');
+                contentTitle.textContent = 'Report Issue';
+                contentBox.innerHTML = `
+                    <p>Help us improve Arcadium by reporting issues!</p>
+                    <br>
+                    <p>Report:</p>
+                    <p>• Bugs or glitches</p>
+                    <p>• Inappropriate content</p>
+                    <p>• Security concerns</p>
+                    <p>• User behavior</p>
+                    <br>
+                    <p>Your reports help keep Arcadium safe and fun for everyone!</p>
+                `;
+            });
+            
+            suggestButton.addEventListener('click', function() {
+                showNotification('Opening suggestion box...');
+                // In a real app, this would open a suggestion form
+                const contentTitle = document.querySelector('.content h2');
+                const contentBox = document.querySelector('.placeholder-box');
+                contentTitle.textContent = 'Suggest Feature';
+                contentBox.innerHTML = `
+                    <p>Have an idea to improve Arcadium? Let us know!</p>
+                    <br>
+                    <p>Suggest:</p>
+                    <p>• New games or features</p>
+                    <p>• Website improvements</p>
+                    <p>• Design changes</p>
+                    <p>• Community ideas</p>
+                    <br>
+                    <p>We love hearing from our users!</p>
+                `;
             });
             
             // Close settings panel
@@ -860,14 +1498,6 @@
                 document.body.style.backgroundImage = 'none';
                 saveSetting('backgroundColor', color);
                 showNotification('Background color applied!');
-            });
-            
-            // Change font
-            fontSelector.addEventListener('change', function() {
-                const fontFamily = this.value;
-                document.body.style.fontFamily = fontFamily;
-                saveSetting('fontFamily', fontFamily);
-                showNotification('Font changed!');
             });
             
             // Upload background image
@@ -935,12 +1565,20 @@
                     document.body.style.fontFamily = "'Fredoka One', cursive";
                     bgColorPicker.value = '#0a0e2a';
                     colorPreview.style.backgroundColor = '#0a0e2a';
-                    fontSelector.value = "'Fredoka One', cursive";
+                    selectedFontName.textContent = 'Fredoka One';
                     bgImageUpload.value = '';
                     document.body.classList.remove('reduce-motion');
                     performanceMode = false;
                     reduceMotion.innerHTML = '<i class="fas fa-running"></i> Reduce Animations';
                     showNotification('Settings reset!');
+                    
+                    // Mark Fredoka One as selected
+                    document.querySelectorAll('.font-option').forEach(opt => {
+                        opt.classList.remove('selected');
+                        if (opt.textContent.includes('Fredoka One')) {
+                            opt.classList.add('selected');
+                        }
+                    });
                 }
             });
             
@@ -954,42 +1592,6 @@
             // Save setting to localStorage
             function saveSetting(key, value) {
                 localStorage.setItem('arcadium_' + key, value);
-            }
-            
-            // Load settings from localStorage
-            function loadSettings() {
-                // Load background color
-                const savedBgColor = localStorage.getItem('arcadium_backgroundColor');
-                if (savedBgColor) {
-                    document.body.style.background = savedBgColor;
-                    bgColorPicker.value = savedBgColor;
-                    colorPreview.style.backgroundColor = savedBgColor;
-                } else {
-                    colorPreview.style.backgroundColor = '#0a0e2a';
-                }
-                
-                // Load font
-                const savedFont = localStorage.getItem('arcadium_fontFamily');
-                if (savedFont) {
-                    document.body.style.fontFamily = savedFont;
-                    fontSelector.value = savedFont;
-                }
-                
-                // Load background image
-                const savedBgImage = localStorage.getItem('arcadium_backgroundImage');
-                if (savedBgImage && savedBgImage !== 'none') {
-                    document.body.style.backgroundImage = `url('${savedBgImage}')`;
-                    document.body.style.backgroundSize = 'cover';
-                    document.body.style.backgroundAttachment = 'fixed';
-                }
-                
-                // Load performance mode
-                const savedPerformanceMode = localStorage.getItem('arcadium_performanceMode');
-                if (savedPerformanceMode === 'true') {
-                    performanceMode = true;
-                    document.body.classList.add('reduce-motion');
-                    reduceMotion.innerHTML = '<i class="fas fa-tachometer-alt"></i> Normal Animations';
-                }
             }
             
             // Show notification
@@ -1006,7 +1608,7 @@
                 notification.textContent = message;
                 notification.style.cssText = `
                     position: fixed;
-                    bottom: 30px;
+                    bottom: 100px;
                     left: 50%;
                     transform: translateX(-50%);
                     background: rgba(255, 255, 255, 0.15);
@@ -1039,8 +1641,8 @@
             const notificationStyle = document.createElement('style');
             notificationStyle.textContent = `
                 @keyframes notificationShow {
-                    from { opacity: 0; bottom: 0; }
-                    to { opacity: 1; bottom: 30px; }
+                    from { opacity: 0; bottom: 80px; }
+                    to { opacity: 1; bottom: 100px; }
                 }
                 @keyframes notificationHide {
                     from { opacity: 1; }
@@ -1056,6 +1658,16 @@
                     closeSettingsPanel();
                 }
             });
+            
+            // Mark selected font on load
+            setTimeout(() => {
+                const savedFontName = localStorage.getItem('arcadium_fontName') || 'Fredoka One';
+                document.querySelectorAll('.font-option').forEach(opt => {
+                    if (opt.textContent.includes(savedFontName)) {
+                        opt.classList.add('selected');
+                    }
+                });
+            }, 100);
         });
     </script>
 </body>
