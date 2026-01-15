@@ -27,7 +27,6 @@
             font-family: 'Fredoka One', cursive; /* Default font */
             transition: background 0.3s ease;
             will-change: background;
-            padding-bottom: 100px; /* Space for bottom bar */
         }
         
         /* Optimized Background Bubbles - Reduced count and simplified */
@@ -86,8 +85,7 @@
         
         /* White Text Glow for all text */
         .logo, .nav-link, .content h2, .placeholder-box, .settings-panel h3, 
-        .settings-group h4, .btn, .setting-info, .dropdown-link,
-        .bottom-bar-item span {
+        .settings-group h4, .btn, .setting-info, .dropdown-link {
             color: #ffffff;
             text-shadow: 
                 0 0 5px #ffffff,
@@ -295,7 +293,6 @@
             min-height: 400px;
             position: relative;
             overflow: hidden;
-            margin-bottom: 30px;
         }
         
         .content h2 {
@@ -331,158 +328,6 @@
             width: 100%;
             height: 100%;
             background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.1), transparent 50%);
-        }
-        
-        /* Bottom Bar - Circular Button Navigation */
-        .bottom-bar {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 90%;
-            max-width: 800px;
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(15px);
-            border-radius: 50px;
-            padding: 15px 30px;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 
-                0 10px 25px rgba(0, 0, 0, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            z-index: 50;
-            transition: all 0.4s ease;
-        }
-        
-        .bottom-bar:hover {
-            background: rgba(255, 255, 255, 0.12);
-            border-color: rgba(255, 255, 255, 0.3);
-            box-shadow: 
-                0 15px 30px rgba(0, 0, 0, 0.5),
-                0 0 20px rgba(255, 255, 255, 0.2),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
-        }
-        
-        .bottom-bar-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            padding: 10px 15px;
-            border-radius: 40px;
-            position: relative;
-        }
-        
-        .bottom-bar-item:hover {
-            transform: translateY(-8px);
-        }
-        
-        .bottom-bar-icon {
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 
-                0 5px 15px rgba(0, 0, 0, 0.3),
-                inset 0 0 10px rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .bottom-bar-item:hover .bottom-bar-icon {
-            transform: scale(1.15);
-            background: rgba(255, 255, 255, 0.2);
-            border-color: rgba(255, 255, 255, 0.4);
-            box-shadow: 
-                0 8px 20px rgba(0, 0, 0, 0.4),
-                0 0 15px rgba(255, 255, 255, 0.3),
-                inset 0 0 15px rgba(255, 255, 255, 0.2);
-        }
-        
-        /* Individual icon colors */
-        .bottom-bar-item:nth-child(1) .bottom-bar-icon {
-            color: #4fc3f7; /* Chat - Light Blue */
-        }
-        
-        .bottom-bar-item:nth-child(2) .bottom-bar-icon {
-            color: #81c784; /* ChatGPT - Light Green */
-        }
-        
-        .bottom-bar-item:nth-child(3) .bottom-bar-icon {
-            color: #ff8a65; /* Report - Orange */
-        }
-        
-        .bottom-bar-item:nth-child(4) .bottom-bar-icon {
-            color: #ba68c8; /* Suggest - Purple */
-        }
-        
-        .bottom-bar-item span {
-            font-family: 'Bubblegum Sans', cursive;
-            font-size: 16px;
-            font-weight: 500;
-            opacity: 0.9;
-            transition: all 0.3s ease;
-            white-space: nowrap;
-        }
-        
-        .bottom-bar-item:hover span {
-            opacity: 1;
-            transform: translateY(2px);
-            text-shadow: 
-                0 0 8px #ffffff,
-                0 0 15px #ffffff;
-        }
-        
-        /* Pulse animation for icons */
-        .bottom-bar-icon::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            border-radius: 50%;
-            border: 2px solid transparent;
-            animation: pulse-ring 2s infinite;
-        }
-        
-        @keyframes pulse-ring {
-            0% {
-                transform: scale(0.8);
-                opacity: 0.8;
-            }
-            100% {
-                transform: scale(1.5);
-                opacity: 0;
-            }
-        }
-        
-        /* Delay pulse animations */
-        .bottom-bar-item:nth-child(1) .bottom-bar-icon::after {
-            animation-delay: 0s;
-        }
-        
-        .bottom-bar-item:nth-child(2) .bottom-bar-icon::after {
-            animation-delay: 0.5s;
-        }
-        
-        .bottom-bar-item:nth-child(3) .bottom-bar-icon::after {
-            animation-delay: 1s;
-        }
-        
-        .bottom-bar-item:nth-child(4) .bottom-bar-icon::after {
-            animation-delay: 1.5s;
         }
         
         /* Simplified Floating Orbs - Reduced count */
@@ -823,43 +668,6 @@
                 margin-top: 15px;
                 min-width: 100%;
             }
-            
-            /* Bottom bar responsive */
-            .bottom-bar {
-                width: 95%;
-                padding: 12px 20px;
-                border-radius: 40px;
-            }
-            
-            .bottom-bar-icon {
-                width: 60px;
-                height: 60px;
-                font-size: 24px;
-            }
-            
-            .bottom-bar-item span {
-                font-size: 14px;
-            }
-        }
-        
-        @media (max-width: 650px) {
-            .bottom-bar {
-                padding: 10px 15px;
-            }
-            
-            .bottom-bar-icon {
-                width: 55px;
-                height: 55px;
-                font-size: 22px;
-            }
-            
-            .bottom-bar-item span {
-                font-size: 12px;
-            }
-            
-            .bottom-bar-item {
-                padding: 8px 10px;
-            }
         }
         
         @media (max-width: 480px) {
@@ -879,29 +687,6 @@
             
             .dropdown-menu {
                 min-width: 100%;
-            }
-            
-            /* Bottom bar mobile */
-            .bottom-bar {
-                flex-wrap: wrap;
-                border-radius: 30px;
-                padding: 10px;
-                width: 95%;
-            }
-            
-            .bottom-bar-item {
-                width: 45%;
-                margin-bottom: 10px;
-            }
-            
-            .bottom-bar-icon {
-                width: 50px;
-                height: 50px;
-                font-size: 20px;
-            }
-            
-            body {
-                padding-bottom: 130px; /* More space for wrapped bottom bar */
             }
         }
         
@@ -1022,10 +807,9 @@
                 <div class="dropdown-container">
                     <a href="#" class="nav-link" id="moreButton">More <i class="fas fa-chevron-down"></i></a>
                     <div class="dropdown-menu" id="dropdownMenu">
+                        <a href="chat.html" class="dropdown-link">Chat</a>
                         <a href="market.html" class="dropdown-link">Market</a>
-                        <a href="news.html" class="dropdown-link">News</a>
-                        <a href="parthers.html" class="dropdown-link">Partners</a>
-                        <a href="chatgpt.html" class="dropdown-link">ChatGpt</a>
+                        <a href="chatgpt.html" class="dropdown-link">ChatGPT</a>
                         <a href="suggest.html" class="dropdown-link">Suggest</a>
                         <a href="report.html" class="dropdown-link">Report</a>
                     </div>
@@ -1040,13 +824,18 @@
             </div>
         </div>
     </div>
-        <!-- Content Area -->
+
+    <!-- Content Area -->
     <div class="content">
-        <h2>Welcome to Arcadium 2.0</h2>
+        <h2>Welcome to Arcadium!</h2>
         <div class="placeholder-box">
-        <p>Bruh this took a while to make ):</p>
+            <p>Your ultimate gaming and entertainment hub. Explore games, proxies, websites and more!</p>
+            <br>
+            <p>Use the settings button to customize your experience!</p>
+            <p>Click on "More" to see additional options.</p>
         </div>
     </div>
+
     <script>
         // List of 100+ Google Fonts
         const googleFonts = [
@@ -1271,12 +1060,6 @@
             const moreButton = document.getElementById('moreButton');
             const dropdownMenu = document.getElementById('dropdownMenu');
             
-            // Bottom bar elements
-            const chatButton = document.getElementById('chatButton');
-            const chatGPTButton = document.getElementById('chatGPTButton');
-            const reportButton = document.getElementById('reportButton');
-            const suggestButton = document.getElementById('suggestButton');
-            
             // Performance mode flag
             let performanceMode = false;
             
@@ -1380,83 +1163,6 @@
                 if (!dropdownMenu.contains(e.target) && !moreButton.contains(e.target)) {
                     dropdownMenu.classList.remove('active');
                 }
-            });
-            
-            // Bottom bar button functionality
-            chatButton.addEventListener('click', function() {
-                showNotification('Chat feature opening soon!');
-                // In a real app, this would open a chat interface
-                const contentTitle = document.querySelector('.content h2');
-                const contentBox = document.querySelector('.placeholder-box');
-                contentTitle.textContent = 'Community Chat';
-                contentBox.innerHTML = `
-                    <p>Connect with other Arcadium users in real-time!</p>
-                    <br>
-                    <p>Features:</p>
-                    <p>• Group discussions</p>
-                    <p>• Private messaging</p>
-                    <p>• Game lobbies</p>
-                    <p>• Community events</p>
-                    <br>
-                    <p>Coming soon!</p>
-                `;
-            });
-            
-            chatGPTButton.addEventListener('click', function() {
-                showNotification('AI Assistant loading...');
-                // In a real app, this would open ChatGPT integration
-                const contentTitle = document.querySelector('.content h2');
-                const contentBox = document.querySelector('.placeholder-box');
-                contentTitle.textContent = 'AI Assistant';
-                contentBox.innerHTML = `
-                    <p>Get help from our AI assistant powered by ChatGPT!</p>
-                    <br>
-                    <p>Ask about:</p>
-                    <p>• Game strategies</p>
-                    <p>• Technical support</p>
-                    <p>• Website recommendations</p>
-                    <p>• General questions</p>
-                    <br>
-                    <p>Coming soon!</p>
-                `;
-            });
-            
-            reportButton.addEventListener('click', function() {
-                showNotification('Opening report form...');
-                // In a real app, this would open a report form
-                const contentTitle = document.querySelector('.content h2');
-                const contentBox = document.querySelector('.placeholder-box');
-                contentTitle.textContent = 'Report Issue';
-                contentBox.innerHTML = `
-                    <p>Help us improve Arcadium by reporting issues!</p>
-                    <br>
-                    <p>Report:</p>
-                    <p>• Bugs or glitches</p>
-                    <p>• Inappropriate content</p>
-                    <p>• Security concerns</p>
-                    <p>• User behavior</p>
-                    <br>
-                    <p>Your reports help keep Arcadium safe and fun for everyone!</p>
-                `;
-            });
-            
-            suggestButton.addEventListener('click', function() {
-                showNotification('Opening suggestion box...');
-                // In a real app, this would open a suggestion form
-                const contentTitle = document.querySelector('.content h2');
-                const contentBox = document.querySelector('.placeholder-box');
-                contentTitle.textContent = 'Suggest Feature';
-                contentBox.innerHTML = `
-                    <p>Have an idea to improve Arcadium? Let us know!</p>
-                    <br>
-                    <p>Suggest:</p>
-                    <p>• New games or features</p>
-                    <p>• Website improvements</p>
-                    <p>• Design changes</p>
-                    <p>• Community ideas</p>
-                    <br>
-                    <p>We love hearing from our users!</p>
-                `;
             });
             
             // Close settings panel
@@ -1585,7 +1291,7 @@
                 notification.textContent = message;
                 notification.style.cssText = `
                     position: fixed;
-                    bottom: 100px;
+                    bottom: 30px;
                     left: 50%;
                     transform: translateX(-50%);
                     background: rgba(255, 255, 255, 0.15);
@@ -1618,8 +1324,8 @@
             const notificationStyle = document.createElement('style');
             notificationStyle.textContent = `
                 @keyframes notificationShow {
-                    from { opacity: 0; bottom: 80px; }
-                    to { opacity: 1; bottom: 100px; }
+                    from { opacity: 0; bottom: 0; }
+                    to { opacity: 1; bottom: 30px; }
                 }
                 @keyframes notificationHide {
                     from { opacity: 1; }
