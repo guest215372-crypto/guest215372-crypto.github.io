@@ -1,0 +1,1815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/png" href="/download.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arcadium Web - Soundboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&family=Fredoka+One&display=swap" rel="stylesheet">
+    <!-- Add 100+ Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&family=Open+Sans:wght@300;400;600;700&family=Lato:wght@300;400;700&family=Oswald:wght@300;400;500;600&family=Raleway:wght@300;400;500;600;700&family=Ubuntu:wght@300;400;500;700&family=Playfair+Display:wght@400;700&family=Merriweather:wght@300;400;700&family=Source+Sans+Pro:wght@300;400;600&family=PT+Sans:wght@400;700&family=Noto+Sans:wght@400;700&family=Nunito:wght@300;400;600;700&family=Quicksand:wght@300;400;500;600&family=Rubik:wght@300;400;500;600&family=Josefin+Sans:wght@300;400;600&family=Arvo:wght@400;700&family=Libre+Baskerville:wght@400;700&family=Roboto+Slab:wght@300;400;700&family=Cabin:wght@400;500;600;700&family=Roboto+Condensed:wght@300;400;700&family=Oxygen:wght@300;400;700&family=Fira+Sans:wght@300;400;500;600&family=Work+Sans:wght@300;400;500;600&family=Karla:wght@400;700&family=Inconsolata:wght@400;700&family=Space+Mono:wght@400;700&family=Courier+Prime:wght@400;700&family=Nanum+Gothic:wght@400;700&family=Comfortaa:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700&family=Exo+2:wght@300;400;500;600;700&family=Titillium+Web:wght@300;400;600;700&family=Archivo:wght@400;500;600;700&family=Manrope:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700&family=Chivo:wght@300;400;700&family=Overpass:wght@300;400;600;700&family=Hind:wght@300;400;500;600;700&family=Muli:wght@300;400;500;600&family=Catamaran:wght@300;400;500;600;700&family=Varela+Round&family=ABeeZee&family=Acme&family=Alfa+Slab+One&family=Amaranth&family=Anton&family=Bangers&family=Bebas+Neue&family=Black+Ops+One&family=Bree+Serif&family=Chewy&family=Concert+One&family=Courgette&family=Crimson+Text&family=Dancing+Script&family=Dosis&family=Economica&family=Fjalla+One&family=Francois+One&family=Gloria+Hallelujah&family=Great+Vibes&family=Indie+Flower&family=Lobster&family=Luckiest+Guy&family=Mitr&family=Monda&family=Monoton&family=Montserrat+Alternates&family=Orbitron&family=Pacifico&family=Passion+One&family=Patua+One&family=Permanent+Marker&family=Press+Start+2P&family=Racing+Sans+One&family=Righteous&family=Roboto+Mono&family=Sacramento&family=Shadows+Into+Light&family=Sigmar+One&family=Staatliches&family=Teko&family=Yellowtail&display=swap" rel="stylesheet">
+    <style>
+        /* Performance optimizations */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0a0e2a 0%, #1a1f4a 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+            font-family: 'Fredoka One', cursive; /* Default font */
+            transition: background 0.3s ease;
+            will-change: background;
+        }
+        
+        /* Optimized Background Bubbles - Reduced count and simplified */
+        .bubbles {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+        
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+            animation: float 20s infinite linear;
+            opacity: 0.7;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); }
+            100% { transform: translateY(-100px) rotate(180deg); }
+        }
+        
+        /* Main Navigation Container */
+        .nav-container {
+            width: 100%;
+            max-width: 1000px;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            border-radius: 50px;
+            padding: 15px 30px;
+            margin-top: 30px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 
+                0 10px 20px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            overflow: visible;
+            z-index: 10;
+        }
+        
+        /* Left Section - Logo and Main Links */
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+        
+        /* White Text Glow for all text */
+        .logo, .nav-link, .content h2, .placeholder-box, .settings-panel h3, 
+        .settings-group h4, .btn, .setting-info, .dropdown-link {
+            color: #ffffff;
+            text-shadow: 
+                0 0 5px #ffffff,
+                0 0 10px #ffffff,
+                0 0 15px #ffffff,
+                0 2px 5px rgba(0, 0, 0, 0.5);
+        }
+        
+        .logo {
+            font-family: 'Bubblegum Sans', cursive;
+            font-size: 42px;
+            font-weight: 400;
+            position: relative;
+            padding: 5px 15px;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 
+                inset 0 0 10px rgba(255, 255, 255, 0.2),
+                0 5px 10px rgba(0, 0, 0, 0.3);
+            animation: gentleGlow 4s infinite alternate;
+        }
+        
+        @keyframes gentleGlow {
+            0% { 
+                text-shadow: 
+                    0 0 5px #ffffff,
+                    0 0 10px #ffffff,
+                    0 0 15px #ffffff;
+            }
+            100% { 
+                text-shadow: 
+                    0 0 8px #ffffff,
+                    0 0 15px #ffffff,
+                    0 0 25px #ffffff;
+            }
+        }
+        
+        .nav-divider {
+            height: 40px;
+            width: 4px;
+            background: linear-gradient(to bottom, transparent, #ffffff, transparent);
+            border-radius: 2px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            position: relative;
+        }
+        
+        .nav-link {
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: 500;
+            padding: 12px 20px;
+            border-radius: 40px;
+            transition: all 0.3s ease;
+            font-family: 'Bubblegum Sans', cursive;
+            position: relative;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            white-space: nowrap;
+        }
+        
+        .nav-link:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-3px);
+            box-shadow: 
+                0 8px 15px rgba(0, 0, 0, 0.3),
+                0 0 10px rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+        
+        /* More Dropdown Menu - Liquid Glass Panel */
+        .dropdown-container {
+            position: relative;
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 10px;
+            min-width: 220px;
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            border: 2px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 
+                0 15px 35px rgba(0, 0, 0, 0.5),
+                0 0 20px rgba(255, 255, 255, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 100;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            overflow: hidden;
+        }
+        
+        /* Bubble effect for dropdown */
+        .dropdown-menu::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.1), transparent 70%);
+            border-radius: 35px;
+            z-index: -1;
+            opacity: 0.5;
+        }
+        
+        .dropdown-menu.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .dropdown-link {
+            display: block;
+            text-decoration: none;
+            padding: 14px 18px;
+            border-radius: 20px;
+            font-family: 'Bubblegum Sans', cursive;
+            font-size: 18px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .dropdown-link:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateX(5px);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+        
+        /* Right Section - Animated Icons */
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .icon-button {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .icon-button:hover {
+            transform: translateY(-5px) scale(1.1);
+            background: rgba(255, 255, 255, 0.2);
+            border-color: #ffffff;
+            box-shadow: 
+                0 10px 15px rgba(0, 0, 0, 0.3),
+                0 0 15px rgba(255, 255, 255, 0.4);
+        }
+        
+        /* Content Area */
+        .content {
+            max-width: 1000px;
+            width: 100%;
+            margin-top: 50px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(8px);
+            border-radius: 40px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 
+                0 10px 25px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: 400px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .content h2 {
+            margin-bottom: 30px;
+            font-family: 'Bubblegum Sans', cursive;
+            font-size: 36px;
+            animation: gentleBounce 3s infinite;
+        }
+        
+        @keyframes gentleBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        
+        .placeholder-box {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 30px;
+            padding: 40px;
+            width: 100%;
+            border: 2px dashed rgba(255, 255, 255, 0.2);
+            font-family: 'Bubblegum Sans', cursive;
+            font-size: 22px;
+            line-height: 1.6;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .placeholder-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.1), transparent 50%);
+        }
+        
+        /* Simplified Floating Orbs - Reduced count */
+        .floating-orb {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05));
+            box-shadow: 
+                inset 0 0 10px rgba(255, 255, 255, 0.2),
+                0 0 15px rgba(255, 255, 255, 0.2);
+            animation: float-orb 15s infinite linear;
+            z-index: 1;
+            opacity: 0.5;
+            pointer-events: none;
+        }
+        
+        @keyframes float-orb {
+            0% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(15px, -15px) scale(1.05); }
+            50% { transform: translate(0, -30px) scale(1); }
+            75% { transform: translate(-15px, -15px) scale(0.95); }
+            100% { transform: translate(0, 0) scale(1); }
+        }
+        
+        /* Bubble-like Settings Panel */
+        .settings-panel {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            width: 420px;
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(15px);
+            border-radius: 30px;
+            border: 2px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.4),
+                0 0 30px rgba(255, 255, 255, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            padding: 25px;
+            overflow-y: auto;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            max-height: 80vh;
+        }
+        
+        .settings-panel.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, -50%) scale(1);
+        }
+        
+        /* Bubble shape effect */
+        .settings-panel::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.1), transparent 70%);
+            border-radius: 40px;
+            z-index: -1;
+            opacity: 0.5;
+        }
+        
+        .settings-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .settings-header h3 {
+            font-size: 28px;
+            font-family: 'Bubblegum Sans', cursive;
+        }
+        
+        .close-settings {
+            background: rgba(255, 255, 255, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .close-settings:hover {
+            background: rgba(255, 100, 100, 0.3);
+            border-color: #ff6464;
+            transform: rotate(90deg);
+        }
+        
+        .settings-group {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        
+        .settings-group h4 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            font-family: 'Bubblegum Sans', cursive;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .settings-group h4 i {
+            font-size: 20px;
+        }
+        
+        /* Font selector with scroll */
+        .font-selector-container {
+            max-height: 200px;
+            overflow-y: auto;
+            border-radius: 10px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+        }
+        
+        .font-option {
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+            font-size: 16px;
+        }
+        
+        .font-option:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateX(5px);
+        }
+        
+        .font-option.selected {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+        
+        .font-preview {
+            display: block;
+            font-size: 14px;
+            margin-top: 5px;
+            opacity: 0.8;
+        }
+        
+        .color-picker-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .color-preview {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            border: 2px solid white;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+        
+        .color-preview:hover {
+            transform: scale(1.1);
+        }
+        
+        .color-picker {
+            flex: 1;
+            height: 40px;
+            border-radius: 10px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+        }
+        
+        .select-container {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 16px;
+            font-family: 'Fredoka One', cursive;
+            margin-bottom: 10px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        
+        .select-container:focus {
+            border-color: rgba(255, 255, 255, 0.6);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+        
+        .file-upload {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.05);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 10px;
+        }
+        
+        .file-upload:hover {
+            border-color: rgba(255, 255, 255, 0.6);
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .btn {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 14px 25px;
+            border-radius: 15px;
+            font-family: 'Bubblegum Sans', cursive;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.5);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3), 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+        
+        .btn i {
+            font-size: 20px;
+        }
+        
+        .setting-info {
+            font-size: 14px;
+            margin-top: 10px;
+            font-style: italic;
+            text-align: center;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            opacity: 0.8;
+        }
+        
+        .reset-btn {
+            background: rgba(255, 100, 100, 0.2);
+            border-color: rgba(255, 100, 100, 0.4);
+        }
+        
+        .reset-btn:hover {
+            background: rgba(255, 100, 100, 0.3);
+        }
+        
+        /* Overlay for settings */
+        .settings-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(3px);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .settings-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Responsive */
+        @media (max-width: 850px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 20px;
+                padding: 20px;
+                border-radius: 40px;
+            }
+            
+            .nav-left {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .nav-divider {
+                height: 2px;
+                width: 80%;
+                background: linear-gradient(to right, transparent, #ffffff, transparent);
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .logo {
+                font-size: 36px;
+            }
+            
+            .content h2 {
+                font-size: 28px;
+            }
+            
+            .settings-panel {
+                width: 90%;
+                max-width: 350px;
+            }
+            
+            .dropdown-menu {
+                position: static;
+                margin-top: 15px;
+                min-width: 100%;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .settings-panel {
+                width: 95%;
+                padding: 20px;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .placeholder-box {
+                padding: 20px;
+                font-size: 18px;
+            }
+            
+            .dropdown-menu {
+                min-width: 100%;
+            }
+        }
+        
+        /* Performance optimization classes */
+        .no-animation {
+            animation: none !important;
+        }
+        
+        .reduce-motion * {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+        }
+    </style>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Optimized Background Bubbles -->
+    <div class="bubbles" id="bubbles"></div>
+    
+    <!-- Settings Overlay -->
+    <div class="settings-overlay" id="settingsOverlay"></div>
+    
+    <!-- Bubble-like Settings Panel -->
+    <div class="settings-panel" id="settingsPanel">
+        <div class="settings-header">
+            <h3><i class="fas fa-cog"></i> Settings</h3>
+            <button class="close-settings" id="closeSettings">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <!-- Background Color Settings -->
+        <div class="settings-group">
+            <h4><i class="fas fa-palette"></i> Background Color</h4>
+            <div class="color-picker-container">
+                <div class="color-preview" id="colorPreview" title="Click to preview"></div>
+                <input type="color" id="bgColorPicker" class="color-picker" value="#0a0e2a">
+            </div>
+            <button class="btn" id="applyBgColor">
+                <i class="fas fa-check"></i> Apply Color
+            </button>
+        </div>
+        
+        <!-- Font Settings with 100+ fonts -->
+        <div class="settings-group">
+            <h4><i class="fas fa-font"></i> Font Selection</h4>
+            <div class="setting-info">
+                Choose from 100+ Google Fonts. Click to preview.
+            </div>
+            <div class="font-selector-container" id="fontSelectorContainer">
+                <!-- Font options will be populated by JavaScript -->
+            </div>
+            <div class="setting-info">
+                Selected font: <span id="selectedFontName">Fredoka One</span>
+            </div>
+        </div>
+        
+        <!-- Background Image Settings -->
+        <div class="settings-group">
+            <h4><i class="fas fa-image"></i> Background Image</h4>
+            <input type="file" id="bgImageUpload" accept="image/*" class="file-upload">
+            <div class="setting-info">
+                Upload any image
+            </div>
+            <button class="btn" id="removeBgImage">
+                <i class="fas fa-trash"></i> Remove Image
+            </button>
+        </div>
+        
+        <!-- About:blank Opener -->
+        <div class="settings-group">
+            <h4><i class="fas fa-external-link-alt"></i> About:Blank</h4>
+            <div class="setting-info">
+                Opens page in new window
+            </div>
+            <button class="btn" id="openAboutBlank">
+                <i class="fas fa-external-link-square-alt"></i> Open
+            </button>
+        </div>
+        
+        <!-- Performance Settings -->
+        <div class="settings-group">
+            <h4><i class="fas fa-tachometer-alt"></i> Performance</h4>
+            <button class="btn" id="reduceMotion">
+                <i class="fas fa-running"></i> Reduce Animations
+            </button>
+            <div class="setting-info">
+                Makes animations simpler for better performance
+            </div>
+        </div>
+        
+        <!-- Reset Settings -->
+        <div class="settings-group">
+            <h4><i class="fas fa-redo"></i> Reset</h4>
+            <button class="btn reset-btn" id="resetSettings">
+                <i class="fas fa-undo"></i> Reset to Default
+            </button>
+        </div>
+    </div>
+    
+    <!-- Optimized Floating Orbs - Reduced to 2 -->
+    <div class="floating-orb" style="width: 80px; height: 80px; top: 15%; left: 10%;"></div>
+    <div class="floating-orb" style="width: 60px; height: 60px; bottom: 20%; right: 15%; animation-delay: -5s;"></div>
+    
+    <!-- Navigation Bar -->
+    <div class="nav-container">
+        <!-- Left Section -->
+        <div class="nav-left">
+            <a href="index.html" class="logo">Arcadium</a>
+            <div class="nav-divider"></div>
+            <div class="nav-links">
+                <a href="games.html" class="nav-link">Games</a>
+                <a href="proxies.html" class="nav-link">Proxies</a>
+                <a href="websites.html" class="nav-link">Websites</a>
+                <a href="soundboard.html" class="nav-link">Soundboard</a>
+                <div class="dropdown-container">
+                    <a href="#" class="nav-link" id="moreButton">More <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown-menu" id="dropdownMenu">
+                        <a href="chat.html" class="dropdown-link">Chat</a>
+                        <a href="market.html" class="dropdown-link">Market</a>
+                        <a href="chatgpt.html" class="dropdown-link">ChatGPT</a>
+                        <a href="suggest.html" class="dropdown-link">Suggest</a>
+                        <a href="report.html" class="dropdown-link">Report</a>
+                        <a href="iframe.html" class="dropdown-link">iFrame</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Right Section with Settings Button -->
+        <div class="nav-right">
+            <div class="icon-button" id="settingsButton" title="Settings">
+                <i class="fas fa-cog"></i>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            padding: 20px;
+            color: #fff;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            padding: 30px;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 5px;
+            font-weight: 600;
+            background: linear-gradient(to right, #a8edea, #fed6e3);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 20px rgba(168, 237, 234, 0.3);
+            font-size: 2.2rem;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+        
+        .iframe-container {
+            position: relative;
+            width: 100%;
+            height: 550px;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 30px;
+            transition: height 0.3s ease;
+        }
+        
+        .glass-effect {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        .liquid-overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(168, 237, 234, 0.05), rgba(254, 214, 227, 0.05));
+            border-radius: 15px;
+            z-index: 2;
+            pointer-events: none;
+            opacity: 0.8;
+        }
+        
+        .liquid-animation {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%;
+            background: linear-gradient(45deg, rgba(168, 237, 234, 0.1), rgba(254, 214, 227, 0.1));
+            animation: liquidMove 15s infinite linear;
+            z-index: 3;
+            pointer-events: none;
+            opacity: 0.6;
+        }
+        
+        .liquid-animation:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            animation-duration: 20s;
+            animation-direction: reverse;
+            top: 20%;
+            left: 70%;
+        }
+        
+        @keyframes liquidMove {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+                border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%;
+            }
+            25% {
+                transform: translate(20px, 40px) rotate(90deg);
+                border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            }
+            50% {
+                transform: translate(-30px, 20px) rotate(180deg);
+                border-radius: 40% 60% 70% 30% / 40% 40% 60% 60%;
+            }
+            75% {
+                transform: translate(-20px, -30px) rotate(270deg);
+                border-radius: 70% 30% 50% 50% / 30% 70% 70% 30%;
+            }
+            100% {
+                transform: translate(0, 0) rotate(360deg);
+                border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%;
+            }
+        }
+        
+        iframe {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 15px;
+            z-index: 10;
+            background-color: white;
+        }
+        
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        
+        .control-group {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 18px;
+            flex: 1;
+            min-width: 200px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .control-title {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .control-title i {
+            color: #a8edea;
+        }
+        
+        .size-controls {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .size-btn {
+            flex: 1;
+            padding: 12px;
+            background: rgba(168, 237, 234, 0.2);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            font-size: 15px;
+        }
+        
+        .size-btn:hover {
+            background: rgba(168, 237, 234, 0.4);
+            transform: translateY(-2px);
+        }
+        
+        .size-btn.active {
+            background: rgba(168, 237, 234, 0.6);
+            box-shadow: 0 5px 15px rgba(168, 237, 234, 0.2);
+        }
+        
+        .button-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+        
+        .action-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 24px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            font-size: 16px;
+        }
+        
+        .action-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .action-btn.primary {
+            background: linear-gradient(135deg, #a8edea, #fed6e3);
+            color: #0f0c29;
+        }
+        
+        .action-btn.primary:hover {
+            box-shadow: 0 5px 20px rgba(168, 237, 234, 0.4);
+        }
+        
+        .custom-slider {
+            width: 100%;
+            margin-top: 15px;
+            -webkit-appearance: none;
+            height: 8px;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            outline: none;
+        }
+        
+        .custom-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: #a8edea;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(168, 237, 234, 0.5);
+        }
+        
+        .custom-slider::-moz-range-thumb {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: #a8edea;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 0 10px rgba(168, 237, 234, 0.5);
+        }
+        
+        @media (max-width: 768px) {
+            .controls {
+                flex-direction: column;
+            }
+            
+            .iframe-container {
+                height: 450px;
+            }
+            
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+        }
+        
+        .fullscreen-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .fullscreen-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 10px;
+        }
+        
+        .close-fullscreen {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            background: rgba(255, 255, 255, 0.15);
+            border: none;
+            border-radius: 50%;
+            width: 55px;
+            height: 55px;
+            color: white;
+            font-size: 26px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1001;
+        }
+        
+        .close-fullscreen:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1><i class="fas fa-glass-whiskey"></i> Soundboard</h1>
+        <p class="subtitle">A soundboard everyone loves (:</p>
+        
+        <div class="iframe-container" id="iframeContainer">
+            <div class="glass-effect"></div>
+            <div class="liquid-overlay"></div>
+            <div class="liquid-animation"></div>
+            <div class="liquid-animation"></div>
+            <!-- 
+                TO CHANGE THE IFRAME URL:
+                Replace the src attribute below with your desired URL
+                Example: src="https://www.example.com"
+            -->
+            <iframe id="mainFrame" src="https://omessimplegames.global.ssl.fastly.net/iframe/179.html" title="Liquid Glass iFrame"></iframe>
+        </div>
+        
+        <div class="controls">
+            <div class="control-group">
+                <div class="control-title">
+                    <i class="fas fa-expand-alt"></i> Adjust Size
+                </div>
+                <div class="size-controls">
+                    <button class="size-btn active" data-size="small">Small</button>
+                    <button class="size-btn" data-size="medium">Medium</button>
+                    <button class="size-btn" data-size="large">Large</button>
+                    <button class="size-btn" data-size="custom">Custom</button>
+                </div>
+                <input type="range" id="customSize" min="350" max="800" value="550" class="custom-slider" style="display: none;">
+            </div>
+        </div>
+        
+        <div class="button-controls">
+            <button class="action-btn primary" id="refreshBtn">
+                <i class="fas fa-sync-alt"></i> Refresh
+            </button>
+            <button class="action-btn" id="newTabBtn">
+                <i class="fas fa-external-link-alt"></i> Open in New Tab
+            </button>
+            <button class="action-btn" id="fullscreenBtn">
+                <i class="fas fa-expand"></i> Full Screen
+            </button>
+        </div>
+    </div>
+    
+    <div class="fullscreen-overlay" id="fullscreenOverlay">
+        <button class="close-fullscreen" id="closeFullscreen">
+            <i class="fas fa-times"></i>
+        </button>
+        <iframe class="fullscreen-iframe" id="fullscreenFrame"></iframe>
+    </div>
+
+    <script>
+        // DOM Elements
+        const iframeContainer = document.getElementById('iframeContainer');
+        const mainFrame = document.getElementById('mainFrame');
+        const refreshBtn = document.getElementById('refreshBtn');
+        const newTabBtn = document.getElementById('newTabBtn');
+        const fullscreenBtn = document.getElementById('fullscreenBtn');
+        const sizeButtons = document.querySelectorAll('.size-btn');
+        const customSizeSlider = document.getElementById('customSize');
+        const fullscreenOverlay = document.getElementById('fullscreenOverlay');
+        const fullscreenFrame = document.getElementById('fullscreenFrame');
+        const closeFullscreen = document.getElementById('closeFullscreen');
+        
+        // Set initial active size button
+        let currentSize = 'medium';
+        
+        // Size presets
+        const sizePresets = {
+            small: 450,
+            medium: 550,
+            large: 650,
+            custom: 550
+        };
+        
+        // Event Listeners for Size Controls
+        sizeButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                sizeButtons.forEach(btn => btn.classList.remove('active'));
+                
+                // Add active class to clicked button
+                button.classList.add('active');
+                
+                // Get the size
+                currentSize = button.getAttribute('data-size');
+                
+                // Show/hide custom slider
+                if (currentSize === 'custom') {
+                    customSizeSlider.style.display = 'block';
+                    iframeContainer.style.height = `${customSizeSlider.value}px`;
+                } else {
+                    customSizeSlider.style.display = 'none';
+                    iframeContainer.style.height = `${sizePresets[currentSize]}px`;
+                }
+            });
+        });
+        
+        // Custom size slider
+        customSizeSlider.addEventListener('input', () => {
+            if (currentSize === 'custom') {
+                iframeContainer.style.height = `${customSizeSlider.value}px`;
+            }
+        });
+        
+        // Refresh iFrame
+        refreshBtn.addEventListener('click', () => {
+            mainFrame.src = mainFrame.src;
+        });
+        
+        // Open iFrame content in new tab
+        newTabBtn.addEventListener('click', () => {
+            window.open(mainFrame.src, '_blank');
+        });
+        
+        // Fullscreen mode
+        fullscreenBtn.addEventListener('click', () => {
+            fullscreenFrame.src = mainFrame.src;
+            fullscreenOverlay.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        });
+        
+        // Close fullscreen
+        closeFullscreen.addEventListener('click', () => {
+            fullscreenOverlay.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+        
+        // Close fullscreen with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && fullscreenOverlay.style.display === 'flex') {
+                fullscreenOverlay.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+        
+        // Initialize with medium size
+        document.querySelector('.size-btn[data-size="medium"]').click();
+    </script>
+</body>
+</html>
+
+    <script>
+        // List of 100+ Google Fonts
+        const googleFonts = [
+            { name: "Fredoka One", family: "'Fredoka One', cursive", preview: "Smooth rounded font for titles" },
+            { name: "Bubblegum Sans", family: "'Bubblegum Sans', cursive", preview: "Fun, playful font for headers" },
+            { name: "Montserrat", family: "'Montserrat', sans-serif", preview: "Modern geometric sans-serif" },
+            { name: "Poppins", family: "'Poppins', sans-serif", preview: "Clean, geometric sans-serif font" },
+            { name: "Roboto", family: "'Roboto', sans-serif", preview: "Material Design's default font" },
+            { name: "Open Sans", family: "'Open Sans', sans-serif", preview: "Humanist sans-serif font" },
+            { name: "Lato", family: "'Lato', sans-serif", preview: "Sans-serif with warmth" },
+            { name: "Oswald", family: "'Oswald', sans-serif", preview: "Reworking of classic gothic styles" },
+            { name: "Raleway", family: "'Raleway', sans-serif", preview: "Elegant sans-serif" },
+            { name: "Ubuntu", family: "'Ubuntu', sans-serif", preview: "Modern humanist sans-serif" },
+            { name: "Playfair Display", family: "'Playfair Display', serif", preview: "Elegant serif font" },
+            { name: "Merriweather", family: "'Merriweather', serif", preview: "Serif font for reading" },
+            { name: "Source Sans Pro", family: "'Source Sans Pro', sans-serif", preview: "Adobe's first open source font" },
+            { name: "PT Sans", family: "'PT Sans', sans-serif", preview: "For use in various interfaces" },
+            { name: "Noto Sans", family: "'Noto Sans', sans-serif", preview: "Google's font for all languages" },
+            { name: "Nunito", family: "'Nunito', sans-serif", preview: "Well-balanced sans-serif" },
+            { name: "Quicksand", family: "'Quicksand', sans-serif", preview: "Display sans-serif with rounded terminals" },
+            { name: "Rubik", family: "'Rubik', sans-serif", preview: "Sans-serif with slightly rounded corners" },
+            { name: "Josefin Sans", family: "'Josefin Sans', sans-serif", preview: "Elegant, geometric sans-serif" },
+            { name: "Arvo", family: "'Arvo', serif", preview: "Slab serif typeface" },
+            { name: "Libre Baskerville", family: "'Libre Baskerville', serif", preview: "Serif optimized for body text" },
+            { name: "Roboto Slab", family: "'Roboto Slab', serif", preview: "Roboto's slab serif companion" },
+            { name: "Cabin", family: "'Cabin', sans-serif", preview: "Humanist sans-serif with personality" },
+            { name: "Roboto Condensed", family: "'Roboto Condensed', sans-serif", preview: "Condensed version of Roboto" },
+            { name: "Oxygen", family: "'Oxygen', sans-serif", preview: "Sans-serif for screens" },
+            { name: "Fira Sans", family: "'Fira Sans', sans-serif", preview: "Humanist sans-serif for Firefox OS" },
+            { name: "Work Sans", family: "'Work Sans', sans-serif", preview: "A grotesque sans-serif" },
+            { name: "Karla", family: "'Karla', sans-serif", preview: "Grotesque sans-serif" },
+            { name: "Inconsolata", family: "'Inconsolata', monospace", preview: "Monospace font for code" },
+            { name: "Space Mono", family: "'Space Mono', monospace", preview: "Original monospace font family" },
+            { name: "Courier Prime", family: "'Courier Prime', monospace", preview: "Courier replacement for screenplays" },
+            { name: "Nanum Gothic", family: "'Nanum Gothic', sans-serif", preview: "Modern sans-serif Korean font" },
+            { name: "Comfortaa", family: "'Comfortaa', cursive", preview: "Rounded geometric sans-serif" },
+            { name: "Orbitron", family: "'Orbitron', sans-serif", preview: "Geometric sans-serif with futuristic feel" },
+            { name: "Exo 2", family: "'Exo 2', sans-serif", preview: "Geometric sans-serif with futuristic feel" },
+            { name: "Titillium Web", family: "'Titillium Web', sans-serif", preview: "Contemporary sans-serif" },
+            { name: "Archivo", family: "'Archivo', sans-serif", preview: "Grotesque sans-serif" },
+            { name: "Manrope", family: "'Manrope', sans-serif", preview: "Modern variable font" },
+            { name: "Inter", family: "'Inter', sans-serif", preview: "Variable font for screens" },
+            { name: "Syne", family: "'Syne', sans-serif", preview: "Contemporary sans-serif" },
+            { name: "Chivo", family: "'Chivo', sans-serif", preview: "Modern sans-serif with character" },
+            { name: "Overpass", family: "'Overpass', sans-serif", preview: "Open source font inspired by Highway Gothic" },
+            { name: "Hind", family: "'Hind', sans-serif", preview: "Sans-serif for Indian scripts" },
+            { name: "Muli", family: "'Muli', sans-serif", preview: "Minimalist sans-serif" },
+            { name: "Catamaran", family: "'Catamaran', sans-serif", preview: "Sans-serif for Tamil and Latin" },
+            { name: "Varela Round", family: "'Varela Round', sans-serif", preview: "Sans-serif with gentle rounds" },
+            { name: "ABeeZee", family: "'ABeeZee', sans-serif", preview: "Friendly sans-serif" },
+            { name: "Acme", family: "'Acme', sans-serif", preview: "Sans-serif with clean lines" },
+            { name: "Alfa Slab One", family: "'Alfa Slab One', cursive", preview: "Heavy slab serif with a vintage feel" },
+            { name: "Amaranth", family: "'Amaranth', sans-serif", preview: "Friendly sans-serif with rounded features" },
+            { name: "Anton", family: "'Anton', sans-serif", preview: "Sans-serif with a strong personality" },
+            { name: "Bangers", family: "'Bangers', cursive", preview: "Comic book style display font" },
+            { name: "Bebas Neue", family: "'Bebas Neue', cursive", preview: "Display sans-serif with narrow width" },
+            { name: "Black Ops One", family: "'Black Ops One', cursive", preview: "Military-style display font" },
+            { name: "Bree Serif", family: "'Bree Serif', serif", preview: "Modern serif with subtle curves" },
+            { name: "Chewy", family: "'Chewy', cursive", preview: "Rounded, bold comic font" },
+            { name: "Concert One", family: "'Concert One', cursive", preview: "Rounded sans-serif for displays" },
+            { name: "Courgette", family: "'Courgette', cursive", preview: "Elegant script font" },
+            { name: "Crimson Text", family: "'Crimson Text', serif", preview: "Serif font for book production" },
+            { name: "Dancing Script", family: "'Dancing Script', cursive", preview: "Elegant cursive script" },
+            { name: "Dosis", family: "'Dosis', sans-serif", preview: "Rounded sans-serif with open forms" },
+            { name: "Economica", family: "'Economica', sans-serif", preview: "Sans-serif with geometric structure" },
+            { name: "Fjalla One", family: "'Fjalla One', sans-serif", preview: "Sans-serif with low contrast" },
+            { name: "Francois One", family: "'Francois One', sans-serif", preview: "Condensed sans-serif" },
+            { name: "Gloria Hallelujah", family: "'Gloria Hallelujah', cursive", preview: "Casual brush script" },
+            { name: "Great Vibes", family: "'Great Vibes', cursive", preview: "Elegant script font" },
+            { name: "Indie Flower", family: "'Indie Flower', cursive", preview: "Casual handwriting font" },
+            { name: "Lobster", family: "'Lobster', cursive", preview: "Script font with strong curves" },
+            { name: "Luckiest Guy", family: "'Luckiest Guy', cursive", preview: "Comic book style font" },
+            { name: "Mitr", family: "'Mitr', sans-serif", preview: "Thai and Latin sans-serif" },
+            { name: "Monda", family: "'Monda', sans-serif", preview: "Sans-serif for headlines" },
+            { name: "Monoton", family: "'Monoton', cursive", preview: "Display font with uniform strokes" },
+            { name: "Montserrat Alternates", family: "'Montserrat Alternates', sans-serif", preview: "Alternate glyphs for Montserrat" },
+            { name: "Orbitron", family: "'Orbitron', sans-serif", preview: "Futuristic sans-serif" },
+            { name: "Pacifico", family: "'Pacifico', cursive", preview: "Brush script with casual feel" },
+            { name: "Passion One", family: "'Passion One', cursive", preview: "Display font with heavy weight" },
+            { name: "Patua One", family: "'Patua One', cursive", preview: "Slab serif with rounded details" },
+            { name: "Permanent Marker", family: "'Permanent Marker', cursive", preview: "Handwritten marker font" },
+            { name: "Press Start 2P", family: "'Press Start 2P', cursive", preview: "Pixel font for video games" },
+            { name: "Racing Sans One", family: "'Racing Sans One', cursive", preview: "Sans-serif inspired by racing typography" },
+            { name: "Righteous", family: "'Righteous', cursive", preview: "Display font with art deco influences" },
+            { name: "Roboto Mono", family: "'Roboto Mono', monospace", preview: "Monospace version of Roboto" },
+            { name: "Sacramento", family: "'Sacramento', cursive", preview: "Calligraphy script font" },
+            { name: "Shadows Into Light", family: "'Shadows Into Light', cursive", preview: "Casual handwriting font" },
+            { name: "Sigmar One", family: "'Sigmar One', cursive", preview: "Display font with rounded terminals" },
+            { name: "Staatliches", family: "'Staatliches', cursive", preview: "Display sans-serif with uniform width" },
+            { name: "Teko", family: "'Teko', sans-serif", preview: "Condensed Devanagari and Latin sans-serif" },
+            { name: "Yellowtail", family: "'Yellowtail', cursive", preview: "Elegant brush script" },
+            { name: "Arial", family: "Arial, sans-serif", preview: "Standard sans-serif font" },
+            { name: "Verdana", family: "Verdana, sans-serif", preview: "Humanist sans-serif for screens" },
+            { name: "Georgia", family: "Georgia, serif", preview: "Transitional serif for screens" },
+            { name: "Times New Roman", family: "'Times New Roman', serif", preview: "Classic serif font" },
+            { name: "Courier New", family: "'Courier New', monospace", preview: "Monospace serif font" },
+            { name: "Trebuchet MS", family: "'Trebuchet MS', sans-serif", preview: "Humanist sans-serif" },
+            { name: "Impact", family: "Impact, sans-serif", preview: "Heavy sans-serif for headlines" },
+            { name: "Comic Sans MS", family: "'Comic Sans MS', cursive", preview: "Casual script font" },
+            { name: "Palatino", family: "Palatino, serif", preview: "Old-style serif typeface" },
+            { name: "Garamond", family: "Garamond, serif", preview: "Old-style serif font" },
+            { name: "Bookman", family: "Bookman, serif", preview: "Old-style serif with strong lines" },
+            { name: "Avant Garde", family: "'Avant Garde', sans-serif", preview: "Geometric sans-serif" },
+            { name: "Helvetica", family: "Helvetica, sans-serif", preview: "Neo-grotesque sans-serif" },
+            { name: "Lucida Sans", family: "'Lucida Sans', sans-serif", preview: "Humanist sans-serif" },
+            { name: "Copperplate", family: "Copperplate, serif", preview: "Serif font with engraved look" },
+            { name: "Brush Script MT", family: "'Brush Script MT', cursive", preview: "Script font resembling handwriting" },
+            { name: "Papyrus", family: "Papyrus, fantasy", preview: "Font resembling ancient writing" }
+        ];
+
+        // Performance-optimized bubble generation
+        document.addEventListener('DOMContentLoaded', function() {
+            const bubblesContainer = document.getElementById('bubbles');
+            const isSlowDevice = /Chromebook|Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            
+            // Generate fewer bubbles for slow devices
+            const bubbleCount = isSlowDevice ? 10 : 20;
+            
+            for (let i = 0; i < bubbleCount; i++) {
+                const bubble = document.createElement('div');
+                bubble.classList.add('bubble');
+                
+                // Smaller size range for performance
+                const size = Math.random() * 40 + 20;
+                bubble.style.width = `${size}px`;
+                bubble.style.height = `${size}px`;
+                
+                // Random position
+                bubble.style.left = `${Math.random() * 100}%`;
+                
+                // Start off-screen at bottom
+                bubble.style.top = `${100 + Math.random() * 20}%`;
+                
+                // Optimized animation
+                const duration = Math.random() * 20 + 20;
+                const delay = Math.random() * 10;
+                bubble.style.animationDuration = `${duration}s`;
+                bubble.style.animationDelay = `${delay}s`;
+                bubble.style.animationTimingFunction = 'linear';
+                
+                bubblesContainer.appendChild(bubble);
+            }
+            
+            // Optimized click effects for nav links
+            const navLinks = document.querySelectorAll('.nav-link:not(#moreButton)');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Simple hover effect instead of complex ripple
+                    this.style.transform = 'translateY(-3px) scale(1.05)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 200);
+                    
+                    // Update content based on clicked link
+                    updateContent(this.textContent.trim());
+                });
+            });
+            
+            // Update content function
+            function updateContent(section) {
+                const contentTitle = document.querySelector('.content h2');
+                const contentBox = document.querySelector('.placeholder-box');
+                
+                const contentMap = {
+                    'HOME': {
+                        title: 'Welcome to Arcadium!',
+                        text: 'Your ultimate gaming and entertainment hub. Explore games, proxies, websites and more!'
+                    },
+                    'GAMES': {
+                        title: 'Arcadium Games',
+                        text: 'Browse our collection of fun and exciting games. From classics to modern hits!'
+                    },
+                    'PROXIES': {
+                        title: 'Proxy Services',
+                        text: 'Access blocked websites with our secure proxy services. Safe and anonymous browsing.'
+                    },
+                    'WEBSITES': {
+                        title: 'Website Collection',
+                        text: 'Curated list of useful and entertaining websites for all your needs.'
+                    },
+                    'SOUNDBOARD': {
+                        title: 'Sound Board',
+                        text: 'Play sounds and create audio mixes with our interactive soundboard.'
+                    },
+                    'MORE': {
+                        title: 'More Options',
+                        text: 'Explore additional features like market, community, leaderboards, and more!'
+                    }
+                };
+                
+                if (contentMap[section]) {
+                    contentTitle.textContent = contentMap[section].title;
+                    contentBox.innerHTML = `
+                        <p>${contentMap[section].text}</p>
+                        <br>
+                        <p>Explore more options in the ${section.toLowerCase()} section.</p>
+                        <p>Use the settings button to customize your experience!</p>
+                    `;
+                }
+            }
+        });
+        
+        // Settings Panel Functionality - Optimized
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elements
+            const settingsButton = document.getElementById('settingsButton');
+            const settingsPanel = document.getElementById('settingsPanel');
+            const settingsOverlay = document.getElementById('settingsOverlay');
+            const closeSettings = document.getElementById('closeSettings');
+            const bgColorPicker = document.getElementById('bgColorPicker');
+            const colorPreview = document.getElementById('colorPreview');
+            const applyBgColor = document.getElementById('applyBgColor');
+            const fontSelectorContainer = document.getElementById('fontSelectorContainer');
+            const selectedFontName = document.getElementById('selectedFontName');
+            const bgImageUpload = document.getElementById('bgImageUpload');
+            const removeBgImage = document.getElementById('removeBgImage');
+            const openAboutBlank = document.getElementById('openAboutBlank');
+            const resetSettings = document.getElementById('resetSettings');
+            const reduceMotion = document.getElementById('reduceMotion');
+            const moreButton = document.getElementById('moreButton');
+            const dropdownMenu = document.getElementById('dropdownMenu');
+            
+            // Performance mode flag
+            let performanceMode = false;
+            
+            // Create font options
+            function createFontOptions() {
+                fontSelectorContainer.innerHTML = '';
+                
+                googleFonts.forEach(font => {
+                    const fontOption = document.createElement('div');
+                    fontOption.className = 'font-option';
+                    fontOption.innerHTML = `
+                        <div style="font-family: ${font.family}">
+                            ${font.name}
+                            <span class="font-preview">${font.preview}</span>
+                        </div>
+                    `;
+                    
+                    // Set font family for preview
+                    fontOption.style.fontFamily = font.family;
+                    
+                    fontOption.addEventListener('click', function() {
+                        // Remove selected class from all options
+                        document.querySelectorAll('.font-option').forEach(opt => {
+                            opt.classList.remove('selected');
+                        });
+                        
+                        // Add selected class to clicked option
+                        this.classList.add('selected');
+                        
+                        // Apply font
+                        document.body.style.fontFamily = font.family;
+                        selectedFontName.textContent = font.name;
+                        saveSetting('fontFamily', font.family);
+                        saveSetting('fontName', font.name);
+                        showNotification(`Font changed to ${font.name}!`);
+                    });
+                    
+                    fontSelectorContainer.appendChild(fontOption);
+                });
+            }
+            
+            // Load saved settings
+            function loadSettings() {
+                // Load background color
+                const savedBgColor = localStorage.getItem('arcadium_backgroundColor');
+                if (savedBgColor) {
+                    document.body.style.background = savedBgColor;
+                    bgColorPicker.value = savedBgColor;
+                    colorPreview.style.backgroundColor = savedBgColor;
+                } else {
+                    colorPreview.style.backgroundColor = '#0a0e2a';
+                }
+                
+                // Load font
+                const savedFont = localStorage.getItem('arcadium_fontFamily');
+                const savedFontName = localStorage.getItem('arcadium_fontName');
+                if (savedFont) {
+                    document.body.style.fontFamily = savedFont;
+                    if (savedFontName) {
+                        selectedFontName.textContent = savedFontName;
+                    }
+                }
+                
+                // Load background image
+                const savedBgImage = localStorage.getItem('arcadium_backgroundImage');
+                if (savedBgImage && savedBgImage !== 'none') {
+                    document.body.style.backgroundImage = `url('${savedBgImage}')`;
+                    document.body.style.backgroundSize = 'cover';
+                    document.body.style.backgroundAttachment = 'fixed';
+                }
+                
+                // Load performance mode
+                const savedPerformanceMode = localStorage.getItem('arcadium_performanceMode');
+                if (savedPerformanceMode === 'true') {
+                    performanceMode = true;
+                    document.body.classList.add('reduce-motion');
+                    reduceMotion.innerHTML = '<i class="fas fa-tachometer-alt"></i> Normal Animations';
+                }
+            }
+            
+            // Initialize
+            createFontOptions();
+            loadSettings();
+            
+            // Toggle settings panel
+            settingsButton.addEventListener('click', function() {
+                settingsPanel.classList.add('active');
+                settingsOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+            
+            // Toggle dropdown menu
+            moreButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                dropdownMenu.classList.toggle('active');
+            });
+            
+            // Close dropdown when clicking elsewhere
+            document.addEventListener('click', function(e) {
+                if (!dropdownMenu.contains(e.target) && !moreButton.contains(e.target)) {
+                    dropdownMenu.classList.remove('active');
+                }
+            });
+            
+            // Close settings panel
+            closeSettings.addEventListener('click', closeSettingsPanel);
+            settingsOverlay.addEventListener('click', closeSettingsPanel);
+            
+            // Color picker preview
+            bgColorPicker.addEventListener('input', function() {
+                colorPreview.style.backgroundColor = this.value;
+            });
+            
+            // Apply background color
+            applyBgColor.addEventListener('click', function() {
+                const color = bgColorPicker.value;
+                document.body.style.background = color;
+                document.body.style.backgroundImage = 'none';
+                saveSetting('backgroundColor', color);
+                showNotification('Background color applied!');
+            });
+            
+            // Upload background image
+            bgImageUpload.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    // Check file size for performance (max 2MB)
+                    if (file.size > 2 * 1024 * 1024) {
+                        showNotification('Image too large! Max 2MB.');
+                        return;
+                    }
+                    
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        const imageUrl = event.target.result;
+                        document.body.style.backgroundImage = `url('${imageUrl}')`;
+                        document.body.style.backgroundSize = 'cover';
+                        document.body.style.backgroundAttachment = 'fixed';
+                        saveSetting('backgroundImage', imageUrl);
+                        showNotification('Background image uploaded!');
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+            
+            // Remove background image
+            removeBgImage.addEventListener('click', function() {
+                document.body.style.backgroundImage = 'none';
+                document.body.style.background = 'linear-gradient(135deg, #0a0e2a 0%, #1a1f4a 100%)';
+                saveSetting('backgroundImage', 'none');
+                bgImageUpload.value = '';
+                showNotification('Background image removed!');
+            });
+            
+            // Open in about:blank
+            openAboutBlank.addEventListener('click', function() {
+                const newWindow = window.open('about:blank', '_blank');
+                const htmlContent = document.documentElement.outerHTML;
+                newWindow.document.write(htmlContent);
+                newWindow.document.close();
+                showNotification('Opened in new window!');
+            });
+            
+            // Toggle performance mode
+            reduceMotion.addEventListener('click', function() {
+                performanceMode = !performanceMode;
+                if (performanceMode) {
+                    document.body.classList.add('reduce-motion');
+                    this.innerHTML = '<i class="fas fa-tachometer-alt"></i> Normal Animations';
+                    showNotification('Performance mode enabled!');
+                } else {
+                    document.body.classList.remove('reduce-motion');
+                    this.innerHTML = '<i class="fas fa-running"></i> Reduce Animations';
+                    showNotification('Performance mode disabled!');
+                }
+                saveSetting('performanceMode', performanceMode);
+            });
+            
+            // Reset all settings
+            resetSettings.addEventListener('click', function() {
+                if (confirm('Reset all settings to default?')) {
+                    localStorage.clear();
+                    document.body.style.background = 'linear-gradient(135deg, #0a0e2a 0%, #1a1f4a 100%)';
+                    document.body.style.backgroundImage = 'none';
+                    document.body.style.fontFamily = "'Fredoka One', cursive";
+                    bgColorPicker.value = '#0a0e2a';
+                    colorPreview.style.backgroundColor = '#0a0e2a';
+                    selectedFontName.textContent = 'Fredoka One';
+                    bgImageUpload.value = '';
+                    document.body.classList.remove('reduce-motion');
+                    performanceMode = false;
+                    reduceMotion.innerHTML = '<i class="fas fa-running"></i> Reduce Animations';
+                    showNotification('Settings reset!');
+                    
+                    // Mark Fredoka One as selected
+                    document.querySelectorAll('.font-option').forEach(opt => {
+                        opt.classList.remove('selected');
+                        if (opt.textContent.includes('Fredoka One')) {
+                            opt.classList.add('selected');
+                        }
+                    });
+                }
+            });
+            
+            // Close settings panel function
+            function closeSettingsPanel() {
+                settingsPanel.classList.remove('active');
+                settingsOverlay.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+            
+            // Save setting to localStorage
+            function saveSetting(key, value) {
+                localStorage.setItem('arcadium_' + key, value);
+            }
+            
+            // Show notification
+            function showNotification(message) {
+                // Remove existing notification
+                const existingNotification = document.querySelector('.notification');
+                if (existingNotification) {
+                    existingNotification.remove();
+                }
+                
+                // Create simple notification for performance
+                const notification = document.createElement('div');
+                notification.className = 'notification';
+                notification.textContent = message;
+                notification.style.cssText = `
+                    position: fixed;
+                    bottom: 30px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: rgba(255, 255, 255, 0.15);
+                    backdrop-filter: blur(10px);
+                    color: white;
+                    padding: 12px 25px;
+                    border-radius: 50px;
+                    font-family: 'Bubblegum Sans', cursive;
+                    font-size: 16px;
+                    z-index: 10000;
+                    border: 2px solid rgba(255, 255, 255, 0.3);
+                    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+                    text-shadow: 0 0 5px #ffffff;
+                    white-space: nowrap;
+                    opacity: 0;
+                    animation: notificationShow 0.3s ease forwards, notificationHide 0.3s ease 2.7s forwards;
+                `;
+                
+                document.body.appendChild(notification);
+                
+                // Remove after animation
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.remove();
+                    }
+                }, 3000);
+            }
+            
+            // Add notification keyframes
+            const notificationStyle = document.createElement('style');
+            notificationStyle.textContent = `
+                @keyframes notificationShow {
+                    from { opacity: 0; bottom: 0; }
+                    to { opacity: 1; bottom: 30px; }
+                }
+                @keyframes notificationHide {
+                    from { opacity: 1; }
+                    to { opacity: 0; }
+                }
+            `;
+            document.head.appendChild(notificationStyle);
+            
+            // Keyboard shortcuts
+            document.addEventListener('keydown', function(e) {
+                // Escape to close settings
+                if (e.key === 'Escape' && settingsPanel.classList.contains('active')) {
+                    closeSettingsPanel();
+                }
+            });
+            
+            // Mark selected font on load
+            setTimeout(() => {
+                const savedFontName = localStorage.getItem('arcadium_fontName') || 'Fredoka One';
+                document.querySelectorAll('.font-option').forEach(opt => {
+                    if (opt.textContent.includes(savedFontName)) {
+                        opt.classList.add('selected');
+                    }
+                });
+            }, 100);
+        });
+    </script>
+</body>
+</html>
