@@ -15,7 +15,7 @@
             padding: 0;
             box-sizing: border-box;
         }
-        
+       
         body {
             background: linear-gradient(135deg, #0a0e2a 0%, #1a1f4a 100%);
             color: #e0e0e0;
@@ -29,7 +29,7 @@
             transition: background 0.3s ease;
             will-change: background;
         }
-        
+       
         /* Optimized Background Bubbles - Reduced count and simplified */
         .bubbles {
             position: fixed;
@@ -41,7 +41,7 @@
             left: 0;
             pointer-events: none;
         }
-        
+       
         .bubble {
             position: absolute;
             border-radius: 50%;
@@ -50,12 +50,12 @@
             animation: float 20s infinite linear;
             opacity: 0.7;
         }
-        
+       
         @keyframes float {
             0% { transform: translateY(100vh) rotate(0deg); }
             100% { transform: translateY(-100px) rotate(180deg); }
         }
-        
+       
         /* Main Navigation Container */
         .nav-container {
             width: 100%;
@@ -66,7 +66,7 @@
             padding: 15px 30px;
             margin-top: 30px;
             border: 2px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 
+            box-shadow:
                 0 10px 20px rgba(0, 0, 0, 0.3),
                 inset 0 1px 0 rgba(255, 255, 255, 0.2);
             display: flex;
@@ -76,25 +76,25 @@
             overflow: visible;
             z-index: 10;
         }
-        
+       
         /* Left Section - Logo and Main Links */
         .nav-left {
             display: flex;
             align-items: center;
             gap: 25px;
         }
-        
+       
         /* White Text Glow for all text */
-        .logo, .nav-link, .content h2, .placeholder-box, .settings-panel h3, 
+        .logo, .nav-link, .content h2, .placeholder-box, .settings-panel h3,
         .settings-group h4, .btn, .setting-info, .dropdown-link {
             color: #ffffff;
-            text-shadow: 
+            text-shadow:
                 0 0 5px #ffffff,
                 0 0 10px #ffffff,
                 0 0 15px #ffffff,
                 0 2px 5px rgba(0, 0, 0, 0.5);
         }
-        
+       
         .logo {
             font-family: 'Bubblegum Sans', cursive;
             font-size: 42px;
@@ -103,27 +103,27 @@
             padding: 5px 15px;
             border-radius: 30px;
             background: rgba(255, 255, 255, 0.1);
-            box-shadow: 
+            box-shadow:
                 inset 0 0 10px rgba(255, 255, 255, 0.2),
                 0 5px 10px rgba(0, 0, 0, 0.3);
             animation: gentleGlow 4s infinite alternate;
         }
-        
+       
         @keyframes gentleGlow {
-            0% { 
-                text-shadow: 
+            0% {
+                text-shadow:
                     0 0 5px #ffffff,
                     0 0 10px #ffffff,
                     0 0 15px #ffffff;
             }
-            100% { 
-                text-shadow: 
+            100% {
+                text-shadow:
                     0 0 8px #ffffff,
                     0 0 15px #ffffff,
                     0 0 25px #ffffff;
             }
         }
-        
+       
         .nav-divider {
             height: 40px;
             width: 4px;
@@ -131,19 +131,19 @@
             border-radius: 2px;
             animation: pulse 2s infinite;
         }
-        
+       
         @keyframes pulse {
             0%, 100% { opacity: 0.7; }
             50% { opacity: 1; }
         }
-        
+       
         .nav-links {
             display: flex;
             gap: 10px;
             align-items: center;
             position: relative;
         }
-        
+       
         .nav-link {
             text-decoration: none;
             font-size: 20px;
@@ -159,21 +159,21 @@
             box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
             white-space: nowrap;
         }
-        
+       
         .nav-link:hover {
             background: rgba(255, 255, 255, 0.15);
             transform: translateY(-3px);
-            box-shadow: 
+            box-shadow:
                 0 8px 15px rgba(0, 0, 0, 0.3),
                 0 0 10px rgba(255, 255, 255, 0.3);
             border-color: rgba(255, 255, 255, 0.4);
         }
-        
+       
         /* More Dropdown Menu - Liquid Glass Panel */
         .dropdown-container {
             position: relative;
         }
-        
+       
         .dropdown-menu {
             position: absolute;
             top: 100%;
@@ -184,7 +184,7 @@
             backdrop-filter: blur(15px);
             border-radius: 25px;
             border: 2px solid rgba(255, 255, 255, 0.25);
-            box-shadow: 
+            box-shadow:
                 0 15px 35px rgba(0, 0, 0, 0.5),
                 0 0 20px rgba(255, 255, 255, 0.2),
                 inset 0 1px 0 rgba(255, 255, 255, 0.2);
@@ -199,7 +199,7 @@
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             overflow: hidden;
         }
-        
+       
         /* Bubble effect for dropdown */
         .dropdown-menu::before {
             content: '';
@@ -213,13 +213,13 @@
             z-index: -1;
             opacity: 0.5;
         }
-        
+       
         .dropdown-menu.active {
             opacity: 1;
             visibility: visible;
             transform: translateY(0);
         }
-        
+       
         .dropdown-link {
             display: block;
             text-decoration: none;
@@ -232,20 +232,20 @@
             transition: all 0.3s ease;
             text-align: center;
         }
-        
+       
         .dropdown-link:hover {
             background: rgba(255, 255, 255, 0.15);
             transform: translateX(5px);
             border-color: rgba(255, 255, 255, 0.4);
         }
-        
+       
         /* Right Section - Animated Icons */
         .nav-right {
             display: flex;
             align-items: center;
             gap: 20px;
         }
-        
+       
         .icon-button {
             width: 60px;
             height: 60px;
@@ -263,16 +263,16 @@
             overflow: hidden;
             box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
         }
-        
+       
         .icon-button:hover {
             transform: translateY(-5px) scale(1.1);
             background: rgba(255, 255, 255, 0.2);
             border-color: #ffffff;
-            box-shadow: 
+            box-shadow:
                 0 10px 15px rgba(0, 0, 0, 0.3),
                 0 0 15px rgba(255, 255, 255, 0.4);
         }
-        
+       
         /* Content Area */
         .content {
             max-width: 1000px;
@@ -283,7 +283,7 @@
             backdrop-filter: blur(8px);
             border-radius: 40px;
             border: 2px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 
+            box-shadow:
                 0 10px 25px rgba(0, 0, 0, 0.4),
                 inset 0 1px 0 rgba(255, 255, 255, 0.1);
             display: flex;
@@ -295,19 +295,19 @@
             position: relative;
             overflow: hidden;
         }
-        
+       
         .content h2 {
             margin-bottom: 30px;
             font-family: 'Bubblegum Sans', cursive;
             font-size: 36px;
             animation: gentleBounce 3s infinite;
         }
-        
+       
         @keyframes gentleBounce {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-8px); }
         }
-        
+       
         .placeholder-box {
             background: rgba(255, 255, 255, 0.05);
             border-radius: 30px;
@@ -320,7 +320,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+       
         .placeholder-box::before {
             content: '';
             position: absolute;
@@ -330,13 +330,13 @@
             height: 100%;
             background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.1), transparent 50%);
         }
-        
+       
         /* Simplified Floating Orbs - Reduced count */
         .floating-orb {
             position: absolute;
             border-radius: 50%;
             background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05));
-            box-shadow: 
+            box-shadow:
                 inset 0 0 10px rgba(255, 255, 255, 0.2),
                 0 0 15px rgba(255, 255, 255, 0.2);
             animation: float-orb 15s infinite linear;
@@ -344,7 +344,7 @@
             opacity: 0.5;
             pointer-events: none;
         }
-        
+       
         @keyframes float-orb {
             0% { transform: translate(0, 0) scale(1); }
             25% { transform: translate(15px, -15px) scale(1.05); }
@@ -352,7 +352,7 @@
             75% { transform: translate(-15px, -15px) scale(0.95); }
             100% { transform: translate(0, 0) scale(1); }
         }
-        
+       
         /* Bubble-like Settings Panel */
         .settings-panel {
             position: fixed;
@@ -364,7 +364,7 @@
             backdrop-filter: blur(15px);
             border-radius: 30px;
             border: 2px solid rgba(255, 255, 255, 0.25);
-            box-shadow: 
+            box-shadow:
                 0 20px 40px rgba(0, 0, 0, 0.4),
                 0 0 30px rgba(255, 255, 255, 0.2),
                 inset 0 1px 0 rgba(255, 255, 255, 0.2);
@@ -376,13 +376,13 @@
             visibility: hidden;
             max-height: 80vh;
         }
-        
+       
         .settings-panel.active {
             opacity: 1;
             visibility: visible;
             transform: translate(-50%, -50%) scale(1);
         }
-        
+       
         /* Bubble shape effect */
         .settings-panel::before {
             content: '';
@@ -396,7 +396,7 @@
             z-index: -1;
             opacity: 0.5;
         }
-        
+       
         .settings-header {
             display: flex;
             justify-content: space-between;
@@ -405,12 +405,12 @@
             padding-bottom: 15px;
             border-bottom: 2px solid rgba(255, 255, 255, 0.2);
         }
-        
+       
         .settings-header h3 {
             font-size: 28px;
             font-family: 'Bubblegum Sans', cursive;
         }
-        
+       
         .close-settings {
             background: rgba(255, 255, 255, 0.15);
             border: 2px solid rgba(255, 255, 255, 0.3);
@@ -422,13 +422,13 @@
             cursor: pointer;
             transition: all 0.3s ease;
         }
-        
+       
         .close-settings:hover {
             background: rgba(255, 100, 100, 0.3);
             border-color: #ff6464;
             transform: rotate(90deg);
         }
-        
+       
         .settings-group {
             background: rgba(255, 255, 255, 0.08);
             border-radius: 20px;
@@ -436,7 +436,7 @@
             margin-bottom: 20px;
             border: 1px solid rgba(255, 255, 255, 0.15);
         }
-        
+       
         .settings-group h4 {
             font-size: 18px;
             margin-bottom: 15px;
@@ -445,11 +445,11 @@
             align-items: center;
             gap: 10px;
         }
-        
+       
         .settings-group h4 i {
             font-size: 20px;
         }
-        
+       
         /* Font selector with scroll */
         .font-selector-container {
             max-height: 200px;
@@ -459,7 +459,7 @@
             background: rgba(255, 255, 255, 0.05);
             border: 2px solid rgba(255, 255, 255, 0.15);
         }
-        
+       
         .font-option {
             padding: 12px 15px;
             margin-bottom: 8px;
@@ -471,32 +471,32 @@
             text-align: left;
             font-size: 16px;
         }
-        
+       
         .font-option:hover {
             background: rgba(255, 255, 255, 0.15);
             transform: translateX(5px);
         }
-        
+       
         .font-option.selected {
             background: rgba(255, 255, 255, 0.2);
             border-color: rgba(255, 255, 255, 0.4);
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
         }
-        
+       
         .font-preview {
             display: block;
             font-size: 14px;
             margin-top: 5px;
             opacity: 0.8;
         }
-        
+       
         .color-picker-container {
             display: flex;
             align-items: center;
             gap: 15px;
             margin-bottom: 15px;
         }
-        
+       
         .color-preview {
             width: 40px;
             height: 40px;
@@ -506,11 +506,11 @@
             transition: transform 0.3s ease;
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
         }
-        
+       
         .color-preview:hover {
             transform: scale(1.1);
         }
-        
+       
         .color-picker {
             flex: 1;
             height: 40px;
@@ -519,7 +519,7 @@
             background: rgba(255, 255, 255, 0.1);
             cursor: pointer;
         }
-        
+       
         .select-container {
             width: 100%;
             padding: 12px;
@@ -533,12 +533,12 @@
             outline: none;
             transition: all 0.3s ease;
         }
-        
+       
         .select-container:focus {
             border-color: rgba(255, 255, 255, 0.6);
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
         }
-        
+       
         .file-upload {
             width: 100%;
             padding: 12px;
@@ -550,12 +550,12 @@
             transition: all 0.3s ease;
             margin-bottom: 10px;
         }
-        
+       
         .file-upload:hover {
             border-color: rgba(255, 255, 255, 0.6);
             background: rgba(255, 255, 255, 0.1);
         }
-        
+       
         .btn {
             background: rgba(255, 255, 255, 0.15);
             color: white;
@@ -574,18 +574,18 @@
             gap: 10px;
             box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
         }
-        
+       
         .btn:hover {
             transform: translateY(-3px);
             background: rgba(255, 255, 255, 0.25);
             border-color: rgba(255, 255, 255, 0.5);
             box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3), 0 0 10px rgba(255, 255, 255, 0.2);
         }
-        
+       
         .btn i {
             font-size: 20px;
         }
-        
+       
         .setting-info {
             font-size: 14px;
             margin-top: 10px;
@@ -596,16 +596,16 @@
             border-radius: 10px;
             opacity: 0.8;
         }
-        
+       
         .reset-btn {
             background: rgba(255, 100, 100, 0.2);
             border-color: rgba(255, 100, 100, 0.4);
         }
-        
+       
         .reset-btn:hover {
             background: rgba(255, 100, 100, 0.3);
         }
-        
+       
         /* Overlay for settings */
         .settings-overlay {
             position: fixed;
@@ -620,12 +620,12 @@
             visibility: hidden;
             transition: all 0.3s ease;
         }
-        
+       
         .settings-overlay.active {
             opacity: 1;
             visibility: visible;
         }
-        
+       
         /* Responsive */
         @media (max-width: 850px) {
             .nav-container {
@@ -634,72 +634,145 @@
                 padding: 20px;
                 border-radius: 40px;
             }
-            
+           
             .nav-left {
                 flex-direction: column;
                 gap: 15px;
             }
-            
+           
             .nav-divider {
                 height: 2px;
                 width: 80%;
                 background: linear-gradient(to right, transparent, #ffffff, transparent);
             }
-            
+           
             .nav-links {
                 flex-wrap: wrap;
                 justify-content: center;
             }
-            
+           
             .logo {
                 font-size: 36px;
             }
-            
+           
             .content h2 {
                 font-size: 28px;
             }
-            
+           
             .settings-panel {
                 width: 90%;
                 max-width: 350px;
             }
-            
+           
             .dropdown-menu {
                 position: static;
                 margin-top: 15px;
                 min-width: 100%;
             }
         }
-        
+       
         @media (max-width: 480px) {
             .settings-panel {
                 width: 95%;
                 padding: 20px;
             }
-            
+           
             .content {
                 padding: 20px;
             }
-            
+           
             .placeholder-box {
                 padding: 20px;
                 font-size: 18px;
             }
-            
+           
             .dropdown-menu {
                 min-width: 100%;
             }
         }
-        
+       
         /* Performance optimization classes */
         .no-animation {
             animation: none !important;
         }
-        
+       
         .reduce-motion * {
             animation-duration: 0.01ms !important;
             animation-iteration-count: 1 !important;
             transition-duration: 0.01ms !important;
+        }
+
+        /* Additional styles for profile and admin panels */
+        .profile-panel, .admin-panel {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            width: 420px;
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(15px);
+            border-radius: 30px;
+            border: 2px solid rgba(255, 255, 255, 0.25);
+            box-shadow:
+                0 20px 40px rgba(0, 0, 0, 0.4),
+                0 0 30px rgba(255, 255, 255, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            padding: 25px;
+            overflow-y: auto;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            max-height: 80vh;
+        }
+       
+        .profile-panel.active, .admin-panel.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, -50%) scale(1);
+        }
+       
+        .profile-panel::before, .admin-panel::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.1), transparent 70%);
+            border-radius: 40px;
+            z-index: -1;
+            opacity: 0.5;
+        }
+
+        .admin-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .admin-user {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"], input[type="password"], input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            outline: none;
+        }
+
+        .profile-pic-preview {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 10px;
         }
     </style>
     <!-- Font Awesome for icons -->
@@ -708,10 +781,10 @@
 <body>
     <!-- Optimized Background Bubbles -->
     <div class="bubbles" id="bubbles"></div>
-    
+   
     <!-- Settings Overlay -->
     <div class="settings-overlay" id="settingsOverlay"></div>
-    
+   
     <!-- Bubble-like Settings Panel -->
     <div class="settings-panel" id="settingsPanel">
         <div class="settings-header">
@@ -720,7 +793,7 @@
                 <i class="fas fa-times"></i>
             </button>
         </div>
-        
+       
         <!-- Background Color Settings -->
         <div class="settings-group">
             <h4><i class="fas fa-palette"></i> Background Color</h4>
@@ -732,7 +805,7 @@
                 <i class="fas fa-check"></i> Apply Color
             </button>
         </div>
-        
+       
         <!-- Font Settings with 100+ fonts -->
         <div class="settings-group">
             <h4><i class="fas fa-font"></i> Font Selection</h4>
@@ -746,7 +819,7 @@
                 Selected font: <span id="selectedFontName">Fredoka One</span>
             </div>
         </div>
-        
+       
         <!-- Background Image Settings -->
         <div class="settings-group">
             <h4><i class="fas fa-image"></i> Background Image</h4>
@@ -758,7 +831,7 @@
                 <i class="fas fa-trash"></i> Remove Image
             </button>
         </div>
-        
+       
         <!-- About:blank Opener -->
         <div class="settings-group">
             <h4><i class="fas fa-external-link-alt"></i> About:Blank</h4>
@@ -769,7 +842,7 @@
                 <i class="fas fa-external-link-square-alt"></i> Open
             </button>
         </div>
-        
+       
         <!-- Performance Settings -->
         <div class="settings-group">
             <h4><i class="fas fa-tachometer-alt"></i> Performance</h4>
@@ -780,7 +853,7 @@
                 Makes animations simpler for better performance
             </div>
         </div>
-        
+       
         <!-- Reset Settings -->
         <div class="settings-group">
             <h4><i class="fas fa-redo"></i> Reset</h4>
@@ -789,11 +862,33 @@
             </button>
         </div>
     </div>
-    
+   
+    <!-- Profile Panel -->
+    <div class="profile-panel" id="profilePanel">
+        <div class="settings-header">
+            <h3><i class="fas fa-user"></i> Profile</h3>
+            <button class="close-settings" id="closeProfile">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div id="profileContent"></div>
+    </div>
+
+    <!-- Admin Panel -->
+    <div class="admin-panel" id="adminPanel">
+        <div class="settings-header">
+            <h3><i class="fas fa-crown"></i> Admin</h3>
+            <button class="close-settings" id="closeAdmin">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="admin-list" id="adminContent"></div>
+    </div>
+   
     <!-- Optimized Floating Orbs - Reduced to 2 -->
     <div class="floating-orb" style="width: 80px; height: 80px; top: 15%; left: 10%;"></div>
     <div class="floating-orb" style="width: 60px; height: 60px; bottom: 20%; right: 15%; animation-delay: -5s;"></div>
-    
+   
     <!-- Navigation Bar -->
     <div class="nav-container">
         <!-- Left Section -->
@@ -814,11 +909,12 @@
                         <a href="suggest.html" class="dropdown-link">Suggest</a>
                         <a href="report.html" class="dropdown-link">Report</a>
                         <a href="iframe.html" class="dropdown-link">iFrame</a>
+                        <a href="leaderboard.html" class="dropdown-link">Leaderboard</a>
                     </div>
                 </div>
             </div>
         </div>
-        
+       
         <!-- Right Section with Settings Button -->
         <div class="nav-right">
             <div class="icon-button" id="settingsButton" title="Settings">
@@ -826,7 +922,6 @@
             </div>
         </div>
     </div>
-
     <!-- Content Area -->
     <div class="content">
         <h2>Welcome to Arcadium 2.0!</h2>
@@ -834,6 +929,16 @@
             <p>Use the settings button to customize your experience!</p>
             <p>Click on "More" to see additional options.</p>
         </div>
+    </div>
+
+    <!-- Profile Button Bottom Left -->
+    <div class="icon-button" id="profileButton" title="Profile" style="position: fixed; bottom: 20px; left: 20px; z-index: 100;">
+        <i class="fas fa-user"></i>
+    </div>
+
+    <!-- Admin Button Bottom Right (Owner Only) -->
+    <div class="icon-button" id="adminButton" title="Admin" style="position: fixed; bottom: 20px; right: 20px; z-index: 100;">
+        <i class="fas fa-crown"></i>
     </div>
 
     <script>
@@ -945,62 +1050,61 @@
             { name: "Brush Script MT", family: "'Brush Script MT', cursive", preview: "Script font resembling handwriting" },
             { name: "Papyrus", family: "Papyrus, fantasy", preview: "Font resembling ancient writing" }
         ];
-
         // Performance-optimized bubble generation
         document.addEventListener('DOMContentLoaded', function() {
             const bubblesContainer = document.getElementById('bubbles');
             const isSlowDevice = /Chromebook|Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-            
+           
             // Generate fewer bubbles for slow devices
             const bubbleCount = isSlowDevice ? 10 : 20;
-            
+           
             for (let i = 0; i < bubbleCount; i++) {
                 const bubble = document.createElement('div');
                 bubble.classList.add('bubble');
-                
+               
                 // Smaller size range for performance
                 const size = Math.random() * 40 + 20;
                 bubble.style.width = `${size}px`;
                 bubble.style.height = `${size}px`;
-                
+               
                 // Random position
                 bubble.style.left = `${Math.random() * 100}%`;
-                
+               
                 // Start off-screen at bottom
                 bubble.style.top = `${100 + Math.random() * 20}%`;
-                
+               
                 // Optimized animation
                 const duration = Math.random() * 20 + 20;
                 const delay = Math.random() * 10;
                 bubble.style.animationDuration = `${duration}s`;
                 bubble.style.animationDelay = `${delay}s`;
                 bubble.style.animationTimingFunction = 'linear';
-                
+               
                 bubblesContainer.appendChild(bubble);
             }
-            
+           
             // Optimized click effects for nav links
             const navLinks = document.querySelectorAll('.nav-link:not(#moreButton)');
             navLinks.forEach(link => {
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
-                    
+                   
                     // Simple hover effect instead of complex ripple
                     this.style.transform = 'translateY(-3px) scale(1.05)';
                     setTimeout(() => {
                         this.style.transform = '';
                     }, 200);
-                    
+                   
                     // Update content based on clicked link
                     updateContent(this.textContent.trim());
                 });
             });
-            
+           
             // Update content function
             function updateContent(section) {
                 const contentTitle = document.querySelector('.content h2');
                 const contentBox = document.querySelector('.placeholder-box');
-                
+               
                 const contentMap = {
                     'HOME': {
                         title: 'Welcome to Arcadium!',
@@ -1027,7 +1131,7 @@
                         text: 'Explore additional features like market, community, leaderboards, and more!'
                     }
                 };
-                
+               
                 if (contentMap[section]) {
                     contentTitle.textContent = contentMap[section].title;
                     contentBox.innerHTML = `
@@ -1039,7 +1143,7 @@
                 }
             }
         });
-        
+       
         // Settings Panel Functionality - Optimized
         document.addEventListener('DOMContentLoaded', function() {
             // Elements
@@ -1059,14 +1163,22 @@
             const reduceMotion = document.getElementById('reduceMotion');
             const moreButton = document.getElementById('moreButton');
             const dropdownMenu = document.getElementById('dropdownMenu');
-            
+            const profileButton = document.getElementById('profileButton');
+            const profilePanel = document.getElementById('profilePanel');
+            const closeProfile = document.getElementById('closeProfile');
+            const profileContent = document.getElementById('profileContent');
+            const adminButton = document.getElementById('adminButton');
+            const adminPanel = document.getElementById('adminPanel');
+            const closeAdmin = document.getElementById('closeAdmin');
+            const adminContent = document.getElementById('adminContent');
+           
             // Performance mode flag
             let performanceMode = false;
-            
+           
             // Create font options
             function createFontOptions() {
                 fontSelectorContainer.innerHTML = '';
-                
+               
                 googleFonts.forEach(font => {
                     const fontOption = document.createElement('div');
                     fontOption.className = 'font-option';
@@ -1076,19 +1188,19 @@
                             <span class="font-preview">${font.preview}</span>
                         </div>
                     `;
-                    
+                   
                     // Set font family for preview
                     fontOption.style.fontFamily = font.family;
-                    
+                   
                     fontOption.addEventListener('click', function() {
                         // Remove selected class from all options
                         document.querySelectorAll('.font-option').forEach(opt => {
                             opt.classList.remove('selected');
                         });
-                        
+                       
                         // Add selected class to clicked option
                         this.classList.add('selected');
-                        
+                       
                         // Apply font
                         document.body.style.fontFamily = font.family;
                         selectedFontName.textContent = font.name;
@@ -1096,11 +1208,11 @@
                         saveSetting('fontName', font.name);
                         showNotification(`Font changed to ${font.name}!`);
                     });
-                    
+                   
                     fontSelectorContainer.appendChild(fontOption);
                 });
             }
-            
+           
             // Load saved settings
             function loadSettings() {
                 // Load background color
@@ -1112,7 +1224,7 @@
                 } else {
                     colorPreview.style.backgroundColor = '#0a0e2a';
                 }
-                
+               
                 // Load font
                 const savedFont = localStorage.getItem('arcadium_fontFamily');
                 const savedFontName = localStorage.getItem('arcadium_fontName');
@@ -1122,7 +1234,7 @@
                         selectedFontName.textContent = savedFontName;
                     }
                 }
-                
+               
                 // Load background image
                 const savedBgImage = localStorage.getItem('arcadium_backgroundImage');
                 if (savedBgImage && savedBgImage !== 'none') {
@@ -1130,7 +1242,7 @@
                     document.body.style.backgroundSize = 'cover';
                     document.body.style.backgroundAttachment = 'fixed';
                 }
-                
+               
                 // Load performance mode
                 const savedPerformanceMode = localStorage.getItem('arcadium_performanceMode');
                 if (savedPerformanceMode === 'true') {
@@ -1139,41 +1251,41 @@
                     reduceMotion.innerHTML = '<i class="fas fa-tachometer-alt"></i> Normal Animations';
                 }
             }
-            
+           
             // Initialize
             createFontOptions();
             loadSettings();
-            
+           
             // Toggle settings panel
             settingsButton.addEventListener('click', function() {
                 settingsPanel.classList.add('active');
                 settingsOverlay.classList.add('active');
                 document.body.style.overflow = 'hidden';
             });
-            
+           
             // Toggle dropdown menu
             moreButton.addEventListener('click', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
                 dropdownMenu.classList.toggle('active');
             });
-            
+           
             // Close dropdown when clicking elsewhere
             document.addEventListener('click', function(e) {
                 if (!dropdownMenu.contains(e.target) && !moreButton.contains(e.target)) {
                     dropdownMenu.classList.remove('active');
                 }
             });
-            
+           
             // Close settings panel
             closeSettings.addEventListener('click', closeSettingsPanel);
             settingsOverlay.addEventListener('click', closeSettingsPanel);
-            
+           
             // Color picker preview
             bgColorPicker.addEventListener('input', function() {
                 colorPreview.style.backgroundColor = this.value;
             });
-            
+           
             // Apply background color
             applyBgColor.addEventListener('click', function() {
                 const color = bgColorPicker.value;
@@ -1182,7 +1294,7 @@
                 saveSetting('backgroundColor', color);
                 showNotification('Background color applied!');
             });
-            
+           
             // Upload background image
             bgImageUpload.addEventListener('change', function(e) {
                 const file = e.target.files[0];
@@ -1192,7 +1304,7 @@
                         showNotification('Image too large! Max 2MB.');
                         return;
                     }
-                    
+                   
                     const reader = new FileReader();
                     reader.onload = function(event) {
                         const imageUrl = event.target.result;
@@ -1205,7 +1317,7 @@
                     reader.readAsDataURL(file);
                 }
             });
-            
+           
             // Remove background image
             removeBgImage.addEventListener('click', function() {
                 document.body.style.backgroundImage = 'none';
@@ -1214,7 +1326,7 @@
                 bgImageUpload.value = '';
                 showNotification('Background image removed!');
             });
-            
+           
             // Open in about:blank
             openAboutBlank.addEventListener('click', function() {
                 const newWindow = window.open('about:blank', '_blank');
@@ -1223,7 +1335,7 @@
                 newWindow.document.close();
                 showNotification('Opened in new window!');
             });
-            
+           
             // Toggle performance mode
             reduceMotion.addEventListener('click', function() {
                 performanceMode = !performanceMode;
@@ -1238,7 +1350,7 @@
                 }
                 saveSetting('performanceMode', performanceMode);
             });
-            
+           
             // Reset all settings
             resetSettings.addEventListener('click', function() {
                 if (confirm('Reset all settings to default?')) {
@@ -1254,7 +1366,7 @@
                     performanceMode = false;
                     reduceMotion.innerHTML = '<i class="fas fa-running"></i> Reduce Animations';
                     showNotification('Settings reset!');
-                    
+                   
                     // Mark Fredoka One as selected
                     document.querySelectorAll('.font-option').forEach(opt => {
                         opt.classList.remove('selected');
@@ -1264,19 +1376,19 @@
                     });
                 }
             });
-            
+           
             // Close settings panel function
             function closeSettingsPanel() {
                 settingsPanel.classList.remove('active');
                 settingsOverlay.classList.remove('active');
                 document.body.style.overflow = 'auto';
             }
-            
+           
             // Save setting to localStorage
             function saveSetting(key, value) {
                 localStorage.setItem('arcadium_' + key, value);
             }
-            
+           
             // Show notification
             function showNotification(message) {
                 // Remove existing notification
@@ -1284,7 +1396,7 @@
                 if (existingNotification) {
                     existingNotification.remove();
                 }
-                
+               
                 // Create simple notification for performance
                 const notification = document.createElement('div');
                 notification.className = 'notification';
@@ -1309,9 +1421,9 @@
                     opacity: 0;
                     animation: notificationShow 0.3s ease forwards, notificationHide 0.3s ease 2.7s forwards;
                 `;
-                
+               
                 document.body.appendChild(notification);
-                
+               
                 // Remove after animation
                 setTimeout(() => {
                     if (notification.parentNode) {
@@ -1319,7 +1431,7 @@
                     }
                 }, 3000);
             }
-            
+           
             // Add notification keyframes
             const notificationStyle = document.createElement('style');
             notificationStyle.textContent = `
@@ -1333,7 +1445,7 @@
                 }
             `;
             document.head.appendChild(notificationStyle);
-            
+           
             // Keyboard shortcuts
             document.addEventListener('keydown', function(e) {
                 // Escape to close settings
@@ -1341,7 +1453,7 @@
                     closeSettingsPanel();
                 }
             });
-            
+           
             // Mark selected font on load
             setTimeout(() => {
                 const savedFontName = localStorage.getItem('arcadium_fontName') || 'Fredoka One';
@@ -1351,6 +1463,226 @@
                     }
                 });
             }, 100);
+
+            // User Management
+            let xpInterval;
+            function getUsers() {
+                return JSON.parse(localStorage.getItem('arcadium_users')) || [];
+            }
+
+            function saveUsers(users) {
+                localStorage.setItem('arcadium_users', JSON.stringify(users));
+            }
+
+            function getCurrentUser() {
+                return localStorage.getItem('arcadium_currentUser');
+            }
+
+            function setCurrentUser(username) {
+                localStorage.setItem('arcadium_currentUser', username);
+            }
+
+            function updateUser(username, updates) {
+                let users = getUsers();
+                const userIndex = users.findIndex(u => u.username === username);
+                if (userIndex !== -1) {
+                    users[userIndex] = { ...users[userIndex], ...updates };
+                    saveUsers(users);
+                }
+            }
+
+            function startXpTimer() {
+                const currentUser = getCurrentUser();
+                if (currentUser) {
+                    clearInterval(xpInterval);
+                    xpInterval = setInterval(() => {
+                        let users = getUsers();
+                        const user = users.find(u => u.username === currentUser);
+                        if (user && !user.banned) {
+                            user.xp += 5;
+                            saveUsers(users);
+                        }
+                    }, 60000); // every minute
+                }
+            }
+
+            // Profile Panel
+            profileButton.addEventListener('click', function() {
+                settingsOverlay.classList.add('active');
+                profilePanel.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                renderProfileContent();
+            });
+
+            closeProfile.addEventListener('click', closeProfilePanel);
+            settingsOverlay.addEventListener('click', closeProfilePanel); // Reuse overlay for all panels
+
+            function closeProfilePanel() {
+                profilePanel.classList.remove('active');
+                if (!settingsPanel.classList.contains('active') && !adminPanel.classList.contains('active')) {
+                    settingsOverlay.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            }
+
+            function renderProfileContent() {
+                const currentUser = getCurrentUser();
+                if (!currentUser) {
+                    // Create account form
+                    profileContent.innerHTML = `
+                        <div class="settings-group">
+                            <h4>Create Account</h4>
+                            <input type="text" id="newUsername" placeholder="Username">
+                            <input type="password" id="newPassword" placeholder="Password">
+                            <input type="file" id="profilePicUpload" accept="image/*" class="file-upload">
+                            <button class="btn" id="createAccountBtn"><i class="fas fa-user-plus"></i> Create Account</button>
+                        </div>
+                    `;
+                    document.getElementById('createAccountBtn').addEventListener('click', createAccount);
+                } else {
+                    const users = getUsers();
+                    const user = users.find(u => u.username === currentUser);
+                    profileContent.innerHTML = `
+                        <div class="settings-group">
+                            <h4>${user.username} ${user.title ? `(${user.title})` : ''}</h4>
+                            <img src="${user.profilePic || ''}" alt="Profile Pic" class="profile-pic-preview" style="${user.profilePic ? '' : 'display:none;'}">
+                            <p>XP: ${user.xp}</p>
+                            <button class="btn" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                        </div>
+                    `;
+                    document.getElementById('logoutBtn').addEventListener('click', () => {
+                        localStorage.removeItem('arcadium_currentUser');
+                        clearInterval(xpInterval);
+                        renderProfileContent();
+                    });
+                }
+            }
+
+            function createAccount() {
+                const username = document.getElementById('newUsername').value.trim();
+                const password = document.getElementById('newPassword').value.trim();
+                const file = document.getElementById('profilePicUpload').files[0];
+
+                if (!username || !password) {
+                    showNotification('Username and password required!');
+                    return;
+                }
+
+                let users = getUsers();
+                if (users.find(u => u.username === username)) {
+                    showNotification('Username taken!');
+                    return;
+                }
+
+                let profilePic = '';
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        profilePic = event.target.result;
+                        addUser();
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    addUser();
+                }
+
+                function addUser() {
+                    users.push({
+                        username,
+                        password, // Stored plain (client-side only)
+                        xp: 0,
+                        profilePic,
+                        banned: false,
+                        title: ''
+                    });
+                    saveUsers(users);
+                    setCurrentUser(username);
+                    startXpTimer();
+                    showNotification('Account created!');
+                    renderProfileContent();
+                }
+            }
+
+            // Admin Panel
+            adminButton.addEventListener('click', function() {
+                const inputUser = prompt('Owner Username:');
+                const inputPass = prompt('Owner Password:');
+                const ownerUser = String.fromCharCode(65,114,99,97,100,105,117,109); // Arcadium
+                const ownerPass = String.fromCharCode(116,111,107,111,111,108,107,111,97,108,97); // tokoolkoala
+                if (inputUser === ownerUser && inputPass === ownerPass) {
+                    settingsOverlay.classList.add('active');
+                    adminPanel.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                    renderAdminContent();
+                } else {
+                    showNotification('Access denied!');
+                }
+            });
+
+            closeAdmin.addEventListener('click', closeAdminPanel);
+            settingsOverlay.addEventListener('click', closeAdminPanel);
+
+            function closeAdminPanel() {
+                adminPanel.classList.remove('active');
+                if (!settingsPanel.classList.contains('active') && !profilePanel.classList.contains('active')) {
+                    settingsOverlay.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            }
+
+            function renderAdminContent() {
+                const users = getUsers();
+                adminContent.innerHTML = '';
+                users.forEach(user => {
+                    const userDiv = document.createElement('div');
+                    userDiv.className = 'admin-user';
+                    userDiv.innerHTML = `
+                        <h4>${user.username}</h4>
+                        <p>XP: ${user.xp} | Banned: ${user.banned ? 'Yes' : 'No'} | Title: ${user.title}</p>
+                        <button class="btn" onclick="banUser('${user.username}')">Ban/Unban</button>
+                        <input type="number" id="xp_${user.username}" placeholder="New XP">
+                        <button class="btn" onclick="setXp('${user.username}', document.getElementById('xp_${user.username}').value)">Set XP</button>
+                        <input type="text" id="name_${user.username}" placeholder="New Name">
+                        <button class="btn" onclick="setName('${user.username}', document.getElementById('name_${user.username}').value)">Change Name</button>
+                        <input type="text" id="title_${user.username}" placeholder="New Title">
+                        <button class="btn" onclick="setTitle('${user.username}', document.getElementById('title_${user.username}').value)">Set Title</button>
+                    `;
+                    adminContent.appendChild(userDiv);
+                });
+            }
+
+            window.banUser = function(username) {
+                updateUser(username, { banned: !getUsers().find(u => u.username === username).banned });
+                renderAdminContent();
+            };
+
+            window.setXp = function(username, xp) {
+                if (xp !== '') {
+                    updateUser(username, { xp: parseInt(xp) });
+                    renderAdminContent();
+                }
+            };
+
+            window.setName = function(username, newName) {
+                if (newName) {
+                    let users = getUsers();
+                    const oldUser = users.find(u => u.username === username);
+                    oldUser.username = newName;
+                    saveUsers(users);
+                    if (getCurrentUser() === username) {
+                        setCurrentUser(newName);
+                    }
+                    renderAdminContent();
+                }
+            };
+
+            window.setTitle = function(username, title) {
+                updateUser(username, { title });
+                renderAdminContent();
+            };
+
+            // Start XP timer on load
+            startXpTimer();
         });
     </script>
 </body>
