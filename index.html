@@ -923,13 +923,122 @@
         </div>
     </div>
     <!-- Content Area -->
-    <div class="content">
-        <h2>Welcome to Arcadium 2.0!</h2>
-        <div class="placeholder-box">
-            <p>Use the settings button to customize your experience!</p>
-            <p>Click on "More" to see additional options.</p>
+    <style>
+    .games-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 25px;
+        width: 100%;
+        max-width: 1100px;
+        padding: 20px 0;
+    }
+
+    .game-box {
+        aspect-ratio: 1 / 1;               /* square for clean look */
+        border-radius: 18px;
+        overflow: hidden;
+        border: 3px solid rgba(255, 255, 255, 0.18);
+        box-shadow: 
+            0 8px 20px rgba(0, 0, 0, 0.4),
+            inset 0 1px 0 rgba(255, 255, 255, 0.12);
+        transition: all 0.28s ease;
+        background: rgba(255, 255, 255, 0.06);
+        backdrop-filter: blur(4px);
+    }
+
+    .game-box:hover {
+        transform: translateY(-10px) scale(1.06);
+        border-color: rgba(255, 255, 255, 0.45);
+        box-shadow: 
+            0 15px 35px rgba(0, 0, 0, 0.5),
+            0 0 25px rgba(255, 255, 255, 0.25);
+    }
+
+    .game-box img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    .game-link {
+        display: block;
+        width: 100%;
+        height: 100%;
+        text-decoration: none;
+    }
+</style>
+
+<div class="games-grid">
+    <!-- Replace href with your actual game pages / embeds -->
+    <!-- Images are example placeholders — swap with real thumbnails -->
+
+    <a href="games.html" class="game-link">
+        <div class="game-box">
+            <img src="https://www.thiings.co/_next/image?url=https%3A%2F%2Flftz25oez4aqbxpq.public.blob.vercel-storage.com%2Fimage-soM5VkrS231RkzTJKdb30Wco5dj6aJ.png&w=1000&q=75" alt="Games">
         </div>
-    </div>
+    </a>
+
+    <a href="proxies.html" class="game-link">
+        <div class="game-box">
+            <img src="https://my.thiings.co/_next/image?url=https%3A%2F%2Flftz25oez4aqbxpq.public.blob.vercel-storage.com%2Fimage-nk5pwIbGSqixrexrCaFrOdEX7op4SY.png&w=3840&q=75" alt="Proxies">
+        </div>
+    </a>
+
+    <a href="websites.html" class="game-link">
+        <div class="game-box">
+            <img src="https://www.thiings.co/_next/image?url=https%3A%2F%2Flftz25oez4aqbxpq.public.blob.vercel-storage.com%2Fimage-UN1NRnC5SEYcBvC7jJ1HjGKB22Q6Eb.png&w=1000&q=75" alt="Websites">
+        </div>
+    </a>
+
+    <a href="soundboard.html" class="game-link">
+        <div class="game-box">
+            <img src="https://www.thiings.co/_next/image?url=https%3A%2F%2Flftz25oez4aqbxpq.public.blob.vercel-storage.com%2Fimage-hDhBtPPCWt6xvsZ5ppJP1RgsZBu2PE.png&w=1000&q=75" alt="Soundboard">
+        </div>
+    </a>
+
+    <a href="chat.html" class="game-link">
+        <div class="game-box">
+            <img src="https://www.thiings.co/_next/image?url=https%3A%2F%2Flftz25oez4aqbxpq.public.blob.vercel-storage.com%2Fimage-ojyJBpIQ9Ktog9Md3IseRIXqSlExpm.png&w=1000&q=75" alt="Chat">
+        </div>
+    </a>
+
+    <a href="hacks.html" class="game-link">
+        <div class="game-box">
+            <img src="https://www.thiings.co/_next/image?url=https%3A%2F%2Flftz25oez4aqbxpq.public.blob.vercel-storage.com%2Fimage-2hWc56qe65HBnef6BzkHaezzR6Vx5A.png&w=1000&q=75" alt="Hacks">
+        </div>
+    </a>
+
+    <a href="chatgpt.html" class="game-link">
+        <div class="game-box">
+            <img src="https://www.thiings.co/_next/image?url=https%3A%2F%2Flftz25oez4aqbxpq.public.blob.vercel-storage.com%2Fimage-LfpfRdF2BugZEEpTgPQNhXOgbpJBMo.png&w=1000&q=75" alt="ChatGPT">
+        </div>
+    </a>
+
+    <a href="suggest.html" class="game-link">
+        <div class="game-box">
+            <img src="https://www.thiings.co/_next/image?url=https%3A%2F%2Flftz25oez4aqbxpq.public.blob.vercel-storage.com%2Fimage-ks6jS6698MImMPN6eEpjvZlq0n97WQ.png&w=1000&q=75" alt="Suggest">
+        </div>
+    </a>
+
+        <a href="report.html" class="game-link">
+        <div class="game-box">
+            <img src="https://www.thiings.co/_next/image?url=https%3A%2F%2Flftz25oez4aqbxpq.public.blob.vercel-storage.com%2Fimage-QMPzI14FNzJADBc9wwDzUjqoeeX8sA.png&w=1000&q=75" alt="Report">
+        </div>
+    </a>
+
+        <a href="iframe.html" class="game-link">
+        <div class="game-box">
+            <img src="https://www.thiings.co/_next/image?url=https%3A%2F%2Flftz25oez4aqbxpq.public.blob.vercel-storage.com%2Fimage-61FptNC7iNIc1qSqjjRSyRS4n3DRSq.png&w=1000&q=75" alt="iFrame">
+        </div>
+    </a>
+
+        <a href="leaderboard.html" class="game-link">
+        <div class="game-box">
+            <img src="https://www.thiings.co/_next/image?url=https%3A%2F%2Flftz25oez4aqbxpq.public.blob.vercel-storage.com%2Fimage-d2E4v7g51TmwSQg2ReSaW4fkv80sBI.png&w=1000&q=75" alt="leaderboard">
+        </div>
+    </a>
+</div>
 
     <!-- Profile Button Bottom Left -->
     <div class="icon-button" id="profileButton" title="Profile" style="position: fixed; bottom: 20px; left: 20px; z-index: 100;">
