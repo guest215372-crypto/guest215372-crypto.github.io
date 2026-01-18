@@ -829,472 +829,454 @@
     </div>
     <br>
     <br>
-    <style>
+<!DOCTYPE html>
+<html lang="en">
+<br>
+<style>
+        :root {
+            --glow: 0 0 10px #ffffff, 0 0 20px #ffffff, 0 0 30px #ffffff;
+        }
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
         body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            background: linear-gradient(135deg, #0a0e2a 0%, #1a1f4a 100%);
+            color: #e0e0e0;
             min-height: 100vh;
-            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            font-family: 'Fredoka One', cursive;
             padding: 20px;
-            color: #fff;
-        }
-        
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            overflow: hidden;
-            padding: 30px;
-        }
-        
-        h1 {
-            text-align: center;
-            margin-bottom: 5px;
-            font-weight: 600;
-            background: linear-gradient(to right, #a8edea, #fed6e3);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: 0 0 20px rgba(168, 237, 234, 0.3);
-            font-size: 2.2rem;
-        }
-        
-        .subtitle {
-            text-align: center;
-            color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 30px;
-            font-size: 16px;
-        }
-        
-        .iframe-container {
-            position: relative;
-            width: 100%;
-            height: 550px;
-            border-radius: 15px;
-            overflow: hidden;
-            margin-bottom: 30px;
-            transition: height 0.3s ease;
-        }
-        
-        .glass-effect {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            z-index: 1;
-            pointer-events: none;
-        }
-        
-        .liquid-overlay {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, rgba(168, 237, 234, 0.05), rgba(254, 214, 227, 0.05));
-            border-radius: 15px;
-            z-index: 2;
-            pointer-events: none;
-            opacity: 0.8;
-        }
-        
-        .liquid-animation {
-            position: absolute;
-            width: 300px;
-            height: 300px;
-            border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%;
-            background: linear-gradient(45deg, rgba(168, 237, 234, 0.1), rgba(254, 214, 227, 0.1));
-            animation: liquidMove 15s infinite linear;
-            z-index: 3;
-            pointer-events: none;
-            opacity: 0.6;
-        }
-        
-        .liquid-animation:nth-child(2) {
-            width: 200px;
-            height: 200px;
-            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-            animation-duration: 20s;
-            animation-direction: reverse;
-            top: 20%;
-            left: 70%;
-        }
-        
-        @keyframes liquidMove {
-            0% {
-                transform: translate(0, 0) rotate(0deg);
-                border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%;
-            }
-            25% {
-                transform: translate(20px, 40px) rotate(90deg);
-                border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-            }
-            50% {
-                transform: translate(-30px, 20px) rotate(180deg);
-                border-radius: 40% 60% 70% 30% / 40% 40% 60% 60%;
-            }
-            75% {
-                transform: translate(-20px, -30px) rotate(270deg);
-                border-radius: 70% 30% 50% 50% / 30% 70% 70% 30%;
-            }
-            100% {
-                transform: translate(0, 0) rotate(360deg);
-                border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%;
-            }
-        }
-        
-        iframe {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            border: none;
-            border-radius: 15px;
-            z-index: 10;
-            background-color: white;
-        }
-        
-        .controls {
             display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: center;
-            margin-bottom: 30px;
-        }
-        
-        .control-group {
-            background: rgba(255, 255, 255, 0.08);
-            border-radius: 12px;
-            padding: 18px;
-            flex: 1;
-            min-width: 200px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .control-title {
-            font-size: 14px;
-            color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 12px;
-            display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 8px;
+            overflow-x: hidden;
         }
-        
-        .control-title i {
-            color: #a8edea;
-        }
-        
-        .size-controls {
-            display: flex;
-            gap: 10px;
-        }
-        
-        .size-btn {
-            flex: 1;
-            padding: 12px;
-            background: rgba(168, 237, 234, 0.2);
-            border: none;
-            border-radius: 8px;
-            color: white;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 500;
-            font-size: 15px;
-        }
-        
-        .size-btn:hover {
-            background: rgba(168, 237, 234, 0.4);
-            transform: translateY(-2px);
-        }
-        
-        .size-btn.active {
-            background: rgba(168, 237, 234, 0.6);
-            box-shadow: 0 5px 15px rgba(168, 237, 234, 0.2);
-        }
-        
-        .button-controls {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            justify-content: center;
-        }
-        
-        .action-btn {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 14px 24px;
-            background: rgba(255, 255, 255, 0.1);
-            border: none;
-            border-radius: 10px;
-            color: white;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 500;
-            font-size: 16px;
-        }
-        
-        .action-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
-        }
-        
-        .action-btn.primary {
-            background: linear-gradient(135deg, #a8edea, #fed6e3);
-            color: #0f0c29;
-        }
-        
-        .action-btn.primary:hover {
-            box-shadow: 0 5px 20px rgba(168, 237, 234, 0.4);
-        }
-        
-        .custom-slider {
-            width: 100%;
-            margin-top: 15px;
-            -webkit-appearance: none;
-            height: 8px;
-            border-radius: 4px;
-            background: rgba(255, 255, 255, 0.1);
-            outline: none;
-        }
-        
-        .custom-slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            width: 22px;
-            height: 22px;
-            border-radius: 50%;
-            background: #a8edea;
-            cursor: pointer;
-            box-shadow: 0 0 10px rgba(168, 237, 234, 0.5);
-        }
-        
-        .custom-slider::-moz-range-thumb {
-            width: 22px;
-            height: 22px;
-            border-radius: 50%;
-            background: #a8edea;
-            cursor: pointer;
-            border: none;
-            box-shadow: 0 0 10px rgba(168, 237, 234, 0.5);
-        }
-        
-        @media (max-width: 768px) {
-            .controls {
-                flex-direction: column;
-            }
-            
-            .iframe-container {
-                height: 450px;
-            }
-            
-            .container {
-                padding: 20px;
-            }
-            
-            h1 {
-                font-size: 1.8rem;
-            }
-        }
-        
-        .fullscreen-overlay {
+        .bubbles {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            z-index: 1000;
-            display: none;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
+            inset: 0;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
         }
-        
-        .fullscreen-iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            border-radius: 10px;
-        }
-        
-        .close-fullscreen {
+        .bubble {
             position: absolute;
-            top: 25px;
-            right: 25px;
-            background: rgba(255, 255, 255, 0.15);
-            border: none;
+            background: rgba(255,255,255,0.08);
             border-radius: 50%;
-            width: 55px;
-            height: 55px;
-            color: white;
-            font-size: 26px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            z-index: 1001;
+            box-shadow: 0 0 12px rgba(255,255,255,0.25);
+            animation: float 18s infinite linear;
+            opacity: 0.75;
         }
-        
-        .close-fullscreen:hover {
-            background: rgba(255, 255, 255, 0.25);
-            transform: scale(1.1);
+        @keyframes float {
+            0%   { transform: translateY(110vh) rotate(0deg); }
+            100% { transform: translateY(-15vh) rotate(360deg); }
+        }
+        header {
+            width: 100%;
+            max-width: 1000px;
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255,255,255,0.2);
+            border-radius: 50px;
+            padding: 14px 28px;
+            margin: 20px 0 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.15);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-family: 'Bubblegum Sans', cursive;
+            font-size: 42px;
+            color: white;
+            text-shadow: var(--glow);
+            background: rgba(255,255,255,0.1);
+            padding: 6px 18px;
+            border-radius: 30px;
+        }
+        .chat-container {
+            width: 100%;
+            max-width: 1000px;
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(8px);
+            border: 2px solid rgba(255,255,255,0.12);
+            border-radius: 36px;
+            padding: 24px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.1);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        h2 {
+            font-family: 'Bubblegum Sans', cursive;
+            font-size: 32px;
+            text-align: center;
+            color: white;
+            text-shadow: var(--glow);
+            margin: 0 0 12px;
+        }
+        #messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 12px;
+            background: rgba(0,0,0,0.25);
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .message {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            max-width: 82%;
+            padding: 12px 16px;
+            border-radius: 16px;
+        }
+        .message.own {
+            align-self: flex-end;
+            background: rgba(124,94,255,0.28);
+            border: 1px solid rgba(124,94,255,0.4);
+        }
+        .message.other {
+            align-self: flex-start;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+        .avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            font-weight: bold;
+            flex-shrink: 0;
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .content {
+            flex: 1;
+        }
+        .nickname-row {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+            margin-bottom: 4px;
+        }
+        .nickname {
+            font-weight: 600;
+            color: #a5d8ff;
+            text-shadow: 0 0 6px rgba(165,216,255,0.6);
+        }
+        .title {
+            font-size: 0.82rem;
+            color: #ffca3a;
+            opacity: 0.92;
+        }
+        .time {
+            font-size: 0.78rem;
+            opacity: 0.65;
+        }
+        .text {
+            line-height: 1.4;
+        }
+        .reactions {
+            display: flex;
+            gap: 6px;
+            margin-top: 6px;
+            font-size: 1.1rem;
+        }
+        .reaction {
+            background: rgba(255,255,255,0.08);
+            padding: 4px 9px;
+            border-radius: 12px;
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: all 0.2s;
+        }
+        .reaction:hover {
+            border-color: #7c5eff;
+            background: rgba(124,94,255,0.18);
+        }
+        .input-row {
+            display: flex;
+            gap: 12px;
+        }
+        #message-input {
+            flex: 1;
+            padding: 14px 18px;
+            border-radius: 20px;
+            border: 2px solid rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.06);
+            color: white;
+            font-size: 1.05rem;
+        }
+        #send-btn {
+            padding: 0 28px;
+            background: #7c5eff;
+            border: none;
+            border-radius: 20px;
+            color: white;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        #send-btn:hover {
+            background: #6c4fff;
+            transform: translateY(-1px);
+        }
+        #typing {
+            color: #a0a0ff;
+            font-style: italic;
+            padding: 8px 0;
+            min-height: 1.4em;
+        }
+        .delete-btn {
+            background: none;
+            border: none;
+            color: #ff7675;
+            font-size: 0.9rem;
+            cursor: pointer;
+            margin-left: 10px;
+            opacity: 0.7;
+        }
+        .delete-btn:hover {
+            opacity: 1;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1><i class="fas fa-glass-whiskey"></i> Wall Of Comments</h1>
-        <p class="subtitle">ANYONE can chat here</p>
-        
-        <div class="iframe-container" id="iframeContainer">
-            <div class="glass-effect"></div>
-            <div class="liquid-overlay"></div>
-            <div class="liquid-animation"></div>
-            <div class="liquid-animation"></div>
-            <!-- 
-                TO CHANGE THE IFRAME URL:
-                Replace the src attribute below with your desired URL
-                Example: src="https://www.example.com"
-            -->
-            <iframe id="mainFrame" src="https://padlet.com/Arcadiumweb/wall-of-comments-rdb1p5h73lnwexdu" title="Liquid Glass iFrame"></iframe>
-        </div>
-        
-        <div class="controls">
-            <div class="control-group">
-                <div class="control-title">
-                    <i class="fas fa-expand-alt"></i> Adjust Size
-                </div>
-                <div class="size-controls">
-                    <button class="size-btn active" data-size="small">Small</button>
-                    <button class="size-btn" data-size="medium">Medium</button>
-                    <button class="size-btn" data-size="large">Large</button>
-                    <button class="size-btn" data-size="custom">Custom</button>
-                </div>
-                <input type="range" id="customSize" min="350" max="800" value="550" class="custom-slider" style="display: none;">
-            </div>
-        </div>
-        
-        <div class="button-controls">
-            <button class="action-btn primary" id="refreshBtn">
-                <i class="fas fa-sync-alt"></i> Refresh
-            </button>
-            <button class="action-btn" id="newTabBtn">
-                <i class="fas fa-external-link-alt"></i> Open in New Tab
-            </button>
-            <button class="action-btn" id="fullscreenBtn">
-                <i class="fas fa-expand"></i> Full Screen
-            </button>
-        </div>
-    </div>
-    
-    <div class="fullscreen-overlay" id="fullscreenOverlay">
-        <button class="close-fullscreen" id="closeFullscreen">
-            <i class="fas fa-times"></i>
-        </button>
-        <iframe class="fullscreen-iframe" id="fullscreenFrame"></iframe>
-    </div>
 
-    <script>
-        // DOM Elements
-        const iframeContainer = document.getElementById('iframeContainer');
-        const mainFrame = document.getElementById('mainFrame');
-        const refreshBtn = document.getElementById('refreshBtn');
-        const newTabBtn = document.getElementById('newTabBtn');
-        const fullscreenBtn = document.getElementById('fullscreenBtn');
-        const sizeButtons = document.querySelectorAll('.size-btn');
-        const customSizeSlider = document.getElementById('customSize');
-        const fullscreenOverlay = document.getElementById('fullscreenOverlay');
-        const fullscreenFrame = document.getElementById('fullscreenFrame');
-        const closeFullscreen = document.getElementById('closeFullscreen');
-        
-        // Set initial active size button
-        let currentSize = 'medium';
-        
-        // Size presets
-        const sizePresets = {
-            small: 450,
-            medium: 550,
-            large: 650,
-            custom: 550
+<div class="bubbles" id="bubbles"></div>
+
+<header>
+    <div class="logo">Arcadium Chat</div>
+    <div id="user-info"></div>
+</header>
+
+<div class="chat-container">
+    <h2>Live Chat</h2>
+    <div id="messages"></div>
+    <div id="typing"></div>
+
+    <div class="input-row">
+        <input id="message-input" placeholder="Type your message..." autocomplete="off" />
+        <button id="send-btn"><i class="fas fa-paper-plane"></i></button>
+    </div>
+</div>
+
+<script>
+    // ─── User / Profile logic (from your main page) ────────────────────────────────
+    function getUsers()          { return JSON.parse(localStorage.getItem('arcadium_users')) || []; }
+    function saveUsers(users)    { localStorage.setItem('arcadium_users', JSON.stringify(users)); }
+    function getCurrentUserName(){ return localStorage.getItem('arcadium_currentUser'); }
+    function getUserData() {
+        const name = getCurrentUserName();
+        if (!name) return { username: 'Guest', profilePic: '', title: '' };
+        const user = getUsers().find(u => u.username === name);
+        return user || { username: name, profilePic: '', title: '' };
+    }
+
+    function isBanned() {
+        const data = getUserData();
+        return data.banned === true;
+    }
+
+    // ─── Chat logic ────────────────────────────────────────────────────────────────
+    const messagesEl = document.getElementById('messages');
+    const inputEl    = document.getElementById('message-input');
+    const sendBtn    = document.getElementById('send-btn');
+    const typingEl   = document.getElementById('typing');
+    const userInfoEl = document.getElementById('user-info');
+
+    let typingTimer = null;
+
+    function updateUserDisplay() {
+        const data = getUserData();
+        let html = `<span style="color:#a5d8ff;font-weight:600;">${data.username}</span>`;
+        if (data.title) html += ` <span style="color:#ffca3a;">(${data.title})</span>`;
+        if (data.banned) html += ' <span style="color:#ff7675;">(banned)</span>';
+        userInfoEl.innerHTML = html;
+    }
+
+    function escapeHtml(text) {
+        return text.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
+    }
+
+    function addMessage(msg, isOwn = false) {
+        const div = document.createElement('div');
+        div.className = `message ${isOwn ? 'own' : 'other'}`;
+
+        const avatar = msg.profilePic
+            ? `<img src="${msg.profilePic}" alt="">`
+            : `<span>${msg.username.slice(0,1).toUpperCase()}</span>`;
+
+        div.innerHTML = `
+            <div class="avatar">${avatar}</div>
+            <div class="content">
+                <div class="nickname-row">
+                    <span class="nickname">${escapeHtml(msg.username)}</span>
+                    ${msg.title ? `<span class="title">(${escapeHtml(msg.title)})</span>` : ''}
+                    <span class="time">${new Date(msg.timestamp).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}</span>
+                    ${isOwn ? `<button class="delete-btn" data-ts="${msg.timestamp}">🗑️</button>` : ''}
+                </div>
+                <div class="text">${escapeHtml(msg.content)}</div>
+                <div class="reactions" data-ts="${msg.timestamp}"></div>
+            </div>
+        `;
+
+        // Add reaction buttons
+        const reactContainer = div.querySelector('.reactions');
+        ['❤️','😂','😮','👍','👎'].forEach(emoji => {
+            const span = document.createElement('span');
+            span.className = 'reaction';
+            span.textContent = emoji;
+            span.onclick = () => toggleReaction(msg.timestamp, emoji);
+            reactContainer.appendChild(span);
+        });
+
+        // Show existing reactions
+        showReactions(msg.timestamp, reactContainer);
+
+        messagesEl.appendChild(div);
+        messagesEl.scrollTop = messagesEl.scrollHeight;
+
+        // Delete handler
+        div.querySelector('.delete-btn')?.addEventListener('click', () => {
+            if (confirm('Delete this message?')) {
+                deleteOwnMessage(msg.timestamp);
+            }
+        });
+    }
+
+    function saveMessage(msg) {
+        let history = JSON.parse(localStorage.getItem('arcadium_chat') || '[]');
+        history.push(msg);
+        if (history.length > 200) history = history.slice(-200);
+        localStorage.setItem('arcadium_chat', JSON.stringify(history));
+    }
+
+    function loadMessages() {
+        messagesEl.innerHTML = '';
+        const history = JSON.parse(localStorage.getItem('arcadium_chat') || '[]');
+        const current = getCurrentUserName();
+        history.forEach(msg => {
+            addMessage(msg, msg.username === current);
+        });
+    }
+
+    function deleteOwnMessage(timestamp) {
+        let history = JSON.parse(localStorage.getItem('arcadium_chat') || '[]');
+        history = history.filter(m => m.timestamp !== timestamp);
+        localStorage.setItem('arcadium_chat', JSON.stringify(history));
+        loadMessages();
+    }
+
+    function toggleReaction(timestamp, emoji) {
+        let history = JSON.parse(localStorage.getItem('arcadium_chat') || '[]');
+        const msg = history.find(m => m.timestamp === timestamp);
+        if (!msg) return;
+
+        if (!msg.reactions) msg.reactions = {};
+        if (!msg.reactions[emoji]) msg.reactions[emoji] = 0;
+        msg.reactions[emoji]++;
+
+        saveUsers(history); // wait — typo — save messages
+        localStorage.setItem('arcadium_chat', JSON.stringify(history));
+        loadMessages();     // refresh
+    }
+
+    function showReactions(timestamp, container) {
+        const history = JSON.parse(localStorage.getItem('arcadium_chat') || '[]');
+        const msg = history.find(m => m.timestamp === timestamp);
+        if (!msg?.reactions) return;
+
+        container.innerHTML = '';
+        Object.entries(msg.reactions).forEach(([emoji, count]) => {
+            if (count > 0) {
+                const span = document.createElement('span');
+                span.className = 'reaction';
+                span.textContent = `${emoji} ${count}`;
+                container.appendChild(span);
+            }
+        });
+    }
+
+    function send() {
+        const text = inputEl.value.trim();
+        if (!text) return;
+
+        if (isBanned()) {
+            alert("You are banned from chatting.");
+            return;
+        }
+
+        const user = getUserData();
+        const msg = {
+            username: user.username,
+            title: user.title || '',
+            profilePic: user.profilePic || '',
+            content: text,
+            timestamp: Date.now(),
+            reactions: {}
         };
-        
-        // Event Listeners for Size Controls
-        sizeButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                // Remove active class from all buttons
-                sizeButtons.forEach(btn => btn.classList.remove('active'));
-                
-                // Add active class to clicked button
-                button.classList.add('active');
-                
-                // Get the size
-                currentSize = button.getAttribute('data-size');
-                
-                // Show/hide custom slider
-                if (currentSize === 'custom') {
-                    customSizeSlider.style.display = 'block';
-                    iframeContainer.style.height = `${customSizeSlider.value}px`;
-                } else {
-                    customSizeSlider.style.display = 'none';
-                    iframeContainer.style.height = `${sizePresets[currentSize]}px`;
-                }
-            });
-        });
-        
-        // Custom size slider
-        customSizeSlider.addEventListener('input', () => {
-            if (currentSize === 'custom') {
-                iframeContainer.style.height = `${customSizeSlider.value}px`;
-            }
-        });
-        
-        // Refresh iFrame
-        refreshBtn.addEventListener('click', () => {
-            mainFrame.src = mainFrame.src;
-        });
-        
-        // Open iFrame content in new tab
-        newTabBtn.addEventListener('click', () => {
-            window.open(mainFrame.src, '_blank');
-        });
-        
-        // Fullscreen mode
-        fullscreenBtn.addEventListener('click', () => {
-            fullscreenFrame.src = mainFrame.src;
-            fullscreenOverlay.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-        });
-        
-        // Close fullscreen
-        closeFullscreen.addEventListener('click', () => {
-            fullscreenOverlay.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        });
-        
-        // Close fullscreen with Escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && fullscreenOverlay.style.display === 'flex') {
-                fullscreenOverlay.style.display = 'none';
-                document.body.style.overflow = 'auto';
-            }
-        });
-        
-        // Initialize with medium size
-        document.querySelector('.size-btn[data-size="medium"]').click();
-    </script>
+
+        addMessage(msg, true);
+        saveMessage(msg);
+        inputEl.value = '';
+    }
+
+    // Typing indicator (local fake)
+    inputEl.oninput = () => {
+        typingEl.textContent = "typing...";
+        clearTimeout(typingTimer);
+        typingTimer = setTimeout(() => typingEl.textContent = "", 1400);
+    };
+
+    sendBtn.onclick = send;
+    inputEl.onkeypress = e => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            send();
+        }
+    };
+
+    // Init
+    updateUserDisplay();
+    loadMessages();
+
+    // Refresh every ~8 seconds to see admin changes (title, ban, etc.)
+    setInterval(() => {
+        updateUserDisplay();
+    }, 8000);
+
+    // Background bubbles (same as main page)
+    document.addEventListener('DOMContentLoaded', () => {
+        const container = document.getElementById('bubbles');
+        for (let i = 0; i < 18; i++) {
+            const b = document.createElement('div');
+            b.className = 'bubble';
+            const size = Math.random() * 40 + 20;
+            b.style.width = b.style.height = size + 'px';
+            b.style.left = Math.random() * 100 + '%';
+            b.style.top = (100 + Math.random() * 30) + '%';
+            b.style.animationDuration = (Math.random() * 20 + 18) + 's';
+            b.style.animationDelay = Math.random() * 8 + 's';
+            container.appendChild(b);
+        }
+    });
+</script>
 </body>
 </html>
-
     <script>
         // List of 100+ Google Fonts
         const googleFonts = [
