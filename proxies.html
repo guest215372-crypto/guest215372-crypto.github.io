@@ -1,0 +1,1523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/png" href="/download.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arcadium Web - Proxies</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&family=Fredoka+One&display=swap" rel="stylesheet">
+    <!-- Add 100+ Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&family=Open+Sans:wght@300;400;600;700&family=Lato:wght@300;400;700&family=Oswald:wght@300;400;500;600&family=Raleway:wght@300;400;500;600;700&family=Ubuntu:wght@300;400;500;700&family=Playfair+Display:wght@400;700&family=Merriweather:wght@300;400;700&family=Source+Sans+Pro:wght@300;400;600&family=PT+Sans:wght@400;700&family=Noto+Sans:wght@400;700&family=Nunito:wght@300;400;600;700&family=Quicksand:wght@300;400;500;600&family=Rubik:wght@300;400;500;600&family=Josefin+Sans:wght@300;400;600&family=Arvo:wght@400;700&family=Libre+Baskerville:wght@400;700&family=Roboto+Slab:wght@300;400;700&family=Cabin:wght@400;500;600;700&family=Roboto+Condensed:wght@300;400;700&family=Oxygen:wght@300;400;700&family=Fira+Sans:wght@300;400;500;600&family=Work+Sans:wght@300;400;500;600&family=Karla:wght@400;700&family=Inconsolata:wght@400;700&family=Space+Mono:wght@400;700&family=Courier+Prime:wght@400;700&family=Nanum+Gothic:wght@400;700&family=Comfortaa:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700&family=Exo+2:wght@300;400;500;600;700&family=Titillium+Web:wght@300;400;600;700&family=Archivo:wght@400;500;600;700&family=Manrope:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700&family=Chivo:wght@300;400;700&family=Overpass:wght@300;400;600;700&family=Hind:wght@300;400;500;600;700&family=Muli:wght@300;400;500;600&family=Catamaran:wght@300;400;500;600;700&family=Varela+Round&family=ABeeZee&family=Acme&family=Alfa+Slab+One&family=Amaranth&family=Anton&family=Bangers&family=Bebas+Neue&family=Black+Ops+One&family=Bree+Serif&family=Chewy&family=Concert+One&family=Courgette&family=Crimson+Text&family=Dancing+Script&family=Dosis&family=Economica&family=Fjalla+One&family=Francois+One&family=Gloria+Hallelujah&family=Great+Vibes&family=Indie+Flower&family=Lobster&family=Luckiest+Guy&family=Mitr&family=Monda&family=Monoton&family=Montserrat+Alternates&family=Orbitron&family=Pacifico&family=Passion+One&family=Patua+One&family=Permanent+Marker&family=Press+Start+2P&family=Racing+Sans+One&family=Righteous&family=Roboto+Mono&family=Sacramento&family=Shadows+Into+Light&family=Sigmar+One&family=Staatliches&family=Teko&family=Yellowtail&display=swap" rel="stylesheet">
+    <style>
+        /* Performance optimizations */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0a0e2a 0%, #1a1f4a 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+            font-family: 'Fredoka One', cursive; /* Default font */
+            transition: background 0.3s ease;
+            will-change: background;
+        }
+        
+        /* Optimized Background Bubbles - Reduced count and simplified */
+        .bubbles {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+        
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+            animation: float 20s infinite linear;
+            opacity: 0.7;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); }
+            100% { transform: translateY(-100px) rotate(180deg); }
+        }
+        
+        /* Main Navigation Container */
+        .nav-container {
+            width: 100%;
+            max-width: 1000px;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            border-radius: 50px;
+            padding: 15px 30px;
+            margin-top: 30px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 
+                0 10px 20px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            overflow: visible;
+            z-index: 10;
+        }
+        
+        /* Left Section - Logo and Main Links */
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+        
+        /* White Text Glow for all text */
+        .logo, .nav-link, .content h2, .placeholder-box, .settings-panel h3, 
+        .settings-group h4, .btn, .setting-info, .dropdown-link {
+            color: #ffffff;
+            text-shadow: 
+                0 0 5px #ffffff,
+                0 0 10px #ffffff,
+                0 0 15px #ffffff,
+                0 2px 5px rgba(0, 0, 0, 0.5);
+        }
+        
+        .logo {
+            font-family: 'Bubblegum Sans', cursive;
+            font-size: 42px;
+            font-weight: 400;
+            position: relative;
+            padding: 5px 15px;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 
+                inset 0 0 10px rgba(255, 255, 255, 0.2),
+                0 5px 10px rgba(0, 0, 0, 0.3);
+            animation: gentleGlow 4s infinite alternate;
+        }
+        
+        @keyframes gentleGlow {
+            0% { 
+                text-shadow: 
+                    0 0 5px #ffffff,
+                    0 0 10px #ffffff,
+                    0 0 15px #ffffff;
+            }
+            100% { 
+                text-shadow: 
+                    0 0 8px #ffffff,
+                    0 0 15px #ffffff,
+                    0 0 25px #ffffff;
+            }
+        }
+        
+        .nav-divider {
+            height: 40px;
+            width: 4px;
+            background: linear-gradient(to bottom, transparent, #ffffff, transparent);
+            border-radius: 2px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            position: relative;
+        }
+        
+        .nav-link {
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: 500;
+            padding: 12px 20px;
+            border-radius: 40px;
+            transition: all 0.3s ease;
+            font-family: 'Bubblegum Sans', cursive;
+            position: relative;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            white-space: nowrap;
+        }
+        
+        .nav-link:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-3px);
+            box-shadow: 
+                0 8px 15px rgba(0, 0, 0, 0.3),
+                0 0 10px rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+        
+        /* More Dropdown Menu - Liquid Glass Panel */
+        .dropdown-container {
+            position: relative;
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 10px;
+            min-width: 220px;
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            border: 2px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 
+                0 15px 35px rgba(0, 0, 0, 0.5),
+                0 0 20px rgba(255, 255, 255, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 100;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            overflow: hidden;
+        }
+        
+        /* Bubble effect for dropdown */
+        .dropdown-menu::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.1), transparent 70%);
+            border-radius: 35px;
+            z-index: -1;
+            opacity: 0.5;
+        }
+        
+        .dropdown-menu.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .dropdown-link {
+            display: block;
+            text-decoration: none;
+            padding: 14px 18px;
+            border-radius: 20px;
+            font-family: 'Bubblegum Sans', cursive;
+            font-size: 18px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .dropdown-link:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateX(5px);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+        
+        /* Right Section - Animated Icons */
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .icon-button {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .icon-button:hover {
+            transform: translateY(-5px) scale(1.1);
+            background: rgba(255, 255, 255, 0.2);
+            border-color: #ffffff;
+            box-shadow: 
+                0 10px 15px rgba(0, 0, 0, 0.3),
+                0 0 15px rgba(255, 255, 255, 0.4);
+        }
+        
+        /* Content Area */
+        .content {
+            max-width: 1000px;
+            width: 100%;
+            margin-top: 50px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(8px);
+            border-radius: 40px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 
+                0 10px 25px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: 400px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .content h2 {
+            margin-bottom: 30px;
+            font-family: 'Bubblegum Sans', cursive;
+            font-size: 36px;
+            animation: gentleBounce 3s infinite;
+        }
+        
+        @keyframes gentleBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        
+        .placeholder-box {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 30px;
+            padding: 40px;
+            width: 100%;
+            border: 2px dashed rgba(255, 255, 255, 0.2);
+            font-family: 'Bubblegum Sans', cursive;
+            font-size: 22px;
+            line-height: 1.6;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .placeholder-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.1), transparent 50%);
+        }
+        
+        /* Simplified Floating Orbs - Reduced count */
+        .floating-orb {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05));
+            box-shadow: 
+                inset 0 0 10px rgba(255, 255, 255, 0.2),
+                0 0 15px rgba(255, 255, 255, 0.2);
+            animation: float-orb 15s infinite linear;
+            z-index: 1;
+            opacity: 0.5;
+            pointer-events: none;
+        }
+        
+        @keyframes float-orb {
+            0% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(15px, -15px) scale(1.05); }
+            50% { transform: translate(0, -30px) scale(1); }
+            75% { transform: translate(-15px, -15px) scale(0.95); }
+            100% { transform: translate(0, 0) scale(1); }
+        }
+        
+        /* Bubble-like Settings Panel */
+        .settings-panel {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            width: 420px;
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(15px);
+            border-radius: 30px;
+            border: 2px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.4),
+                0 0 30px rgba(255, 255, 255, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            padding: 25px;
+            overflow-y: auto;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            max-height: 80vh;
+        }
+        
+        .settings-panel.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, -50%) scale(1);
+        }
+        
+        /* Bubble shape effect */
+        .settings-panel::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.1), transparent 70%);
+            border-radius: 40px;
+            z-index: -1;
+            opacity: 0.5;
+        }
+        
+        .settings-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .settings-header h3 {
+            font-size: 28px;
+            font-family: 'Bubblegum Sans', cursive;
+        }
+        
+        .close-settings {
+            background: rgba(255, 255, 255, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .close-settings:hover {
+            background: rgba(255, 100, 100, 0.3);
+            border-color: #ff6464;
+            transform: rotate(90deg);
+        }
+        
+        .settings-group {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        
+        .settings-group h4 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            font-family: 'Bubblegum Sans', cursive;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .settings-group h4 i {
+            font-size: 20px;
+        }
+        
+        /* Font selector with scroll */
+        .font-selector-container {
+            max-height: 200px;
+            overflow-y: auto;
+            border-radius: 10px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+        }
+        
+        .font-option {
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+            font-size: 16px;
+        }
+        
+        .font-option:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateX(5px);
+        }
+        
+        .font-option.selected {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+        
+        .font-preview {
+            display: block;
+            font-size: 14px;
+            margin-top: 5px;
+            opacity: 0.8;
+        }
+        
+        .color-picker-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .color-preview {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            border: 2px solid white;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+        
+        .color-preview:hover {
+            transform: scale(1.1);
+        }
+        
+        .color-picker {
+            flex: 1;
+            height: 40px;
+            border-radius: 10px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+        }
+        
+        .select-container {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 16px;
+            font-family: 'Fredoka One', cursive;
+            margin-bottom: 10px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        
+        .select-container:focus {
+            border-color: rgba(255, 255, 255, 0.6);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+        
+        .file-upload {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.05);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 10px;
+        }
+        
+        .file-upload:hover {
+            border-color: rgba(255, 255, 255, 0.6);
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .btn {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 14px 25px;
+            border-radius: 15px;
+            font-family: 'Bubblegum Sans', cursive;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.5);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3), 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+        
+        .btn i {
+            font-size: 20px;
+        }
+        
+        .setting-info {
+            font-size: 14px;
+            margin-top: 10px;
+            font-style: italic;
+            text-align: center;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            opacity: 0.8;
+        }
+        
+        .reset-btn {
+            background: rgba(255, 100, 100, 0.2);
+            border-color: rgba(255, 100, 100, 0.4);
+        }
+        
+        .reset-btn:hover {
+            background: rgba(255, 100, 100, 0.3);
+        }
+        
+        /* Overlay for settings */
+        .settings-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(3px);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .settings-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Responsive */
+        @media (max-width: 850px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 20px;
+                padding: 20px;
+                border-radius: 40px;
+            }
+            
+            .nav-left {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .nav-divider {
+                height: 2px;
+                width: 80%;
+                background: linear-gradient(to right, transparent, #ffffff, transparent);
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .logo {
+                font-size: 36px;
+            }
+            
+            .content h2 {
+                font-size: 28px;
+            }
+            
+            .settings-panel {
+                width: 90%;
+                max-width: 350px;
+            }
+            
+            .dropdown-menu {
+                position: static;
+                margin-top: 15px;
+                min-width: 100%;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .settings-panel {
+                width: 95%;
+                padding: 20px;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .placeholder-box {
+                padding: 20px;
+                font-size: 18px;
+            }
+            
+            .dropdown-menu {
+                min-width: 100%;
+            }
+        }
+        
+        /* Performance optimization classes */
+        .no-animation {
+            animation: none !important;
+        }
+        
+        .reduce-motion * {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+        }
+    </style>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Optimized Background Bubbles -->
+    <div class="bubbles" id="bubbles"></div>
+    
+    <!-- Settings Overlay -->
+    <div class="settings-overlay" id="settingsOverlay"></div>
+    
+    <!-- Bubble-like Settings Panel -->
+    <div class="settings-panel" id="settingsPanel">
+        <div class="settings-header">
+            <h3><i class="fas fa-cog"></i> Settings</h3>
+            <button class="close-settings" id="closeSettings">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <!-- Background Color Settings -->
+        <div class="settings-group">
+            <h4><i class="fas fa-palette"></i> Background Color</h4>
+            <div class="color-picker-container">
+                <div class="color-preview" id="colorPreview" title="Click to preview"></div>
+                <input type="color" id="bgColorPicker" class="color-picker" value="#0a0e2a">
+            </div>
+            <button class="btn" id="applyBgColor">
+                <i class="fas fa-check"></i> Apply Color
+            </button>
+        </div>
+        
+        <!-- Font Settings with 100+ fonts -->
+        <div class="settings-group">
+            <h4><i class="fas fa-font"></i> Font Selection</h4>
+            <div class="setting-info">
+                Choose from 100+ Google Fonts. Click to preview.
+            </div>
+            <div class="font-selector-container" id="fontSelectorContainer">
+                <!-- Font options will be populated by JavaScript -->
+            </div>
+            <div class="setting-info">
+                Selected font: <span id="selectedFontName">Fredoka One</span>
+            </div>
+        </div>
+        
+        <!-- Background Image Settings -->
+        <div class="settings-group">
+            <h4><i class="fas fa-image"></i> Background Image</h4>
+            <input type="file" id="bgImageUpload" accept="image/*" class="file-upload">
+            <div class="setting-info">
+                Upload any image
+            </div>
+            <button class="btn" id="removeBgImage">
+                <i class="fas fa-trash"></i> Remove Image
+            </button>
+        </div>
+        
+        <!-- About:blank Opener -->
+        <div class="settings-group">
+            <h4><i class="fas fa-external-link-alt"></i> About:Blank</h4>
+            <div class="setting-info">
+                Opens page in new window
+            </div>
+            <button class="btn" id="openAboutBlank">
+                <i class="fas fa-external-link-square-alt"></i> Open
+            </button>
+        </div>
+        
+        <!-- Performance Settings -->
+        <div class="settings-group">
+            <h4><i class="fas fa-tachometer-alt"></i> Performance</h4>
+            <button class="btn" id="reduceMotion">
+                <i class="fas fa-running"></i> Reduce Animations
+            </button>
+            <div class="setting-info">
+                Makes animations simpler for better performance
+            </div>
+        </div>
+        
+        <!-- Reset Settings -->
+        <div class="settings-group">
+            <h4><i class="fas fa-redo"></i> Reset</h4>
+            <button class="btn reset-btn" id="resetSettings">
+                <i class="fas fa-undo"></i> Reset to Default
+            </button>
+        </div>
+    </div>
+    
+    <!-- Optimized Floating Orbs - Reduced to 2 -->
+    <div class="floating-orb" style="width: 80px; height: 80px; top: 15%; left: 10%;"></div>
+    <div class="floating-orb" style="width: 60px; height: 60px; bottom: 20%; right: 15%; animation-delay: -5s;"></div>
+    
+    <!-- Navigation Bar -->
+    <div class="nav-container">
+        <!-- Left Section -->
+        <div class="nav-left">
+            <a href="index.html" class="logo">Arcadium</a>
+            <div class="nav-divider"></div>
+            <div class="nav-links">
+                <a href="games.html" class="nav-link" onclick="window.location.href='games.html'">Games</a>
+                <a href="proxies.html" class="nav-link" onclick="window.location.href='proxies.html'">Proxies</a>
+                <a href="websites.html" class="nav-link" onclick="window.location.href='websites.html'">Websites</a>
+                <a href="soundboard.html" class="nav-link" onclick="window.location.href='soundboard.html'">Soundboard</a>
+                <div class="dropdown-container">
+                    <a href="#" class="nav-link" id="moreButton">More <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown-menu" id="dropdownMenu">
+                        <a href="chat.html" class="dropdown-link">Chat</a>
+                        <a href="market.html" class="dropdown-link">Market</a>
+                        <a href="chatgpt.html" class="dropdown-link">ChatGPT</a>
+                        <a href="suggest.html" class="dropdown-link">Suggest</a>
+                        <a href="report.html" class="dropdown-link">Report</a>
+                        <a href="iframe.html" class="dropdown-link">iFrame</a>
+                        <a href="leaderboard.html" class="dropdown-link">Leaderboard</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Right Section with Settings Button -->
+        <div class="nav-right">
+            <div class="icon-button" id="settingsButton" title="Settings">
+                <i class="fas fa-cog"></i>
+            </div>
+        </div>
+    </div>
+
+<style>
+    .games-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 25px;
+        width: 100%;
+        max-width: 1100px;
+        padding: 20px 0;
+    }
+
+    .game-box {
+        aspect-ratio: 1 / 1;               /* square for clean look */
+        border-radius: 18px;
+        overflow: hidden;
+        border: 3px solid rgba(255, 255, 255, 0.18);
+        box-shadow: 
+            0 8px 20px rgba(0, 0, 0, 0.4),
+            inset 0 1px 0 rgba(255, 255, 255, 0.12);
+        transition: all 0.28s ease;
+        background: rgba(255, 255, 255, 0.06);
+        backdrop-filter: blur(4px);
+    }
+
+    .game-box:hover {
+        transform: translateY(-10px) scale(1.06);
+        border-color: rgba(255, 255, 255, 0.45);
+        box-shadow: 
+            0 15px 35px rgba(0, 0, 0, 0.5),
+            0 0 25px rgba(255, 255, 255, 0.25);
+    }
+
+    .game-box img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    .game-link {
+        display: block;
+        width: 100%;
+        height: 100%;
+        text-decoration: none;
+    }
+</style>
+
+<div class="games-grid">
+
+    <a href="https://frogiesarcadeome.global.ssl.fastly.net" class="game-link">
+        <div class="game-box">
+            <img src="https://frogiesarcadeome.global.ssl.fastly.net/stuff/logo.png" alt="Frogies Arcade">
+        </div>
+    </a>
+
+    <a href="https://red.global.ssl.fastly.net/" class="game-link">
+        <div class="game-box">
+            <img src="https://i.pinimg.com/736x/75/97/01/7597018edf0de3225590653d3f2cdc6a.jpg" alt="Reds Exploit Corner">
+        </div>
+    </a>
+
+    <a href="https://arcadiumnetwork.global.ssl.fastly.net" class="game-link">
+        <div class="game-box">
+            <img src="data:image/png;base64,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" alt="Untitled">
+        </div>
+    </a>
+
+    <a href="https://loungef2x.global.ssl.fastly.net/" class="game-link">
+        <div class="game-box">
+            <img src="https://loungef2x.global.ssl.fastly.net/static/images/l2x.png" alt="loungefx2">
+        </div>
+    </a>
+
+    <a href="https://yegames.global.ssl.fastly.net/" class="game-link">
+        <div class="game-box">
+            <img src="https://i.pinimg.com/736x/93/47/31/9347319040a5d044c2128e3852eb7073.jpg" alt="Ye Games">
+        </div>
+    </a>
+
+    <a href="https://arcadiumholy.global.ssl.fastly.net/" class="game-link">
+        <div class="game-box">
+            <img src="data:image/png;base64,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" alt="Untitled">
+        </div>
+    </a>
+
+    <a href="https://truffled1.global.ssl.fastly.net/" class="game-link">
+        <div class="game-box">
+            <img src="data:image/png;base64,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" alt="Untitled">
+        </div>
+    </a>
+
+    <a href="https://wmath.global.ssl.fastly.net/" class="game-link">
+        <div class="game-box">
+            <img src="https://i.pinimg.com/736x/f9/c4/39/f9c43951e012550b93271f3b27c3dd44.jpg" alt="Untitled">
+        </div>
+    </a>
+
+    <a href="https://ttghome.global.ssl.fastly.net/" class="game-link">
+        <div class="game-box">
+            <img src="https://ttghome.global.ssl.fastly.net/assets/images/header-logo.png" alt="Untitled">
+        </div>
+    </a>
+    <a href="https://arcadiumneddle.global.ssl.fastly.net/" class="game-link">
+        <div class="game-box">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6XOvQnKoNBv8lwAgZ4hwFu4mJiHA3ldlMtg&s" alt="Untitled">
+        </div>
+    </a>
+
+        <a href="https://securedweb.global.ssl.fastly.net/" class="game-link">
+        <div class="game-box">
+            <img src="https://securedweb.global.ssl.fastly.net/images/logo.png" alt="Secured">
+        </div>
+    </a>
+
+        <a href="https://afilliteos.global.ssl.fastly.net/" class="game-link">
+        <div class="game-box">
+            <img src="https://afilliteos.global.ssl.fastly.net/files/aos/images/brand/afilite.png" alt="Afilite">
+        </div>
+    </a>
+
+        <a href="https://uniub.global.ssl.fastly.net/" class="game-link">
+        <div class="game-box">
+            <img src="data:image/jpeg;base64,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" alt="UniUb">
+        </div>
+    </a>
+
+        <a href="https://arcadiummadethislolll.global.ssl.fastly.net/" class="game-link">
+        <div class="game-box">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOAAAADgCAMAAAAt85rTAAAAbFBMVEUAAAD////7+/uSkpI6Ojrk5OR7e3upqanp6en29vabm5sWFhbExMQQEBD8/Px2dnYoKCjX19dMTEzOzs6xsbGBgYEvLy8lJSVWVlYcHBzR0dFGRkaJiYk0NDRBQUGsrKxqamqfn5+8vLxjY2PIbg5pAAADRUlEQVR4nO2c6XLaMBRGJQOJSVkMSVnqLKR5/3dssxIZ2VfqMFM+zTl/jW50Bn++Qig4BwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPCN5fPNKc/L+fvVduVfmdxnVm1Hkao3o4ezT99m6mNMxu9Xl5+XR3lVr6NVc6uchSpNsLrKqhoXrC5Y0E+zDAUF82anKOj9TXpVTcHqZ3JVTUE/TTaUEbwKu8gidYaqgr5O7Piygn6RdpfqCibmUFjQ++uEqtKC04RpSgum5FBbMCGH4oJ2DuUFrRzKC1o51Bf008E1TQGCw0+aEgQHV95FCHrff5cWIrjo7RYygstBwf4Zywg+zAYFe6csI+iau2HDRTyHOoKuuTUMozkUEnTrlWEYm7WSoNsZ72Fs2lKCdg5P1zRagm7zyzA8yaGYYH4O1QTd2LhLu1OXE3Qur1sICq5rwzB40ggK5uVQUdBtMnIoKWjmsDrmUFTQzOHXyltU0Mzh1zkRVUH38DQs+KkgK5jaD4UED6Nt8Pq0HMoIPv7VuV0HA/a/hw3fcigj+LarVu/CIYZh9aQm6FdNMGRr3KX+Xk3Qz/bBmN1kWHB6rybo60MwaG6s2nq4QMHjccrwSWPlUEbwuHXfyWFj5VBOMDeHeoLdHO7vFoUJ+kWnH2Y/aS5dsJvDfW4OL16wm8PW+O5JT9DXL+Honn8f0BX0dfgebo09bz1BPwtz2OZ0CwlBvwrXNI8ZOdQQ9NUhrGDsYugJdnO4sXai5AT/OYcygv45rJHaD3UEZ/NOlbR+KCy4T+qHwoKuNfZL5QXdNuGzhbSg29tPGm1BtzP7obigW1s5VBc0TwzJC1on9/QFjRwWIDicwxIEB3NYhKDb9vfDMgTdrtewEMH+VVspgr3dohjBvvM05Qj2nPMuSDDeLUoSdE3kM35RgrEcliUYyWFhgqc5LE3wpB8WJ9jNYXmCnfOlBQqG50uLFGy/nVQoUtC1x45fpqBrvr6ZKVTweHLvvwjGz2PVn4Jx/0zBx49vSJN/teyczOoYdx8n0der2NXsnxsdv/+VyYv90vPzI8I8+XIq89dx55s0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAH/ytP5dg98B0AAAAAElFTkSuQmCC" alt="Interstellar">
+        </div>
+    </a>
+
+        <a href="https://tiktok.global.ssl.fastly.net/" class="game-link">
+        <div class="game-box">
+            <img src="https://i.pinimg.com/736x/fe/f2/ed/fef2edb74caf9a2fa69860988737f548.jpg" alt="Gtube">
+        </div>
+    </a>
+
+        <a href="https://terbiumarcadium.global.ssl.fastly.net/" class="game-link">
+        <div class="game-box">
+            <img src="data:image/jpeg;base64,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" alt="Terbium">
+        </div>
+    </a>
+
+        <a href="https://omemadeutopia.global.ssl.fastly.net/" class="game-link">
+        <div class="game-box">
+            <img src="data:image/jpeg;base64,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" alt="Utopia">
+        </div>
+    </a>
+
+        <a href="https://vapor.global.ssl.fastly.net/" class="game-link">
+        <div class="game-box">
+            <img src="data:image/jpeg;base64,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" alt="Vapor">
+        </div>
+    </a>
+
+        <a href="https://overcloaked.global.ssl.fastly.net/" class="game-link">
+        <div class="game-box">
+            <img src="https://i.pinimg.com/736x/3b/a7/d9/3ba7d951a435960bf49f9be37fb186db.jpg" alt="OverCloaked">
+        </div>
+    </a>
+
+        <a href="https://luminalos.global.ssl.fastly.net/" class="game-link">
+        <div class="game-box">
+            <img src="https://i.pinimg.com/736x/61/73/4f/61734fec9b353a01e0a54da8f8abd349.jpg" alt="Luminal OS">
+        </div>
+    </a>
+
+        <a href="https://glintbrowser.global.ssl.fastly.net/" class="game-link">
+        <div class="game-box">
+            <img src="https://glintbrowser.global.ssl.fastly.net/images/logo.png" alt="Glint Browser">
+        </div>
+    </a>
+</div>
+
+    <script>
+        // List of 100+ Google Fonts
+        const googleFonts = [
+            { name: "Fredoka One", family: "'Fredoka One', cursive", preview: "Smooth rounded font for titles" },
+            { name: "Bubblegum Sans", family: "'Bubblegum Sans', cursive", preview: "Fun, playful font for headers" },
+            { name: "Montserrat", family: "'Montserrat', sans-serif", preview: "Modern geometric sans-serif" },
+            { name: "Poppins", family: "'Poppins', sans-serif", preview: "Clean, geometric sans-serif font" },
+            { name: "Roboto", family: "'Roboto', sans-serif", preview: "Material Design's default font" },
+            { name: "Open Sans", family: "'Open Sans', sans-serif", preview: "Humanist sans-serif font" },
+            { name: "Lato", family: "'Lato', sans-serif", preview: "Sans-serif with warmth" },
+            { name: "Oswald", family: "'Oswald', sans-serif", preview: "Reworking of classic gothic styles" },
+            { name: "Raleway", family: "'Raleway', sans-serif", preview: "Elegant sans-serif" },
+            { name: "Ubuntu", family: "'Ubuntu', sans-serif", preview: "Modern humanist sans-serif" },
+            { name: "Playfair Display", family: "'Playfair Display', serif", preview: "Elegant serif font" },
+            { name: "Merriweather", family: "'Merriweather', serif", preview: "Serif font for reading" },
+            { name: "Source Sans Pro", family: "'Source Sans Pro', sans-serif", preview: "Adobe's first open source font" },
+            { name: "PT Sans", family: "'PT Sans', sans-serif", preview: "For use in various interfaces" },
+            { name: "Noto Sans", family: "'Noto Sans', sans-serif", preview: "Google's font for all languages" },
+            { name: "Nunito", family: "'Nunito', sans-serif", preview: "Well-balanced sans-serif" },
+            { name: "Quicksand", family: "'Quicksand', sans-serif", preview: "Display sans-serif with rounded terminals" },
+            { name: "Rubik", family: "'Rubik', sans-serif", preview: "Sans-serif with slightly rounded corners" },
+            { name: "Josefin Sans", family: "'Josefin Sans', sans-serif", preview: "Elegant, geometric sans-serif" },
+            { name: "Arvo", family: "'Arvo', serif", preview: "Slab serif typeface" },
+            { name: "Libre Baskerville", family: "'Libre Baskerville', serif", preview: "Serif optimized for body text" },
+            { name: "Roboto Slab", family: "'Roboto Slab', serif", preview: "Roboto's slab serif companion" },
+            { name: "Cabin", family: "'Cabin', sans-serif", preview: "Humanist sans-serif with personality" },
+            { name: "Roboto Condensed", family: "'Roboto Condensed', sans-serif", preview: "Condensed version of Roboto" },
+            { name: "Oxygen", family: "'Oxygen', sans-serif", preview: "Sans-serif for screens" },
+            { name: "Fira Sans", family: "'Fira Sans', sans-serif", preview: "Humanist sans-serif for Firefox OS" },
+            { name: "Work Sans", family: "'Work Sans', sans-serif", preview: "A grotesque sans-serif" },
+            { name: "Karla", family: "'Karla', sans-serif", preview: "Grotesque sans-serif" },
+            { name: "Inconsolata", family: "'Inconsolata', monospace", preview: "Monospace font for code" },
+            { name: "Space Mono", family: "'Space Mono', monospace", preview: "Original monospace font family" },
+            { name: "Courier Prime", family: "'Courier Prime', monospace", preview: "Courier replacement for screenplays" },
+            { name: "Nanum Gothic", family: "'Nanum Gothic', sans-serif", preview: "Modern sans-serif Korean font" },
+            { name: "Comfortaa", family: "'Comfortaa', cursive", preview: "Rounded geometric sans-serif" },
+            { name: "Orbitron", family: "'Orbitron', sans-serif", preview: "Geometric sans-serif with futuristic feel" },
+            { name: "Exo 2", family: "'Exo 2', sans-serif", preview: "Geometric sans-serif with futuristic feel" },
+            { name: "Titillium Web", family: "'Titillium Web', sans-serif", preview: "Contemporary sans-serif" },
+            { name: "Archivo", family: "'Archivo', sans-serif", preview: "Grotesque sans-serif" },
+            { name: "Manrope", family: "'Manrope', sans-serif", preview: "Modern variable font" },
+            { name: "Inter", family: "'Inter', sans-serif", preview: "Variable font for screens" },
+            { name: "Syne", family: "'Syne', sans-serif", preview: "Contemporary sans-serif" },
+            { name: "Chivo", family: "'Chivo', sans-serif", preview: "Modern sans-serif with character" },
+            { name: "Overpass", family: "'Overpass', sans-serif", preview: "Open source font inspired by Highway Gothic" },
+            { name: "Hind", family: "'Hind', sans-serif", preview: "Sans-serif for Indian scripts" },
+            { name: "Muli", family: "'Muli', sans-serif", preview: "Minimalist sans-serif" },
+            { name: "Catamaran", family: "'Catamaran', sans-serif", preview: "Sans-serif for Tamil and Latin" },
+            { name: "Varela Round", family: "'Varela Round', sans-serif", preview: "Sans-serif with gentle rounds" },
+            { name: "ABeeZee", family: "'ABeeZee', sans-serif", preview: "Friendly sans-serif" },
+            { name: "Acme", family: "'Acme', sans-serif", preview: "Sans-serif with clean lines" },
+            { name: "Alfa Slab One", family: "'Alfa Slab One', cursive", preview: "Heavy slab serif with a vintage feel" },
+            { name: "Amaranth", family: "'Amaranth', sans-serif", preview: "Friendly sans-serif with rounded features" },
+            { name: "Anton", family: "'Anton', sans-serif", preview: "Sans-serif with a strong personality" },
+            { name: "Bangers", family: "'Bangers', cursive", preview: "Comic book style display font" },
+            { name: "Bebas Neue", family: "'Bebas Neue', cursive", preview: "Display sans-serif with narrow width" },
+            { name: "Black Ops One", family: "'Black Ops One', cursive", preview: "Military-style display font" },
+            { name: "Bree Serif", family: "'Bree Serif', serif", preview: "Modern serif with subtle curves" },
+            { name: "Chewy", family: "'Chewy', cursive", preview: "Rounded, bold comic font" },
+            { name: "Concert One", family: "'Concert One', cursive", preview: "Rounded sans-serif for displays" },
+            { name: "Courgette", family: "'Courgette', cursive", preview: "Elegant script font" },
+            { name: "Crimson Text", family: "'Crimson Text', serif", preview: "Serif font for book production" },
+            { name: "Dancing Script", family: "'Dancing Script', cursive", preview: "Elegant cursive script" },
+            { name: "Dosis", family: "'Dosis', sans-serif", preview: "Rounded sans-serif with open forms" },
+            { name: "Economica", family: "'Economica', sans-serif", preview: "Sans-serif with geometric structure" },
+            { name: "Fjalla One", family: "'Fjalla One', sans-serif", preview: "Sans-serif with low contrast" },
+            { name: "Francois One", family: "'Francois One', sans-serif", preview: "Condensed sans-serif" },
+            { name: "Gloria Hallelujah", family: "'Gloria Hallelujah', cursive", preview: "Casual brush script" },
+            { name: "Great Vibes", family: "'Great Vibes', cursive", preview: "Elegant script font" },
+            { name: "Indie Flower", family: "'Indie Flower', cursive", preview: "Casual handwriting font" },
+            { name: "Lobster", family: "'Lobster', cursive", preview: "Script font with strong curves" },
+            { name: "Luckiest Guy", family: "'Luckiest Guy', cursive", preview: "Comic book style font" },
+            { name: "Mitr", family: "'Mitr', sans-serif", preview: "Thai and Latin sans-serif" },
+            { name: "Monda", family: "'Monda', sans-serif", preview: "Sans-serif for headlines" },
+            { name: "Monoton", family: "'Monoton', cursive", preview: "Display font with uniform strokes" },
+            { name: "Montserrat Alternates", family: "'Montserrat Alternates', sans-serif", preview: "Alternate glyphs for Montserrat" },
+            { name: "Orbitron", family: "'Orbitron', sans-serif", preview: "Futuristic sans-serif" },
+            { name: "Pacifico", family: "'Pacifico', cursive", preview: "Brush script with casual feel" },
+            { name: "Passion One", family: "'Passion One', cursive", preview: "Display font with heavy weight" },
+            { name: "Patua One", family: "'Patua One', cursive", preview: "Slab serif with rounded details" },
+            { name: "Permanent Marker", family: "'Permanent Marker', cursive", preview: "Handwritten marker font" },
+            { name: "Press Start 2P", family: "'Press Start 2P', cursive", preview: "Pixel font for video games" },
+            { name: "Racing Sans One", family: "'Racing Sans One', cursive", preview: "Sans-serif inspired by racing typography" },
+            { name: "Righteous", family: "'Righteous', cursive", preview: "Display font with art deco influences" },
+            { name: "Roboto Mono", family: "'Roboto Mono', monospace", preview: "Monospace version of Roboto" },
+            { name: "Sacramento", family: "'Sacramento', cursive", preview: "Calligraphy script font" },
+            { name: "Shadows Into Light", family: "'Shadows Into Light', cursive", preview: "Casual handwriting font" },
+            { name: "Sigmar One", family: "'Sigmar One', cursive", preview: "Display font with rounded terminals" },
+            { name: "Staatliches", family: "'Staatliches', cursive", preview: "Display sans-serif with uniform width" },
+            { name: "Teko", family: "'Teko', sans-serif", preview: "Condensed Devanagari and Latin sans-serif" },
+            { name: "Yellowtail", family: "'Yellowtail', cursive", preview: "Elegant brush script" },
+            { name: "Arial", family: "Arial, sans-serif", preview: "Standard sans-serif font" },
+            { name: "Verdana", family: "Verdana, sans-serif", preview: "Humanist sans-serif for screens" },
+            { name: "Georgia", family: "Georgia, serif", preview: "Transitional serif for screens" },
+            { name: "Times New Roman", family: "'Times New Roman', serif", preview: "Classic serif font" },
+            { name: "Courier New", family: "'Courier New', monospace", preview: "Monospace serif font" },
+            { name: "Trebuchet MS", family: "'Trebuchet MS', sans-serif", preview: "Humanist sans-serif" },
+            { name: "Impact", family: "Impact, sans-serif", preview: "Heavy sans-serif for headlines" },
+            { name: "Comic Sans MS", family: "'Comic Sans MS', cursive", preview: "Casual script font" },
+            { name: "Palatino", family: "Palatino, serif", preview: "Old-style serif typeface" },
+            { name: "Garamond", family: "Garamond, serif", preview: "Old-style serif font" },
+            { name: "Bookman", family: "Bookman, serif", preview: "Old-style serif with strong lines" },
+            { name: "Avant Garde", family: "'Avant Garde', sans-serif", preview: "Geometric sans-serif" },
+            { name: "Helvetica", family: "Helvetica, sans-serif", preview: "Neo-grotesque sans-serif" },
+            { name: "Lucida Sans", family: "'Lucida Sans', sans-serif", preview: "Humanist sans-serif" },
+            { name: "Copperplate", family: "Copperplate, serif", preview: "Serif font with engraved look" },
+            { name: "Brush Script MT", family: "'Brush Script MT', cursive", preview: "Script font resembling handwriting" },
+            { name: "Papyrus", family: "Papyrus, fantasy", preview: "Font resembling ancient writing" }
+        ];
+
+        // Performance-optimized bubble generation
+        document.addEventListener('DOMContentLoaded', function() {
+            const bubblesContainer = document.getElementById('bubbles');
+            const isSlowDevice = /Chromebook|Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            
+            // Generate fewer bubbles for slow devices
+            const bubbleCount = isSlowDevice ? 10 : 20;
+            
+            for (let i = 0; i < bubbleCount; i++) {
+                const bubble = document.createElement('div');
+                bubble.classList.add('bubble');
+                
+                // Smaller size range for performance
+                const size = Math.random() * 40 + 20;
+                bubble.style.width = `${size}px`;
+                bubble.style.height = `${size}px`;
+                
+                // Random position
+                bubble.style.left = `${Math.random() * 100}%`;
+                
+                // Start off-screen at bottom
+                bubble.style.top = `${100 + Math.random() * 20}%`;
+                
+                // Optimized animation
+                const duration = Math.random() * 20 + 20;
+                const delay = Math.random() * 10;
+                bubble.style.animationDuration = `${duration}s`;
+                bubble.style.animationDelay = `${delay}s`;
+                bubble.style.animationTimingFunction = 'linear';
+                
+                bubblesContainer.appendChild(bubble);
+            }
+            
+            // Optimized click effects for nav links
+            const navLinks = document.querySelectorAll('.nav-link:not(#moreButton)');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Simple hover effect instead of complex ripple
+                    this.style.transform = 'translateY(-3px) scale(1.05)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 200);
+                    
+                    // Update content based on clicked link
+                    updateContent(this.textContent.trim());
+                });
+            });
+            
+            // Update content function
+            function updateContent(section) {
+                const contentTitle = document.querySelector('.content h2');
+                const contentBox = document.querySelector('.placeholder-box');
+                
+                const contentMap = {
+                    'HOME': {
+                        title: 'Welcome to Arcadium!',
+                        text: 'Your ultimate gaming and entertainment hub. Explore games, proxies, websites and more!'
+                    },
+                    'GAMES': {
+                        title: 'Arcadium Games',
+                        text: 'Browse our collection of fun and exciting games. From classics to modern hits!'
+                    },
+                    'PROXIES': {
+                        title: 'Proxy Services',
+                        text: 'Access blocked websites with our secure proxy services. Safe and anonymous browsing.'
+                    },
+                    'WEBSITES': {
+                        title: 'Website Collection',
+                        text: 'Curated list of useful and entertaining websites for all your needs.'
+                    },
+                    'SOUNDBOARD': {
+                        title: 'Sound Board',
+                        text: 'Play sounds and create audio mixes with our interactive soundboard.'
+                    },
+                    'MORE': {
+                        title: 'More Options',
+                        text: 'Explore additional features like market, community, leaderboards, and more!'
+                    }
+                };
+                
+                if (contentMap[section]) {
+                    contentTitle.textContent = contentMap[section].title;
+                    contentBox.innerHTML = `
+                        <p>${contentMap[section].text}</p>
+                        <br>
+                        <p>Explore more options in the ${section.toLowerCase()} section.</p>
+                        <p>Use the settings button to customize your experience!</p>
+                    `;
+                }
+            }
+        });
+        
+        // Settings Panel Functionality - Optimized
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elements
+            const settingsButton = document.getElementById('settingsButton');
+            const settingsPanel = document.getElementById('settingsPanel');
+            const settingsOverlay = document.getElementById('settingsOverlay');
+            const closeSettings = document.getElementById('closeSettings');
+            const bgColorPicker = document.getElementById('bgColorPicker');
+            const colorPreview = document.getElementById('colorPreview');
+            const applyBgColor = document.getElementById('applyBgColor');
+            const fontSelectorContainer = document.getElementById('fontSelectorContainer');
+            const selectedFontName = document.getElementById('selectedFontName');
+            const bgImageUpload = document.getElementById('bgImageUpload');
+            const removeBgImage = document.getElementById('removeBgImage');
+            const openAboutBlank = document.getElementById('openAboutBlank');
+            const resetSettings = document.getElementById('resetSettings');
+            const reduceMotion = document.getElementById('reduceMotion');
+            const moreButton = document.getElementById('moreButton');
+            const dropdownMenu = document.getElementById('dropdownMenu');
+            
+            // Performance mode flag
+            let performanceMode = false;
+            
+            // Create font options
+            function createFontOptions() {
+                fontSelectorContainer.innerHTML = '';
+                
+                googleFonts.forEach(font => {
+                    const fontOption = document.createElement('div');
+                    fontOption.className = 'font-option';
+                    fontOption.innerHTML = `
+                        <div style="font-family: ${font.family}">
+                            ${font.name}
+                            <span class="font-preview">${font.preview}</span>
+                        </div>
+                    `;
+                    
+                    // Set font family for preview
+                    fontOption.style.fontFamily = font.family;
+                    
+                    fontOption.addEventListener('click', function() {
+                        // Remove selected class from all options
+                        document.querySelectorAll('.font-option').forEach(opt => {
+                            opt.classList.remove('selected');
+                        });
+                        
+                        // Add selected class to clicked option
+                        this.classList.add('selected');
+                        
+                        // Apply font
+                        document.body.style.fontFamily = font.family;
+                        selectedFontName.textContent = font.name;
+                        saveSetting('fontFamily', font.family);
+                        saveSetting('fontName', font.name);
+                        showNotification(`Font changed to ${font.name}!`);
+                    });
+                    
+                    fontSelectorContainer.appendChild(fontOption);
+                });
+            }
+            
+            // Load saved settings
+            function loadSettings() {
+                // Load background color
+                const savedBgColor = localStorage.getItem('arcadium_backgroundColor');
+                if (savedBgColor) {
+                    document.body.style.background = savedBgColor;
+                    bgColorPicker.value = savedBgColor;
+                    colorPreview.style.backgroundColor = savedBgColor;
+                } else {
+                    colorPreview.style.backgroundColor = '#0a0e2a';
+                }
+                
+                // Load font
+                const savedFont = localStorage.getItem('arcadium_fontFamily');
+                const savedFontName = localStorage.getItem('arcadium_fontName');
+                if (savedFont) {
+                    document.body.style.fontFamily = savedFont;
+                    if (savedFontName) {
+                        selectedFontName.textContent = savedFontName;
+                    }
+                }
+                
+                // Load background image
+                const savedBgImage = localStorage.getItem('arcadium_backgroundImage');
+                if (savedBgImage && savedBgImage !== 'none') {
+                    document.body.style.backgroundImage = `url('${savedBgImage}')`;
+                    document.body.style.backgroundSize = 'cover';
+                    document.body.style.backgroundAttachment = 'fixed';
+                }
+                
+                // Load performance mode
+                const savedPerformanceMode = localStorage.getItem('arcadium_performanceMode');
+                if (savedPerformanceMode === 'true') {
+                    performanceMode = true;
+                    document.body.classList.add('reduce-motion');
+                    reduceMotion.innerHTML = '<i class="fas fa-tachometer-alt"></i> Normal Animations';
+                }
+            }
+            
+            // Initialize
+            createFontOptions();
+            loadSettings();
+            
+            // Toggle settings panel
+            settingsButton.addEventListener('click', function() {
+                settingsPanel.classList.add('active');
+                settingsOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+            
+            // Toggle dropdown menu
+            moreButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                dropdownMenu.classList.toggle('active');
+            });
+            
+            // Close dropdown when clicking elsewhere
+            document.addEventListener('click', function(e) {
+                if (!dropdownMenu.contains(e.target) && !moreButton.contains(e.target)) {
+                    dropdownMenu.classList.remove('active');
+                }
+            });
+            
+            // Close settings panel
+            closeSettings.addEventListener('click', closeSettingsPanel);
+            settingsOverlay.addEventListener('click', closeSettingsPanel);
+            
+            // Color picker preview
+            bgColorPicker.addEventListener('input', function() {
+                colorPreview.style.backgroundColor = this.value;
+            });
+            
+            // Apply background color
+            applyBgColor.addEventListener('click', function() {
+                const color = bgColorPicker.value;
+                document.body.style.background = color;
+                document.body.style.backgroundImage = 'none';
+                saveSetting('backgroundColor', color);
+                showNotification('Background color applied!');
+            });
+            
+            // Upload background image
+            bgImageUpload.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    // Check file size for performance (max 2MB)
+                    if (file.size > 2 * 1024 * 1024) {
+                        showNotification('Image too large! Max 2MB.');
+                        return;
+                    }
+                    
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        const imageUrl = event.target.result;
+                        document.body.style.backgroundImage = `url('${imageUrl}')`;
+                        document.body.style.backgroundSize = 'cover';
+                        document.body.style.backgroundAttachment = 'fixed';
+                        saveSetting('backgroundImage', imageUrl);
+                        showNotification('Background image uploaded!');
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+            
+            // Remove background image
+            removeBgImage.addEventListener('click', function() {
+                document.body.style.backgroundImage = 'none';
+                document.body.style.background = 'linear-gradient(135deg, #0a0e2a 0%, #1a1f4a 100%)';
+                saveSetting('backgroundImage', 'none');
+                bgImageUpload.value = '';
+                showNotification('Background image removed!');
+            });
+            
+            // Open in about:blank
+            openAboutBlank.addEventListener('click', function() {
+                const newWindow = window.open('about:blank', '_blank');
+                const htmlContent = document.documentElement.outerHTML;
+                newWindow.document.write(htmlContent);
+                newWindow.document.close();
+                showNotification('Opened in new window!');
+            });
+            
+            // Toggle performance mode
+            reduceMotion.addEventListener('click', function() {
+                performanceMode = !performanceMode;
+                if (performanceMode) {
+                    document.body.classList.add('reduce-motion');
+                    this.innerHTML = '<i class="fas fa-tachometer-alt"></i> Normal Animations';
+                    showNotification('Performance mode enabled!');
+                } else {
+                    document.body.classList.remove('reduce-motion');
+                    this.innerHTML = '<i class="fas fa-running"></i> Reduce Animations';
+                    showNotification('Performance mode disabled!');
+                }
+                saveSetting('performanceMode', performanceMode);
+            });
+            
+            // Reset all settings
+            resetSettings.addEventListener('click', function() {
+                if (confirm('Reset all settings to default?')) {
+                    localStorage.clear();
+                    document.body.style.background = 'linear-gradient(135deg, #0a0e2a 0%, #1a1f4a 100%)';
+                    document.body.style.backgroundImage = 'none';
+                    document.body.style.fontFamily = "'Fredoka One', cursive";
+                    bgColorPicker.value = '#0a0e2a';
+                    colorPreview.style.backgroundColor = '#0a0e2a';
+                    selectedFontName.textContent = 'Fredoka One';
+                    bgImageUpload.value = '';
+                    document.body.classList.remove('reduce-motion');
+                    performanceMode = false;
+                    reduceMotion.innerHTML = '<i class="fas fa-running"></i> Reduce Animations';
+                    showNotification('Settings reset!');
+                    
+                    // Mark Fredoka One as selected
+                    document.querySelectorAll('.font-option').forEach(opt => {
+                        opt.classList.remove('selected');
+                        if (opt.textContent.includes('Fredoka One')) {
+                            opt.classList.add('selected');
+                        }
+                    });
+                }
+            });
+            
+            // Close settings panel function
+            function closeSettingsPanel() {
+                settingsPanel.classList.remove('active');
+                settingsOverlay.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+            
+            // Save setting to localStorage
+            function saveSetting(key, value) {
+                localStorage.setItem('arcadium_' + key, value);
+            }
+            
+            // Show notification
+            function showNotification(message) {
+                // Remove existing notification
+                const existingNotification = document.querySelector('.notification');
+                if (existingNotification) {
+                    existingNotification.remove();
+                }
+                
+                // Create simple notification for performance
+                const notification = document.createElement('div');
+                notification.className = 'notification';
+                notification.textContent = message;
+                notification.style.cssText = `
+                    position: fixed;
+                    bottom: 30px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: rgba(255, 255, 255, 0.15);
+                    backdrop-filter: blur(10px);
+                    color: white;
+                    padding: 12px 25px;
+                    border-radius: 50px;
+                    font-family: 'Bubblegum Sans', cursive;
+                    font-size: 16px;
+                    z-index: 10000;
+                    border: 2px solid rgba(255, 255, 255, 0.3);
+                    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+                    text-shadow: 0 0 5px #ffffff;
+                    white-space: nowrap;
+                    opacity: 0;
+                    animation: notificationShow 0.3s ease forwards, notificationHide 0.3s ease 2.7s forwards;
+                `;
+                
+                document.body.appendChild(notification);
+                
+                // Remove after animation
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.remove();
+                    }
+                }, 3000);
+            }
+            
+            // Add notification keyframes
+            const notificationStyle = document.createElement('style');
+            notificationStyle.textContent = `
+                @keyframes notificationShow {
+                    from { opacity: 0; bottom: 0; }
+                    to { opacity: 1; bottom: 30px; }
+                }
+                @keyframes notificationHide {
+                    from { opacity: 1; }
+                    to { opacity: 0; }
+                }
+            `;
+            document.head.appendChild(notificationStyle);
+            
+            // Keyboard shortcuts
+            document.addEventListener('keydown', function(e) {
+                // Escape to close settings
+                if (e.key === 'Escape' && settingsPanel.classList.contains('active')) {
+                    closeSettingsPanel();
+                }
+            });
+            
+            // Mark selected font on load
+            setTimeout(() => {
+                const savedFontName = localStorage.getItem('arcadium_fontName') || 'Fredoka One';
+                document.querySelectorAll('.font-option').forEach(opt => {
+                    if (opt.textContent.includes(savedFontName)) {
+                        opt.classList.add('selected');
+                    }
+                });
+            }, 100);
+        });
+    </script>
+</body>
+</html>
