@@ -4,7 +4,7 @@
     <link rel="icon" type="image/png" href="/download.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arcadium Web - LeaderBoard</title>
+    <title>Arcadium Web - Leaderboard</title>
     <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&family=Fredoka+One&display=swap" rel="stylesheet">
     <!-- Add 100+ Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&family=Open+Sans:wght@300;400;600;700&family=Lato:wght@300;400;700&family=Oswald:wght@300;400;500;600&family=Raleway:wght@300;400;500;600;700&family=Ubuntu:wght@300;400;500;700&family=Playfair+Display:wght@400;700&family=Merriweather:wght@300;400;700&family=Source+Sans+Pro:wght@300;400;600&family=PT+Sans:wght@400;700&family=Noto+Sans:wght@400;700&family=Nunito:wght@300;400;600;700&family=Quicksand:wght@300;400;500;600&family=Rubik:wght@300;400;500;600&family=Josefin+Sans:wght@300;400;600&family=Arvo:wght@400;700&family=Libre+Baskerville:wght@400;700&family=Roboto+Slab:wght@300;400;700&family=Cabin:wght@400;500;600;700&family=Roboto+Condensed:wght@300;400;700&family=Oxygen:wght@300;400;700&family=Fira+Sans:wght@300;400;500;600&family=Work+Sans:wght@300;400;500;600&family=Karla:wght@400;700&family=Inconsolata:wght@400;700&family=Space+Mono:wght@400;700&family=Courier+Prime:wght@400;700&family=Nanum+Gothic:wght@400;700&family=Comfortaa:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700&family=Exo+2:wght@300;400;500;600;700&family=Titillium+Web:wght@300;400;600;700&family=Archivo:wght@400;500;600;700&family=Manrope:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700&family=Chivo:wght@300;400;700&family=Overpass:wght@300;400;600;700&family=Hind:wght@300;400;500;600;700&family=Muli:wght@300;400;500;600&family=Catamaran:wght@300;400;500;600;700&family=Varela+Round&family=ABeeZee&family=Acme&family=Alfa+Slab+One&family=Amaranth&family=Anton&family=Bangers&family=Bebas+Neue&family=Black+Ops+One&family=Bree+Serif&family=Chewy&family=Concert+One&family=Courgette&family=Crimson+Text&family=Dancing+Script&family=Dosis&family=Economica&family=Fjalla+One&family=Francois+One&family=Gloria+Hallelujah&family=Great+Vibes&family=Indie+Flower&family=Lobster&family=Luckiest+Guy&family=Mitr&family=Monda&family=Monoton&family=Montserrat+Alternates&family=Orbitron&family=Pacifico&family=Passion+One&family=Patua+One&family=Permanent+Marker&family=Press+Start+2P&family=Racing+Sans+One&family=Righteous&family=Roboto+Mono&family=Sacramento&family=Shadows+Into+Light&family=Sigmar+One&family=Staatliches&family=Teko&family=Yellowtail&display=swap" rel="stylesheet">
@@ -827,107 +827,199 @@
             </div>
         </div>
     </div>
+
+    <!-- Content Area -->
+    <br>
+    <!-- Copy your main <style> block here or link to external stylesheet -->
     <style>
-        /* Copied styles from index.html for consistency */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-       
+        /* Paste your full CSS from the main page here, or better: make a shared styles.css */
         body {
             background: linear-gradient(135deg, #0a0e2a 0%, #1a1f4a 100%);
             color: #e0e0e0;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
-            overflow-x: hidden;
             font-family: 'Fredoka One', cursive;
-            transition: background 0.3s ease;
-            will-change: background;
-        }
-
-        .content {
-            max-width: 1000px;
-            width: 100%;
-            margin-top: 50px;
-            padding: 40px;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(8px);
-            border-radius: 40px;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            text-align: center;
-            min-height: 400px;
-            position: relative;
-            overflow: hidden;
         }
-
-        table {
+        .container {
+            max-width: 700px;
             width: 100%;
-            border-collapse: collapse;
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(12px);
+            border-radius: 30px;
+            border: 2px solid rgba(255,255,255,0.2);
+            padding: 40px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+            text-align: center;
         }
-
-        th, td {
-            padding: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            text-align: left;
+        h1 {
+            font-family: 'Bubblegum Sans', cursive;
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            text-shadow: 0 0 15px #fff;
         }
-
-        th {
-            background: rgba(255, 255, 255, 0.1);
+        .rank-badge {
+            font-size: 5rem;
+            margin: 20px 0;
+            text-shadow: 0 0 25px currentColor;
         }
-
-        .profile-pic-small {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
+        .stat {
+            background: rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 20px;
+            margin: 15px 0;
+            font-size: 1.4rem;
+        }
+        .stat strong {
+            color: #ffffff;
+            font-size: 1.6rem;
+        }
+        .not-logged-in {
+            font-size: 1.5rem;
+            padding: 30px;
+            background: rgba(200,50,50,0.3);
+            border-radius: 20px;
+            border: 2px solid #c00;
+        }
+        .back-btn {
+            margin-top: 30px;
+            padding: 15px 40px;
+            font-size: 1.3rem;
+            background: rgba(100,180,255,0.3);
+            border: 2px solid #60f;
+            border-radius: 50px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .back-btn:hover {
+            background: rgba(100,180,255,0.5);
+            transform: translateY(-3px);
         }
     </style>
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <div class="content">
-        <h2>Leaderboard</h2>
-        <table id="leaderboardTable">
-            <thead>
-                <tr>
-                    <th>Rank</th>
-                    <th>Profile</th>
-                    <th>Username</th>
-                    <th>Title</th>
-                    <th>XP</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
+
+    <div class="container" id="statsContainer">
+        <h1><i class="fas fa-trophy"></i> Your Stats</h1>
+        
+        <div id="statsContent"></div>
+        
+        <button class="back-btn" onclick="window.location.href='index.html'">← Back to Home</button>
     </div>
+
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            function getUsers() {
-                return JSON.parse(localStorage.getItem('arcadium_users')) || [];
+        // === Copy these helper functions from your main page ===
+        function getCurrentUser() {
+            return localStorage.getItem('arcadium_currentUser');
+        }
+        
+        function getUsers() {
+            return JSON.parse(localStorage.getItem('arcadium_users')) || [];
+        }
+        
+        const ranks = [
+            { name: "Unranked",    minXP: 0,       color: "#aaaaaa", icon: "fa-user" },
+            { name: "Bronze I",    minXP: 100,     color: "#cd7f32", icon: "fa-medal" },
+            { name: "Bronze II",   minXP: 300,     color: "#cd7f32", icon: "fa-medal" },
+            { name: "Bronze III",  minXP: 700,     color: "#cd7f32", icon: "fa-medal" },
+            { name: "Silver I",    minXP: 1200,    color: "#c0c0c0", icon: "fa-medal" },
+            { name: "Silver II",   minXP: 2500,    color: "#c0c0c0", icon: "fa-medal" },
+            { name: "Silver III",  minXP: 4500,    color: "#c0c0c0", icon: "fa-medal" },
+            { name: "Gold I",      minXP: 8000,    color: "#ffd700", icon: "fa-medal" },
+            { name: "Gold II",     minXP: 14000,   color: "#ffd700", icon: "fa-medal" },
+            { name: "Gold III",    minXP: 22000,   color: "#ffd700", icon: "fa-medal" },
+            { name: "Platinum",    minXP: 35000,   color: "#b0e0e6", icon: "fa-crown" },
+            { name: "Diamond",     minXP: 60000,   color: "#00bfff", icon: "fa-gem" },
+            { name: "Legend",      minXP: 100000,  color: "#ff69b4", icon: "fa-star" }
+        ];
+
+        function getUserRank(xp) {
+            let rank = ranks[0];
+            for (let r of ranks) {
+                if (xp >= r.minXP) rank = r;
+                else break;
+            }
+            return rank;
+        }
+
+        function formatTime(seconds) {
+            const h = Math.floor(seconds / 3600);
+            const m = Math.floor((seconds % 3600) / 60);
+            const s = seconds % 60;
+            return `${h > 0 ? h + 'h ' : ''}${m}m ${s}s`;
+        }
+
+        // === Main rendering logic ===
+        function renderStats() {
+            const username = getCurrentUser();
+            const content = document.getElementById('statsContent');
+
+            if (!username) {
+                content.innerHTML = `
+                    <div class="not-logged-in">
+                        <i class="fas fa-lock fa-3x" style="margin-bottom:15px;"></i><br>
+                        You need to be logged in to view your stats.<br><br>
+                        <button class="back-btn" style="background:rgba(80,200,80,0.4); border-color:#0c3;" 
+                                onclick="window.location.href='index.html'">Go to Login</button>
+                    </div>
+                `;
+                return;
             }
 
-            const users = getUsers().filter(u => !u.banned).sort((a, b) => b.xp - a.xp);
-            const tbody = document.querySelector('#leaderboardTable tbody');
-            users.forEach((user, index) => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${index + 1}</td>
-                    <td><img src="${user.profilePic || ''}" alt="" class="profile-pic-small" style="${user.profilePic ? '' : 'display:none;'}"></td>
-                    <td>${user.username}</td>
-                    <td>${user.title}</td>
-                    <td>${user.xp}</td>
-                `;
-                tbody.appendChild(row);
-            });
-        });
+            const users = getUsers();
+            const user = users.find(u => u.username === username);
+
+            if (!user) {
+                localStorage.removeItem('arcadium_currentUser');
+                content.innerHTML = `<p style="color:#f66;">Session error — please log in again.</p>`;
+                return;
+            }
+
+            const rank = getUserRank(user.xp);
+            const nextRank = ranks.find(r => r.minXP > user.xp) || { name: "Max Rank", minXP: user.xp + 100000 };
+            const xpToNext = nextRank.minXP - user.xp;
+
+            // Load time spent (same key as before)
+            const timeSpent = parseInt(localStorage.getItem(`arcadium_time_${username}`) || '0');
+
+            content.innerHTML = `
+                <div class="rank-badge" style="color: ${rank.color};">
+                    <i class="fas ${rank.icon}"></i>
+                </div>
+                
+                <h2 style="color: ${rank.color}; margin: 10px 0;">
+                    ${rank.name}
+                </h2>
+                
+                <div class="stat">
+                    <strong>Player:</strong> ${user.username} 
+                    ${user.title ? `<small>(${user.title})</small>` : ''}
+                </div>
+                
+                <div class="stat">
+                    <strong>XP:</strong> ${user.xp.toLocaleString()}
+                    ${xpToNext > 0 ? `<br><small>(${xpToNext.toLocaleString()} until ${nextRank.name})</small>` : ''}
+                </div>
+                
+                <div class="stat">
+                    <strong>Total Time Online:</strong><br>
+                    ${formatTime(timeSpent)}
+                </div>
+
+                ${user.profilePic ? `
+                    <div style="margin:30px 0;">
+                        <img src="${user.profilePic}" style="width:140px; height:140px; border-radius:50%; border:4px solid ${rank.color};">
+                    </div>
+                ` : ''}
+            `;
+        }
+
+        // Run when page loads
+        renderStats();
     </script>
 </body>
 </html>
